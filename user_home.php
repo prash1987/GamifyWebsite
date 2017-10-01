@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lets Play</title>
+    <title>Gamify</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +30,7 @@
 	           <div class="col-md-5">
 	              <!-- Logo -->
 	              <div class="logo">
-	                 <h1><a href="user_home.php">Lets Play</a></h1>
+	                 <h1><a href="user_home.php">Gamify</a></h1>
 	              </div>
 	           </div>
 	           <div class="col-md-4">
@@ -64,14 +64,14 @@
                 <ul class="nav">
                     <!-- Main menu -->
                     <li class="current"><a href="user_home.php"><i class="glyphicon glyphicon-home"></i> All Events</a></li>
-                    <li><a href="my_events.php"><i class="glyphicon glyphicon-calendar"></i> My Events</a></li>
+                    <li><a href="user_home.php"><i class="glyphicon glyphicon-calendar"></i> My Events</a></li>
                 </ul>
                 
                     
                 
              </div>
               <div class="sidebar content-box" style="display: block; text-align:center;">
-                <a href="create_event.php" class="btn btn-success btn-lg" type="button" ><i class="glyphicon glyphicon-plus"></i> Create Event</a>
+                <a href="user_home.php" class="btn btn-success btn-lg" type="button" ><i class="glyphicon glyphicon-plus"></i> Create Event</a>
               
               </div>
               
@@ -105,25 +105,6 @@
                                 if ($conn->connect_error) {
                                     die("Connection failed: " . $conn->connect_error);
                                 } 
-
-                               /* $sql = "SELECT DISTINCT User_ID,Event_ID,Location,Game_Type,Date,Time,Players_Reqd, COUNT(User_ID) AS Joined FROM event GROUP BY User_ID, Event_ID,Location,Game_Type,Date,Time,Players_Reqd";*/
-                              
-                              $sql = "SELECT DISTINCT User_ID,Event_ID,Location,Game_Type,Date,Time,Players_Reqd, COUNT(User_ID) AS Joined FROM event WHERE Event_ID NOT IN(SELECT Event_ID FROM event WHERE Player_ID='$logged_user') GROUP BY User_ID, Event_ID,Location,Game_Type,Date,Time,Players_Reqd";
-
-                                $result = $conn->query($sql);
-
-                                if ($result->num_rows > 0) {
-                                    // output data of each row
-                                    while($row = $result->fetch_assoc()) {
-                                        if ($row["User_ID"] != $logged_user && $row["Players_Reqd"] != $row["Joined"] ){
-                                            echo '<tr><td>'.$row["User_ID"]."</td><td>".$row["Location"]."</td><td>".$row["Game_Type"]."<td>".$row["Date"]."</td><td>".$row["Time"]."</td><td>".$row["Players_Reqd"]."</td><td>".$row["Joined"].'</td><td><a href="join_event.php?user_id='.$row["User_ID"].'&event_id='.$row["Event_ID"].'" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Join </a></td></tr>';
-                                        }
-
-                                    }
-                                    echo "</table>";
-                                } else {
-                                    echo "0 results";
-                                }
                                 $conn->close();
                             ?>
 			              </tbody>
@@ -157,22 +138,7 @@
                                     die("Connection failed: " . $conn->connect_error);
                                 } 
 
-                                $sql = "SELECT User_ID,Event_ID,Location,Game_Type,Date,Time,Players_Reqd FROM event WHERE Player_ID='$logged_user'";
-
-                                $result = $conn->query($sql);
-
-                                if ($result->num_rows > 0) {
-                                    // output data of each row
-                                    while($row = $result->fetch_assoc()) {
-                                        if ($row["User_ID"] != $logged_user){
-                                            echo '<tr><td>'.$row["User_ID"]."</td><td>".$row["Location"]."</td><td>".$row["Game_Type"]."<td>".$row["Date"]."</td><td>".$row["Time"]."</td><td>".$row["Players_Reqd"].'</td><td><a href="view_joined_event.php?user_id='.$row["User_ID"].'&event_id='.$row["Event_ID"].'" class="btn btn-primary"><i class="glyphicon glyphicon-eye-open"></i> View Details</a></td></tr>';
-                                        }
-
-                                    }
-                                    echo "</table>";
-                                } else {
-                                    echo "0 results";
-                                }
+                                
                                 $conn->close();
                             ?>
 			              </tbody>

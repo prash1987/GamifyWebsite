@@ -13,7 +13,7 @@
       $myusername = mysqli_real_escape_string($db,$_POST['username']);
       $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
       
-      $sql = "SELECT user_id FROM user WHERE (user_id = '$myusername' or email='$myusername') and password = '$mypassword'";
+      $sql = "SELECT user_id FROM login WHERE (user_id = '$myusername' or email_id='$myusername') and Password = '$mypassword'";
       $result = mysqli_query($db,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       
@@ -31,19 +31,6 @@
    }
 ?>
 
-<?php
-$fb = new Facebook\Facebook([
-  'app_id' => '697424340446775',   //UNIQUE APP ID THAT I GENERATED
-  'app_secret' => 'f7f2c94d182ccf0b2fc2bbabfa5a598a',  //UNIQUE APP SECRET ID I GENERATED
-  'default_graph_version' => 'v2.2',
-]);
- 
-$helper = $fb->getRedirectLoginHelper();
- 
-$permissions = []; // Optional information that Gamify can access, such as 'email'. REFER- https://developers.facebook.com/docs/facebook-login/permissions
-$loginUrl = $helper->getLoginUrl('https://example.com/fb-callback.php', $permissions);
-
-?>
 
 <html>
   <head>
@@ -96,7 +83,7 @@ $loginUrl = $helper->getLoginUrl('https://example.com/fb-callback.php', $permiss
 			                <div class="action">
                                 <input type = "submit" class="btn btn-primary signup"  value = " Sign In "/><br />
 			                </div> 
-                      <?php echo '<div><a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook</a></div>'; ?>
+                      
                             </form>        
 			            </div>
 			        </div>
