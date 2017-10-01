@@ -4,7 +4,7 @@
    if($_SERVER["REQUEST_METHOD"] == "POST") {
        
        
-    $userid = $_POST["userName"];
+    $userid = $_POST["userEmail"];
     $firstname=$_POST["firstName"];
     $lastname=$_POST["lastName"];
     $password=$_POST["password"];
@@ -14,38 +14,39 @@
     $address=$_POST["userAddress"];
     $date = $_POST["userDOB"];
     $BIO=$_POST["userBIO"];
-    
-        
-    if(isset($_FILES['image'])){
-      $errors= array();
-      $file_name = $_FILES['image']['name'];
-      $file_size =$_FILES['image']['size'];
-      $file_tmp =$_FILES['image']['tmp_name'];
-      $file_type=$_FILES['image']['type'];
-      $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
+    $otp = "";
       
-      $expensions= array("jpeg","jpg","png");
+    //Profile pic upload needs to be fixed. So, commenting
+   //  if(isset($_FILES['image'])){
+   //    $errors= array();
+   //    $file_name = $_FILES['image']['name'];
+   //    $file_size =$_FILES['image']['size'];
+   //    $file_tmp =$_FILES['image']['tmp_name'];
+   //    $file_type=$_FILES['image']['type'];
+   //    $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
       
-      if(in_array($file_ext,$expensions)=== false){
-         $errors[]="extension not allowed, please choose a JPEG or PNG file.";
-      }
+   //    $expensions= array("jpeg","jpg","png");
       
-      if($file_size >= 5242880){
-         $errors[]='File size must be less than 5 MB';
-      }
+   //    if(in_array($file_ext,$expensions)=== false){
+   //       $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+   //    }
       
-      $temp = explode(".", $_FILES["file"]["name"]);
-      $new_file_name = $userid . '.' . $file_ext;
+   //    if($file_size >= 5242880){
+   //       $errors[]='File size must be less than 5 MB';
+   //    }
+      
+   //    $temp = explode(".", $_FILES["file"]["name"]);
+   //    $new_file_name = $userid . '.' . $file_ext;
           
-      if(empty($errors)==true){
-         move_uploaded_file($file_tmp,"profile_pics/".$new_file_name);
-         //echo "Success";
-      }else{
-         print_r($errors);
-      }
-   }
+   //    if(empty($errors)==true){
+   //       move_uploaded_file($file_tmp,"profile_pics/".$new_file_name);
+   //       //echo "Success";
+   //    }else{
+   //       print_r($errors);
+   //    }
+   // }
             
-    $picpath = "profile_pics/".$new_file_name;
+   //  $picpath = "profile_pics/".$new_file_name;
     
     
     if ($password === $confirmpasswd){
@@ -56,11 +57,17 @@
             die("Connection failed: " . $conn->connect_error);
         } 
 
-        $sql = "INSERT INTO user (user_id, first_name,last_name ,password,address,email,contact,dob,userbio,picpath) 
-        VALUES ('$userid', '$firstname',  '$lastname', '$password','$address','$email','$contact', '$date','$BIO','$picpath')";
+        $sql = "INSERT INTO user (user_id, first_name,last_name ,address,email,contact,dob,userbio) 
+        VALUES ('$userid', '$firstname',  '$lastname', '$address','$email','$contact', '$date','$BIO')";
+
+        $salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), TRUE));
+        $password_hash = hash('sha512', $password . $salt);
+
+        $sql2 = "INSERT INTO login (user_id, email_id, Password, salt, otp) 
+        VALUES ('$userid', '$email','$password_hash', '$salt', '$otp')";
 
 
-        if ($conn->query($sql) === TRUE) {
+        if ($conn->query($sql) === TRUE && $conn->query($sql2) === TRUE) {
             header('Location: login.php');    
         } else {
             //echo " --Something went wrong Error: " . $sql . "<br>" . $conn->error;
@@ -147,12 +154,7 @@
 					        </div>
                      <div class="panel-body">
                          <form action=" " method="post" class="form-horizontal"  enctype="multipart/form-data">
-                                  <div class="form-group">
-								    <label  class="col-sm-2 control-label">User Name</label>
-								    <div class="col-sm-10">
-								      <input type="text" class="form-control" name="userName" placeholder="Username" required>
-								    </div>
-								  </div>
+                                  
                                    <div class="form-group">
 								    <label  class="col-sm-2 control-label">First Name</label>
 								    <div class="col-sm-10">
@@ -178,7 +180,7 @@
 								    </div>
 								  </div>
                              <div class="form-group">
-								    <label  class="col-sm-2 control-label">Email</label>
+								    <label  class="col-sm-2 control-label">Email/User Name</label>
 								    <div class="col-sm-10">
 								      <input type="text" class="form-control" name="userEmail" placeholder="Email" required>
 								    </div>
@@ -202,15 +204,7 @@
 								      <input type="text" class="form-control" id = "userDOB" name="userDOB" placeholder="Date of Birth" required>
 								    </div>
 								  </div>
-                             <div class="form-group">
-								    <label  class="col-sm-2 control-label">Profile Picture</label>
-								    <div class="col-md-10">
-												<input type="file" class="btn btn-default" id="exampleInputFile" name="image">
-												<p class="help-block">
-													Picture should be less than 5 MB
-												</p>
-								    </div>
-								  </div>
+                                               
                              <div class="form-group">
 								    <label  class="col-sm-2 control-label">Interests</label>
 								    <div class="col-sm-10">

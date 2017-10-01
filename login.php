@@ -13,18 +13,28 @@
       $myusername = mysqli_real_escape_string($db,$_POST['username']);
       $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
       
-      $sql = "SELECT user_id FROM login WHERE (user_id = '$myusername' or email_id='$myusername') and Password = '$mypassword'";
+      $sql = "SELECT email_id, Password, salt FROM login WHERE email_id='$myusername' ";
       $result = mysqli_query($db,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       
       $count = mysqli_num_rows($result);
-      
-      // If result matched $myusername and $mypassword, table row must be 1 row
+    
+      // If email ID exists in the login table
 		
       if($count == 1) {
-        $_SESSION['login_user'] = $myusername;
-        $_SESSION['loggedin'] = true;
-        header('Location: user_home.php');    
+        $salt = $row["salt"];
+        $password_hash = $row["Password"];
+        $myhash = hash('sha512', $mypassword . $salt);
+
+        //If the password is correct
+        if($password_hash == $myhash){
+          $_SESSION['login_user'] = $myusername;
+          $_SESSION['loggedin'] = true;
+          header('Location: user_home.php');    
+        }
+        else{
+          $error = "Your Login Name or Password is invalid";
+        }
       }else {
          $error = "Your Login Name or Password is invalid";
       }

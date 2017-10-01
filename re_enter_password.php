@@ -14,7 +14,10 @@
     if($count == 1) {
 
     	if($pswrd == $confirm_pswrd){
-    		$sql2 = "UPDATE login SET Password='". $pswrd ."' WHERE User_id='". $email_id. "'";
+
+            $salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), TRUE));
+            $password_hash = hash('sha512', $pswrd . $salt);
+    		$sql2 = "UPDATE login SET Password='". $password_hash ."', salt='". $salt ."' WHERE User_id='". $email_id. "'";
         	$querry = mysqli_query($db,$sql2);
         	$msg = "Password changed successfully";
     	}
