@@ -27,6 +27,5 @@
     }else {
     	$msg = "Email ID is blank or invalid";
     }
-
     echo $msg;
 ?>

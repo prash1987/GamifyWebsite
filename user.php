@@ -14,6 +14,10 @@
     $address=$_POST["userAddress"];
     $date = $_POST["userDOB"];
     $BIO=$_POST["userBIO"];
+    $sec_q1=$_POST["secQ1"];
+    $sec_ans1=$_POST["secAns1"];
+    $sec_q2=$_POST["secQ2"];
+    $sec_ans2=$_POST["secAns2"];
     $otp = "";
       
     //Profile pic upload needs to be fixed. So, commenting
@@ -57,8 +61,8 @@
             die("Connection failed: " . $conn->connect_error);
         } 
 
-        $sql = "INSERT INTO user (user_id, first_name,last_name ,address,email,contact,dob,userbio) 
-        VALUES ('$userid', '$firstname',  '$lastname', '$address','$email','$contact', '$date','$BIO')";
+        $sql = "INSERT INTO user (user_id, first_name,last_name ,address,email,contact,dob,userbio,sec_q1,sec_ans1,sec_q2,sec_ans2) 
+        VALUES ('$userid', '$firstname',  '$lastname', '$address','$email','$contact', '$date','$BIO','$sec_q1','$sec_ans1','$sec_q2','$sec_ans2')";
 
         $salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), TRUE));
         $password_hash = hash('sha512', $password . $salt);
@@ -211,6 +215,34 @@
 								    <textarea class="form-control" placeholder="Interests (Sports, Dance, Gym, etc.)" rows="3"  name="userBIO" required="required"></textarea>
 								</div>
 								  </div>
+
+                             <div class="form-group">
+                    <label  class="col-sm-2 control-label">Security Question-1</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id = "secQ1" placeholder="Security Question goes here" name="secQ1" required>
+                </div>
+                  </div>
+
+                             <div class="form-group">
+                    <label  class="col-sm-2 control-label">Security Answer-1</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id = "secAns1" placeholder="Your Answer" name="secAns1" required>
+                </div>
+                  </div>
+
+                             <div class="form-group">
+                    <label  class="col-sm-2 control-label">Security Question-2</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id = "secQ2" placeholder="Security Question goes here" name="secQ2" required>
+                </div>
+                  </div>
+
+                             <div class="form-group">
+                    <label  class="col-sm-2 control-label">Security Answer-2</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id = "secAns2" placeholder="Your Answer" name="secAns2" required>
+                </div>
+                  </div>                 
                              <div class="action">
                                 <input type = "submit" class="btn btn-primary signup"  value = "Register"/><br />
 			                </div> 

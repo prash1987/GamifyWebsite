@@ -149,7 +149,7 @@
 	                            
 	                        </div>
                       <form name="Form1" action = "" method = "post">
-  			                <input class="form-control" type="text" name = "email_id" placeholder="Email ID">
+  			                <input class="form-control" type="text" name = "email_id" placeholder="Email ID" required>
   			                <input class="form-control" type="text" name = "otp" placeholder="One-Time Password">
 
                         <div class="already">
@@ -157,7 +157,7 @@
                         </div>
 
   			                <div class="action">
-                                  <input type = "button" class="btn btn-primary signup"  value = " Send OTP " onclick="sendOTP();" /><br />
+                                  <input type = "button" class="btn btn-primary signup"  value = " Send OTP " onclick="sendOTP();" />
                                   <input type = "button" class="btn btn-primary signup"  value = " Verify OTP " onclick="verifyOTP();" /><br />
   			                </div> 
                       </form>        
