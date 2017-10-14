@@ -3,7 +3,6 @@
 
 <?php
    include("config.php");
-   session_start();
    $msg = ".";
    $sec_q1 = "";
    $sec_ans1 = "";

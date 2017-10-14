@@ -30,8 +30,8 @@
 			{
 				echo"<form action = 're_enter_password.php' method = 'post'>";
 				echo "<input class='form-control' type='text' name = 'email_id' value=$email_id readonly>";
-				echo "<input class='form-control' type='text' name = 'new_password' placeholder='New Password'>";
-				echo "<input class='form-control' type='text' name = 'confirm_password' placeholder='Confirm Password'>";
+				echo "<input class='form-control' type='password' name = 'new_password' placeholder='New Password'>";
+				echo "<input class='form-control' type='password' name = 'confirm_password' placeholder='Confirm Password'>";
 				echo "<div class='action'>";
 				echo "<input type = 'submit' class='btn btn-primary signup'  value = 'Change Password' /><br/>";
 				echo "</div></form>";

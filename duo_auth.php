@@ -2,8 +2,7 @@
 
 <?php
    include("config.php");
-   
-   session_start();
+  
    $msg = ".";
 
    if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -25,7 +24,7 @@
 		
       if($count == 1) {
         $_SESSION['login_user'] = $email_id;
-        header('Location: user_home.php');   
+        header('Location: homepage.php');   
       }else {
          $msg = "Authentication failed";
       }

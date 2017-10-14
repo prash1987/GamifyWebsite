@@ -2,7 +2,7 @@
 <?php
    include("config.php");
    include('swift/lib/swift_required.php');
-   session_start();
+
    $error = ".";
 
    if($_SERVER["REQUEST_METHOD"] == "POST") {

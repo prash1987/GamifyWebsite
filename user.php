@@ -52,7 +52,11 @@
             
    //  $picpath = "profile_pics/".$new_file_name;
     
-    
+    if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $password)) {
+      echo "The password does not meet the requirements. Password must contain at least 8 characters made of alphabets, at least one number and at least one special character.";
+    }
+    else {        
+
     if ($password === $confirmpasswd){
         // Create connection
         $conn = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
@@ -81,7 +85,8 @@
     else {
         echo "<h3>Confirm password should match the password</h3>";
     }
-   }
+  }
+}
 ?>
 
 <?php
@@ -213,8 +218,27 @@
 								    <label  class="col-sm-2 control-label">Interests</label>
 								    <div class="col-sm-10">
 								    <textarea class="form-control" placeholder="Interests (Sports, Dance, Gym, etc.)" rows="3"  name="userBIO" required="required"></textarea>
+									</div>
+							 </div>
+
+							   <div class="form-group">
+							    <label class="col-sm-2 control-label" for="userBIO2">Interests</label>
+							    <div class="col-sm-10">
+							    <select multiple class="form-control" id="userBIO2">
+							      <option value="Cricket">Cricket</option>
+							      <option value="Badminton">Badminton</option>
+							      <option value="Tennis">Tennis</option>
+							      <option value="Squash">Squash</option>
+								  <option value="Running">Running</option>
+								  <option value="Football">Football</option>
+								  <option value="Basketball">Basketball</option>
+								  <option value="Cycling">Cycling</option>
+								  <option value="Gym">Gym</option>
+								  <option value="Dance">Dance</option>
+								  <option value="MartialArts">Martial Arts</option>
+							    </select>
 								</div>
-								  </div>
+							  </div>
 
                              <div class="form-group">
                     <label  class="col-sm-2 control-label">Security Question-1</label>
