@@ -90,14 +90,13 @@ class PostClass {
 			$count = 1;
 
 			while($row = mysqli_fetch_array($data_query)) {
-				
+				$id = $row['id'];
 				$body = $row['body'];
 				$location = $row['location'];
 				$play_time = $row['play_time'];
 				$added_by = $row['posted_by'];
 				$date_time = $row['time_stamp'];
 				$image_path = $folder . $row['image_path'];
-
 				$game = $row['game'];
 				$gender = $row['gender'];
 				if ($gender == 'A'){
@@ -153,6 +152,23 @@ class PostClass {
 					$last_name = $user_row['last_name'];
 					// $profile_pic = $user_row['profile_pic'];
 
+					?>
+					<script> 
+						function toggle<?php echo $id; ?>() {
+
+							var target = $(event.target);
+							if (!target.is("a")) {
+								var element = document.getElementById("toggleComment<?php echo $id; ?>");
+
+								if(element.style.display == "block") 
+									element.style.display = "none";
+								else 
+									element.style.display = "block";
+							}
+						}
+
+					</script>
+					<?php
 
 					//Timeframe
 					$date_time_now = date("Y-m-d H:i:s");
@@ -218,7 +234,7 @@ class PostClass {
 						}
 					}
 
-					$str .= "<div class='status_post'>
+					$str .= "<div class='status_post' onClick='javascript:toggle$id()'>
 							
 
 								<div class='posted_by' style='color:#ACACAC;'>
@@ -228,7 +244,7 @@ class PostClass {
 									$body
 									<br>
 								</div>
-									<div id='post_loc_and_play_time'>
+								<div id='post_loc_and_play_time'>
 									$location
 									&nbsp;&nbsp;&nbsp;&nbsp;$play_time
 									&nbsp;&nbsp;&nbsp;&nbsp;
@@ -240,7 +256,16 @@ class PostClass {
 									<br>
 								</div>
 								<img src='$image_path' height='20%' width='20%'></img>
+								<div class='newsfeedPostOptions'>
+									<iframe allowtransparency='true' src='like.php?post_id=$id' style='height: 70px; width: 70px;' frameBorder='0'  scrolling='no'></iframe>
+								</div>
 
+							</div>
+
+								<div class='post_comment' id='toggleComment$id' style='display:none;'>
+								<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
+							</div>
+							
 							<hr>";
 				
 
