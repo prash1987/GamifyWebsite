@@ -39,5 +39,12 @@ class UserClass {
 		$userbio = $this->user['userbio'];
 		return $userbio;
 	}
+
+	public function getProPic() {
+		$propic = $this->user['propic'];
+		$folder="profile_pics/";
+		return $folder . $propic;
+	}
+	
 }
 ?>

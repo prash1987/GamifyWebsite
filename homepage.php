@@ -64,7 +64,7 @@
 	<br><br><br>
 	<div class="user_details column">
 		<br><br>
-		<a href="<?php echo $userLoggedIn;?>">  <img src="pro_pic.png"> </a>
+		<a href="<?php echo $userLoggedIn;?>">  <img height='126' width='126' src="<?php echo $user_obj->getProPic(); ?>"> </a>
 
 		<div class="user_details_left_right">
 			<a href="<?php echo $userLoggedIn;?>">

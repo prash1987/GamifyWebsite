@@ -19,38 +19,31 @@
     $sec_q2=$_POST["secQ2"];
     $sec_ans2=$_POST["secAns2"];
     $otp = "";
+    $new_file_name="";
       
-    //Profile pic upload needs to be fixed. So, commenting
-   //  if(isset($_FILES['image'])){
-   //    $errors= array();
-   //    $file_name = $_FILES['image']['name'];
-   //    $file_size =$_FILES['image']['size'];
-   //    $file_tmp =$_FILES['image']['tmp_name'];
-   //    $file_type=$_FILES['image']['type'];
-   //    $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
+    
+     if(isset($_FILES['userPic'])){
+       $errors= array();
+       $file_name = $_FILES['userPic']['name'];
+       $file_size =$_FILES['userPic']['size'];
+       $file_tmp =$_FILES['userPic']['tmp_name'];
+       $file_type=$_FILES['userPic']['type'];
+       $file_ext=strtolower(end(explode('.',$_FILES['userPic']['name'])));
       
-   //    $expensions= array("jpeg","jpg","png");
+       $expensions= array("jpeg","jpg","png","JPEG","JPG","PNG");
       
-   //    if(in_array($file_ext,$expensions)=== false){
-   //       $errors[]="extension not allowed, please choose a JPEG or PNG file.";
-   //    }
-      
-   //    if($file_size >= 5242880){
-   //       $errors[]='File size must be less than 5 MB';
-   //    }
-      
-   //    $temp = explode(".", $_FILES["file"]["name"]);
-   //    $new_file_name = $userid . '.' . $file_ext;
-          
-   //    if(empty($errors)==true){
-   //       move_uploaded_file($file_tmp,"profile_pics/".$new_file_name);
-   //       //echo "Success";
-   //    }else{
-   //       print_r($errors);
-   //    }
-   // }
-            
-   //  $picpath = "profile_pics/".$new_file_name;
+       if(in_array($file_ext,$expensions)=== false){
+          $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+       }
+  
+       if(empty($errors)==true){
+            $new_file_name=$_FILES['userPic']['name'];
+	   		$folder="profile_pics/";
+	   		move_uploaded_file($_FILES['userPic']['tmp_name'], $folder . $_FILES['userPic']['name']);
+       }else{
+         echo $errors;
+       }
+    }
     
     if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $password)) {
       echo "The password does not meet the requirements. Password must contain at least 8 characters made of alphabets, at least one number and at least one special character.";
@@ -65,8 +58,8 @@
             die("Connection failed: " . $conn->connect_error);
         } 
 
-        $sql = "INSERT INTO user (user_id, first_name,last_name ,address,email,contact,dob,userbio,sec_q1,sec_ans1,sec_q2,sec_ans2) 
-        VALUES ('$userid', '$firstname',  '$lastname', '$address','$email','$contact', '$date','$BIO','$sec_q1','$sec_ans1','$sec_q2','$sec_ans2')";
+        $sql = "INSERT INTO user (user_id, first_name,last_name ,address,email,contact,dob,userbio,sec_q1,sec_ans1,sec_q2,sec_ans2,propic) 
+        VALUES ('$userid', '$firstname',  '$lastname', '$address','$email','$contact', '$date','$BIO','$sec_q1','$sec_ans1','$sec_q2','$sec_ans2','$new_file_name')";
 
         $salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), TRUE));
         $password_hash = hash('sha512', $password . $salt);
@@ -240,6 +233,11 @@
 								</div>
 							  </div>
 
+							  <div class="form-group">
+							  	<label class="col-sm-2 control-label">Profile Picture</label>
+							  	<div class="col-sm-10"><input type="file" name="userPic" id="userPic"></div>
+							  </div>
+
                              <div class="form-group">
                     <label  class="col-sm-2 control-label">Security Question-1</label>
                     <div class="col-sm-10">
@@ -267,7 +265,7 @@
                     <input type="text" class="form-control" id = "secAns2" placeholder="Your Answer" name="secAns2" required>
                 </div>
                   </div>                 
-                             <div class="action">
+                             <br><div class="action">
                                 <input type = "submit" class="btn btn-primary signup"  value = "Register"/><br />
 			                </div> 
                          </form>
