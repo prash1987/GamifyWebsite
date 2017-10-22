@@ -45,40 +45,40 @@
        }
     }
     
-    if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $password)) {
-      echo "The password does not meet the requirements. Password must contain at least 8 characters made of alphabets, at least one number and at least one special character.";
-    }
-    else {        
+    //if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $password)) {
+    //  echo "The password does not meet the requirements. Password must contain at least 8 characters made of alphabets, at least one number and at least one special character.";
+    //}
+    //else {        
 
-    if ($password === $confirmpasswd){
-        // Create connection
-        $conn = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        } 
+		if ($password === $confirmpasswd){
+			// Create connection
+			$conn = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+			// Check connection
+			if ($conn->connect_error) {
+				die("Connection failed: " . $conn->connect_error);
+			} 
 
-        $sql = "INSERT INTO user (user_id, first_name,last_name ,address,email,contact,dob,userbio,sec_q1,sec_ans1,sec_q2,sec_ans2,propic) 
-        VALUES ('$userid', '$firstname',  '$lastname', '$address','$email','$contact', '$date','$BIO','$sec_q1','$sec_ans1','$sec_q2','$sec_ans2','$new_file_name')";
+			$sql = "INSERT INTO user (user_id, first_name,last_name ,address,email,contact,dob,userbio,sec_q1,sec_ans1,sec_q2,sec_ans2,propic) 
+			VALUES ('$userid', '$firstname',  '$lastname', '$address','$email','$contact', '$date','$BIO','$sec_q1','$sec_ans1','$sec_q2','$sec_ans2','$new_file_name')";
 
-        $salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), TRUE));
-        $password_hash = hash('sha512', $password . $salt);
+			$salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), TRUE));
+			$password_hash = hash('sha512', $password . $salt);
 
-        $sql2 = "INSERT INTO login (user_id, email_id, Password, salt, otp) 
-        VALUES ('$userid', '$email','$password_hash', '$salt', '$otp')";
+			$sql2 = "INSERT INTO login (user_id, email_id, Password, salt, otp) 
+			VALUES ('$userid', '$email','$password_hash', '$salt', '$otp')";
 
 
-        if ($conn->query($sql) === TRUE && $conn->query($sql2) === TRUE) {
-            header('Location: login.php');    
-        } else {
-            //echo " --Something went wrong Error: " . $sql . "<br>" . $conn->error;
-            echo "User ID already exists";
-        }
-    }
-    else {
-        echo "<h3>Confirm password should match the password</h3>";
-    }
-  }
+			if ($conn->query($sql) === TRUE && $conn->query($sql2) === TRUE) {
+				header('Location: login.php');    
+			} else {
+				//echo " --Something went wrong Error: " . $sql . "<br>" . $conn->error;
+				echo "User ID already exists";
+			}
+		}
+		else {
+			echo "<h3>Confirm password should match the password</h3>";
+		}
+  //}
 }
 ?>
 
