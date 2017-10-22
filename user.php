@@ -109,14 +109,63 @@
    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     
   <script>
-  $( function() {
+  /*$( function() {
     $( "#userDOB" ).datepicker({ dateFormat: 'yy-mm-dd' });
 
-  } );
+  } ); */
+  
+  	function matchPasswords() {
+		var pass = document.getElementById("password");
+		var c_pass = document.getElementById("confirm_password");
+		var cp_error = document.getElementById("cpass_error");
+		if (c_pass.value == ""){
+			cp_error.innerHTML = "Confirm Password field cannot be blank";
+			c_pass.focus();
+			return false;
+		}
+		else{
+			if (pass.value == c_pass.value){
+				cp_error.innerHTML = "";
+				return true;
+			}
+			else{				
+				cp_error.innerHTML = "*Passwords & Confirm password must be the same. Please re-enter both of them!";
+				//alert("*Passwords & Confirm password must be the same. Please re-enter!");
+				c_pass.value="";
+				pass.value="";
+				pass.focus();
+				return false;
+			}
+		}
+	}
+
+	function regexCheck(){
+		var pass = document.getElementById("password");
+		var p_error = document.getElementById("pass_error")
+		var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+		if (pass.value == ""){
+			p_error.innerHTML = "*Password field cannot be blank";
+			pass.focus();
+			return false;
+		}
+		else{
+			if(!re.test(pass.value)){
+				p_error.innerHTML = "*Password field must contain at least one digit, a lowercase & an uppercase letter and should be at least 6 characters long. Please re-enter it again.";
+				pass.value="";
+				pass.focus();
+				return false;
+			}
+			else{
+				p_error.innerHTML = "";
+				return true;
+			}
+		}
+	}
+	
   </script>
 
   </head>
-   <body >
+   <body onload = 'set_max_date_attribute()'>
 	  	<div class="header">
 	     <div class="container">
 	        <div class="row">
@@ -152,7 +201,7 @@
            <div class="col-md-6">
                <div class="content-box-large">
                    <div class="panel-heading">
-					            <div class="panel-title">Register</div>
+					            <div class="panel-title"><h3>Registration Form</h3></div>
 					        </div>
                      <div class="panel-body">
                          <form action=" " method="post" class="form-horizontal"  enctype="multipart/form-data">
@@ -169,22 +218,24 @@
 								      <input type="text" class="form-control" name="lastName" placeholder="Last Name" required>
 								    </div>
 								  </div>
-                                 <div class="form-group">
-								    <label  class="col-sm-2 control-label">Password</label>
+								<div class="form-group">
+									<label  class="col-sm-2 control-label">Password</label>
 								    <div class="col-sm-10">
-								      <input type="password" class="form-control" name="password" placeholder="Password" required>
+										<input type="password" class="form-control" name="password" id="password" placeholder="Password" onblur= 'return regexCheck();' required>
+										<p id="pass_error" style="color:red; font-size:small;"></p>
 								    </div>
-								  </div>
-                              <div class="form-group">
-								    <label  class="col-sm-2 control-label">Confirm Password</label>
-								    <div class="col-sm-10">
-								      <input type="password" class="form-control" name="confirm_password" placeholder="Password" required>
+								</div>
+								<div class="form-group">
+									<label  class="col-sm-2 control-label">Confirm Password</label>
+									<div class="col-sm-10">
+										<input type="password" class="form-control" name="confirm_password" id="confirm_password" onblur='return matchPasswords();' placeholder="Confirm Password" required>
+										<p id="cpass_error" style="color:red; font-size:small;"></p>
 								    </div>
-								  </div>
+								</div>
                              <div class="form-group">
 								    <label  class="col-sm-2 control-label">Email/User Name</label>
 								    <div class="col-sm-10">
-								      <input type="text" class="form-control" name="userEmail" placeholder="Email" required>
+								      <input type="email" class="form-control" name="userEmail" placeholder="Email" required>
 								    </div>
 								  </div>
                                <div class="form-group">
@@ -196,14 +247,14 @@
                               <div class="form-group">
 								    <label  class="col-sm-2 control-label">Phone Number</label>
 								    <div class="col-sm-10">
-								      <input type="text" class="form-control" name="userContact" placeholder="Phone Number" required>
+								      <input type="number" class="form-control" name="userContact" min= '10' max = '10' title='The number should be atleast 10 digit long' placeholder="Phone Number" required>
 								    </div>
 								  </div>
                     
                               <div class="form-group">
 								    <label  class="col-sm-2 control-label">Date of Birth</label>
 								    <div class="col-sm-10">
-								      <input type="text" class="form-control" id = "userDOB" name="userDOB" placeholder="Date of Birth" required>
+								      <input type="date" class="form-control" id = "userDOB" name="userDOB" placeholder="Date of Birth" required>
 								    </div>
 								  </div>
                                                

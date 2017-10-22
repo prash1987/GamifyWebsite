@@ -8,10 +8,10 @@
    $sec_ans1 = "";
    $sec_q2 = "";
    $sec_ans2 = "";
-
+	$email_valid_flag = False;
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       
-      $msg = ".";
+      $msg = "";
 
       $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
        
@@ -30,6 +30,7 @@
         
         $sec_q1 = $row["sec_q1"];
         $sec_q2 = $row["sec_q2"];
+		$email_valid_flag = TRUE;
 
       }else {
          $msg = "Email ID is blank or invalid";
@@ -98,21 +99,63 @@
 	                            
 	                        </div>
                       <form name="Form1" action = "" method = "post">
-  			                <input class="form-control" type="text" name = "email_id" placeholder="Email ID" required><br>
-                        <label for="sec_ans1"><?php if (isset($sec_q1)) echo $sec_q1 ?></label>
-  			                <input class="form-control" type="text" id = "sec_ans1" name = "sec_ans1" placeholder="Answer">
-                        <label for="sec_ans2"><?php if (isset($sec_q2)) echo $sec_q2 ?></label>
-                        <input class="form-control" type="text" id = "sec_ans2" name = "sec_ans2" placeholder="Answer">
-
-                        <div class="already">
-                          <p><?php if (isset($msg)) echo $msg ?></p>
-                        </div>
-
-  			                <div class="action">
-                                  <input type = "button" class="btn btn-primary signup"  value = " Show security questions " onclick="showQuestions();" />
-                                  <input type = "button" class="btn btn-primary signup"  value = " Verify Answers " onclick="verifyAns();" /><br />
-  			                </div> 
-                      </form>        
+						<?php 
+							$form = "";
+							if (!isset($email_id)){
+								$form .=  "<input class='form-control' type='text' name = 'email_id' placeholder='Email ID' required><br>
+									<div class='already'>";
+									if (isset($msg)){
+										$form .= "<p> $msg </p>";
+									}
+								$form .= "
+									</div>
+									<div class='action'>
+										<input type = 'button' class='btn btn-primary signup'  value = 'Show security questions' onclick='showQuestions();' />
+									</div>
+									</form>";
+								
+								echo $form;
+							}
+							else{
+								if ($email_valid_flag){
+									$form .= "<input class='form-control' type='hidden' name = 'email_id' placeholder='Email ID' value = $email_id readonly><br>
+										<input class='form-control' type='text' id = 'sec_ques1' name = 'sec_ques1' value = $sec_q1 readonly>
+										<input class='form-control' type='text' id = 'sec_ans1' name = 'sec_ans1' placeholder='Answer for Question 1'>
+										<input class='form-control' type='text' id = 'sec_ques2' name = 'sec_ques2' value = $sec_q2 readonly>
+										<input class='form-control' type='text' id = 'sec_ans2' name = 'sec_ans2' placeholder='Answer for Question 2'>
+										<div class='already'>";
+										if (isset($msg)){
+											$form .= "<p> $msg </p>";
+										}
+									$form .= "	
+										</div>
+										
+										 <div class='action'>
+											<input type = 'button' class='btn btn-primary signup'  value = 'Verify Answers' onclick='verifyAns();' /><br />
+										</div> 
+										</form>";
+										
+									echo $form;
+								}
+								else{
+									$form .=  "<input class='form-control' type='text' name = 'email_id' placeholder='Email ID' required><br>
+										<div class='already'>";
+										if (isset($msg)){
+											$form .= "<p> $msg </p>";
+										}
+									$form .= "
+										</div>
+										<div class='action'>
+											<input type = 'button' class='btn btn-primary signup'  value = 'Show security questions' onclick='showQuestions();' />
+										</div>
+										</form>";
+									
+									echo $form;
+									
+								}
+								
+							}
+						?>         
 			            </div>
 			        </div>
 			    </div>
