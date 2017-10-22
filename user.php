@@ -50,7 +50,20 @@
     }
     else {        
 
-    if ($password === $confirmpasswd){
+    if ($password === $confirmpasswd)
+    {
+        if ((string)$sec_q1==="default") { //@Author- Harsha: to check Security questions are selected
+        echo 'Please select both security questions 1 and 2';
+      }
+
+      else
+      {
+        if ((string)$sec_q2==="default") {
+        echo 'Please select both security questions 1 and 2';
+        }
+        else
+        {
+
         // Create connection
         $conn = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
         // Check connection
@@ -74,6 +87,9 @@
             //echo " --Something went wrong Error: " . $sql . "<br>" . $conn->error;
             echo "User ID already exists";
         }
+      }
+
+    }
     }
     else {
         echo "<h3>Confirm password should match the password</h3>";
@@ -240,8 +256,16 @@
 
                              <div class="form-group">
                     <label  class="col-sm-2 control-label">Security Question-1</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" id = "secQ1" placeholder="Security Question goes here" name="secQ1" required>
+                    <div class="col-sm-10"> <!--@Author Harsha: Security questions-->
+                    <!--input type="text" class="form-control" id = "secQ1" placeholder="Security Question goes here" name="secQ1" required-->
+
+                    <select class="form-control" name="secQ1" required>
+                            <option value='default'>Select one from below</option>
+                            <option value="born">Where were you born?</option>
+                            <option value="club">What is your favorite sports club?</option>
+                            <option value="hero">Who is your childhood sports hero?</option>
+                            <option value="job">How old were you when you got your first job?</option>
+                        </select>
                 </div>
                   </div>
 
@@ -255,7 +279,14 @@
                              <div class="form-group">
                     <label  class="col-sm-2 control-label">Security Question-2</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" id = "secQ2" placeholder="Security Question goes here" name="secQ2" required>
+                    <!--input type="text" class="form-control" id = "secQ2" placeholder="Security Question goes here" name="secQ2" required-->
+                    <select class="form-control" name="secQ2" required>
+                            <option value="default">Select one from below</option>
+                            <option value="father">In what year was your father born?</option>
+                            <option value="pet">What is your pet’s name?</option>
+                            <option value="school">What was the name of your elementary school?</option>
+                         
+                        </select>
                 </div>
                   </div>
 

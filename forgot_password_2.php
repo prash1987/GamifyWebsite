@@ -25,13 +25,43 @@
       
       // If result has a match, table row must be 1 row
 		
+      // @Author- Harsha
       if($count == 1) {
         $_SESSION['login_user'] = $email_id;
         
-        $sec_q1 = $row["sec_q1"];
-        $sec_q2 = $row["sec_q2"];
 
-      }else {
+        switch ($row["sec_q1"]) {
+          case 'born':
+                    $sec_q1 = "Where were you born?";
+            break;
+          case 'club':
+                    $sec_q1 = "What is your favorite sports club?";
+            break;
+          case 'hero':
+                    $sec_q1 = "Who is your childhood sports hero?";
+            break;
+          case 'job':
+                    $sec_q1 = "How old were you when you got your first job?";
+            break;
+        }
+
+        switch ($row["sec_q2"]) {
+          case 'father':
+            $sec_q2 = "In what year was your father born?";
+            break;
+            case 'pet':
+            $sec_q2 = "What is your pet’s name?";
+            break;
+            case 'school':
+            $sec_q2 = "What was the name of your elementary school?";
+            break;
+          
+        }
+
+       // $sec_q1 = $row["sec_q1"];
+       // $sec_q2 = $row["sec_q2"];
+    
+     }else {
          $msg = "Email ID is blank or invalid";
       }
    }
