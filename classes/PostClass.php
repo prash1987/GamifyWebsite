@@ -15,9 +15,12 @@ class PostClass {
 		$play_time = mysqli_real_escape_string($this->con, $play_time);
 		$location = strip_tags($location); 
 		$location = mysqli_real_escape_string($this->con, $location);
-		//$image_path = strip_tags($image_path);
+		
+		if (!isset($image_name) || trim($image_name) == '') {
+    		$image_name="default_post.jpg";
+		}
 		$game = strip_tags($game); 
-		$game = mysqli_real_escape_string($this->con, $game);
+		$game = strtoupper(mysqli_real_escape_string($this->con, $game));
 		$gender = strip_tags($gender); 
 		$gender = mysqli_real_escape_string($this->con, $gender);
 		
@@ -54,7 +57,7 @@ class PostClass {
 			}
 
 			if ($game_pref != ""){
-				if($game_pref != "All") {
+				if($game_pref != "ALL") {
 					$sql[] = "game IN ($game_pref)";
 				}	
 			}

@@ -13,17 +13,24 @@
     $contact=$_POST["userContact"];
     $address=$_POST["userAddress"];
     $date = $_POST["userDOB"];
-    $BIO=$_POST["userBIO"];
     $sec_q1=$_POST["secQ1"];
     $sec_ans1=$_POST["secAns1"];
     $sec_q2=$_POST["secQ2"];
     $sec_ans2=$_POST["secAns2"];
+
+    $BIO = '';
+	foreach($_POST['userBIO2'] as $vals) {
+	    $BIO .= $vals . ',';
+	}
+	$BIO= rtrim($BIO, ' ') . $_POST["userBIO"];
+	$BIO= strtoupper($BIO);
+
     $otp = "";
-    $new_file_name="";
+    $new_file_name= "pro_pic.png";
       
     
      if(isset($_FILES['userPic'])){
-       $errors= array();
+       $errors= "";
        $file_name = $_FILES['userPic']['name'];
        $file_size =$_FILES['userPic']['size'];
        $file_tmp =$_FILES['userPic']['tmp_name'];
@@ -33,7 +40,7 @@
        $expensions= array("jpeg","jpg","png","JPEG","JPG","PNG");
       
        if(in_array($file_ext,$expensions)=== false){
-          $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+          $errors="extension not allowed, please choose a JPEG or PNG file. It is " . $file_ext;
        }
   
        if(empty($errors)==true){
@@ -247,7 +254,7 @@
                               <div class="form-group">
 								    <label  class="col-sm-2 control-label">Phone Number</label>
 								    <div class="col-sm-10">
-								      <input type="number" class="form-control" name="userContact" min= '10' max = '10' title='The number should be atleast 10 digit long' placeholder="Phone Number" required>
+								      <input type="text" pattern="\d*" maxlength="10" class="form-control" name="userContact" title='Invalid phone number' placeholder="Phone Number" required>
 								    </div>
 								  </div>
                     
@@ -257,18 +264,11 @@
 								      <input type="date" class="form-control" id = "userDOB" name="userDOB" placeholder="Date of Birth" required>
 								    </div>
 								  </div>
-                                               
-                             <div class="form-group">
-								    <label  class="col-sm-2 control-label">Interests</label>
-								    <div class="col-sm-10">
-								    <textarea class="form-control" placeholder="Interests (Sports, Dance, Gym, etc.)" rows="3"  name="userBIO" required="required"></textarea>
-									</div>
-							 </div>
 
 							   <div class="form-group">
 							    <label class="col-sm-2 control-label" for="userBIO2">Interests</label>
 							    <div class="col-sm-10">
-							    <select multiple class="form-control" id="userBIO2">
+							    <select multiple class="form-control" id="userBIO2" name="userBIO2[]">
 							      <option value="Cricket">Cricket</option>
 							      <option value="Badminton">Badminton</option>
 							      <option value="Tennis">Tennis</option>
@@ -282,6 +282,13 @@
 								  <option value="MartialArts">Martial Arts</option>
 							    </select>
 								</div>
+							  </div>
+
+							  <div class="form-group">
+							  	<label class="col-sm-2 control-label">Other Games (if any)</label>
+							  	<div class="col-sm-10"><input type="text" class="form-control" name="userBIO" id="userBIO" placeholder="Other Games"></div>
+							  
+							  <p style="color:red; font-size:small;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Separate game names with commas. Do not enter any spaces after or before commas.</p>
 							  </div>
 
 							  <div class="form-group">

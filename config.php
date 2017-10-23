@@ -1,7 +1,7 @@
 <?php
 	define('DB_SERVER', 'localhost');
    	define('DB_USERNAME', 'root');
-   	define('DB_PASSWORD', '');
+   	define('DB_PASSWORD', '1234567');
    	define('DB_DATABASE', 'gamify');
 
    	ob_start(); //Turns on output buffering 
