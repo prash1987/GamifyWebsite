@@ -169,6 +169,35 @@
 		}
 	}
 	
+	//@Author- Harsha
+	function securityQuestionCheck(){
+		var secQues1 = document.getElementById("SecQues1");
+		var secQues2 = document.getElementById("SecQues2");
+		var secQ1_error = document.getElementById("secQ1_error");
+		var secQ2_error = document.getElementById("secQ2_error");
+
+		//var selectedValue1 = secQues1.options[secQues1.selectedIndex].value;
+		//var selectedValue2 = secQues2.options[secQues2.selectedIndex].value;
+    	//var secQ1_error = document.getElementById("secQ1_error");
+		if (secQues1.value == "default"){
+			secQ1_error.innerHTML = "Please select a question from the list";
+			secQues1.focus();
+			return false;
+		} else{
+		
+    	secQ1_error.innerHTML = "";
+		if (secQues2.value == "default"){
+			secQ2_error.innerHTML = "Please select a question from the list";
+			secQues2.focus();
+			return false;
+		}
+		else {
+			secQ1_error.innerHTML = "";
+			secQ2_error.innerHTML = "";
+			return true;
+		}
+	}
+}
   </script>
 
   </head>
@@ -299,21 +328,37 @@
                              <div class="form-group">
                     <label  class="col-sm-2 control-label">Security Question-1</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" id = "secQ1" placeholder="Security Question goes here" name="secQ1" required>
-                </div>
-                  </div>
-
-                             <div class="form-group">
-                    <label  class="col-sm-2 control-label">Security Answer-1</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" id = "secAns1" placeholder="Your Answer" name="secAns1" required>
+                    <select class="form-control" id= "SecQues1" name="secQ1" onblur="return securityQuestionCheck();">
+                            <option value='default'>Select one from below</option>
+                            <option value="born">Where were you born?</option>
+                            <option value="club">What is your favorite sports club?</option>
+                            <option value="hero">Who is your childhood sports hero?</option>
+                            <option value="job">How old were you when you got your first job?</option>
+                        </select>
+                        <p id="secQ1_error" style="color:red; font-size:small;"></p>
+                    
                 </div>
                   </div>
 
                              <div class="form-group">
                     <label  class="col-sm-2 control-label">Security Question-2</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" id = "secQ2" placeholder="Security Question goes here" name="secQ2" required>
+                    <!--input type="text" class="form-control" id = "secQ2" placeholder="Security Question goes here" name="secQ2" required-->
+                    	<select class="form-control" id ="SecQues2" name="secQ2" onblur="return securityQuestionCheck();">
+                            <option value="default">Select one from below</option>
+                            <option value="father">In what year was your father born?</option>
+                            <option value="pet">What is your pet’s name?</option>
+                            <option value="school">What was the name of your elementary school?</option> 
+                        </select>
+                        <p id="secQ2_error" style="color:red; font-size:small;"></p>
+                       
+                </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label">Security Answer-1</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" id = "secAns1" placeholder="Your Answer" name="secAns1" required>
                 </div>
                   </div>
 
@@ -324,8 +369,8 @@
                 </div>
                   </div>                 
                              <br><div class="action">
-                                <input type = "submit" class="btn btn-primary signup"  value = "Register"/><br />
-			                </div> 
+                                <input type = "submit" class="btn btn-primary signup"  value = "Register" onclick="return securityQuestionCheck();" /><br />
+                            </div> 
                          </form>
                    </div>
                    

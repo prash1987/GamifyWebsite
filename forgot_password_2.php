@@ -4,35 +4,57 @@
 <?php
    include("config.php");
    $msg = ".";
-   $sec_q1 = "";
+   $my_sec_q1 = "";
    $sec_ans1 = "";
-   $sec_q2 = "";
+   $my_sec_q2 = "";
    $sec_ans2 = "";
-	$email_valid_flag = False;
+	 $email_valid_flag = False;
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       
       $msg = "";
 
-      $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-       
-      $email_id = mysqli_real_escape_string($db,$_POST['email_id']);
+      $email_id = mysqli_real_escape_string($con,$_POST['email_id']);
       
       $sql = "SELECT sec_q1,sec_q2 FROM user WHERE email='$email_id'";
-      $result = mysqli_query($db,$sql);
+      $result = mysqli_query($con,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       
       $count = mysqli_num_rows($result);
       
       // If result has a match, table row must be 1 row
 		
+      // @Author- Harsha
       if($count == 1) {
         $_SESSION['login_user'] = $email_id;
-        
-        $sec_q1 = $row["sec_q1"];
-        $sec_q2 = $row["sec_q2"];
-		$email_valid_flag = TRUE;
+        $email_valid_flag = True;        
 
-      }else {
+        switch ($row["sec_q1"]) {
+          case 'born':
+                    $my_sec_q1 = 'Where were you born?';
+            break;
+          case 'club':
+                    $my_sec_q1 = 'What is your favorite sports club?';
+            break;
+          case 'hero':
+                    $my_sec_q1 = 'Who is your childhood sports hero?';
+            break;
+          case 'job':
+                    $my_sec_q1 = 'How old were you when you got your first job?';
+            break;
+        }
+
+        switch ($row["sec_q2"]) {
+          case 'father':
+            $my_sec_q2 = 'In what year was your father born?';
+            break;
+            case 'pet':
+            $my_sec_q2 = 'What is your pet’s name?';
+            break;
+            case 'school':
+            $my_sec_q2 = 'What was the name of your elementary school?';
+            break;
+        }
+    }else {
          $msg = "Email ID is blank or invalid";
       }
    }
@@ -119,9 +141,9 @@
 							else{
 								if ($email_valid_flag){
 									$form .= "<input class='form-control' type='hidden' name = 'email_id' placeholder='Email ID' value = $email_id readonly><br>
-										<input class='form-control' type='text' id = 'sec_ques1' name = 'sec_ques1' value = $sec_q1 readonly>
+										<input class='form-control' type='text' id = 'sec_ques1' name = 'sec_ques1' value = '$my_sec_q1' readonly>
 										<input class='form-control' type='text' id = 'sec_ans1' name = 'sec_ans1' placeholder='Answer for Question 1'>
-										<input class='form-control' type='text' id = 'sec_ques2' name = 'sec_ques2' value = $sec_q2 readonly>
+										<input class='form-control' type='text' id = 'sec_ques2' name = 'sec_ques2' value = '$my_sec_q2' readonly>
 										<input class='form-control' type='text' id = 'sec_ans2' name = 'sec_ans2' placeholder='Answer for Question 2'>
 										<div class='already'>";
 										if (isset($msg)){
