@@ -10,11 +10,17 @@
 body {
 	line-height: 17px;
 	background-color: #E6EAE8;
+	margin: 0px 8px 8px;
 }
+
+a {
+	text-decoration: none;	
+}
+
 
 .top_bar {
 	width: 100%;
-	min-width: 1050px;
+	/*min-width: 1050px;*/
 	height: 40px;
 	background-color: #20aae5;
 	border-bottom: 0.25em solid #1894ca;
@@ -35,7 +41,7 @@ body {
 }
 
 a:hover {
-	text-decoration: none;
+	color: blue ;
 }
 
 nav {
@@ -57,6 +63,8 @@ nav a:hover {
 	color: #fff;
 }
 
+
+
 .wrapper {
 	margin: 0 auto;
 	top: 50px;
@@ -76,7 +84,7 @@ nav a:hover {
 }
 
 .user_details {
-	width: 250px;
+	width: 24%;
 	float: left;
 	margin-bottom: 20px;
 }
@@ -90,14 +98,16 @@ nav a:hover {
 .user_details_left_right {
 	width: 120px;
 	display: inline-table;
-	position: absolute;
+	/*position: absolute;*/
 }
 
 .main_column {
 	float:right;
 	width: 70%;
 	z-index: -1;
-	min-height: 160px;
+	min-height: 260px;
+	/*max-height:700px;
+	overflow: scroll;*/
 }
 
 .post_form {
@@ -137,4 +147,214 @@ textarea:focus {
 	padding: 5px 4px 4px 5px;
 }
 
+#message_textarea {
+	width:80%;
+	margin-right:8px;
+	border-radius: 5px;
+	border: 1px solid #D3D3D3;
+	font-size: 12px;
+}
 
+#message_submit {
+	height:41px;
+	width:13%;
+	margin:0;
+	border:none;
+	color:#fff;
+	background-color: #20AAE5;
+	color:#156588;
+	border-radius: 5px;
+	font-family: 'Bellota-BoldItalic',sans-serif;
+	text-shadow: #73B6E2 0.5px 0.5px 0px;
+	padding: 25px 6px;
+}
+
+.message{
+	border:1px solid #000;
+	border-radius: 5px;
+	padding: 5px 10px;
+	display: inline-block;
+	color: #fff;
+	font-size: 18px;
+}
+
+.message#blue{
+	background-color: #3498db;
+	border-color: #2980b9;
+	float:right;
+	/*margin-bottom: 5px;*/
+}
+
+.message#green{
+	background-color: #2ecc71;
+	border-color: #27ae60;
+	float:left;
+	/*margin-bottom: 5px;*/
+}
+
+.loaded_conversations{
+	max-height: 216px;
+	overflow:scroll;
+}
+
+.user_found_messages{
+	border-bottom: 1px solid #D3D3D3;
+	padding: 8px 8px 10px 8px;
+}
+
+.user_found_messages:hover{
+	background-color: #D3D3D3;
+}
+
+.user_found_messages img {
+	height: 35px;
+	float: left;
+}
+
+#grey{
+	color:#8C8C8C;
+}
+
+.danger {
+	background-color: #e74c3c;
+}
+.warning {
+	background-color: #f0ad4e;
+}
+.default {
+	background-color: #bdc3c7;
+}
+.success {
+	background-color: #2ecc71;
+}
+.info {
+	background-color: #3498db;
+}
+.deep_blue {
+	background-color: #0043f0;
+}
+
+.delete_button {
+	height: 22px;
+	width: 22px;
+	padding: 0;
+	float: right;
+	border-radius: 4px;
+	right: -15px;
+	position: relative;
+	background-color: #e74c3c;
+}
+
+.status_post {
+	width: 96%;
+	font-size: 15px;
+	padding: 0px 5px;
+	min-height: 75px;
+	cursor:pointer;
+}
+
+#comment_iframe {
+	max-height: 250px;	
+	width: 100%;
+	margin-top: 5px;
+}
+
+.comment_section {
+	padding: 0 5px 5px 5px;
+}
+
+.comment_section img {
+	margin: 0 3px 3px 3px;
+	border-radius: 3px;
+}
+
+#comment_form textarea {
+	border-color: #D3D3D3;
+	width: 85%;
+	height: 35px;
+	border-radius: 5px;
+	color: #616060;
+	font-size: 14px;
+	margin: 3px 3px 3px 5px;
+}
+#comment_form input[type="submit"] {
+	border:none;
+	background-color: #20AAE5;
+	color: #156588;
+	border-radius: 5px;
+	width: 13%;
+	height: 35px;
+	margin-top: 3px;
+	position: absolute;
+	font-family: 'Bellota-BoldItalic', sans-serif;
+	text-shadow: #73B6E2 0.5px 0.5px 0px;
+}
+
+.status_post {
+	width: 96%;
+	font-size: 15px;
+	padding: 0px 5px;
+	min-height: 75px;
+	cursor:pointer;
+}
+
+.newsfeedPostOptions {
+	padding: 0px;
+	text-decoration: none;
+	color:#20AAE5;
+	border:none;
+}
+
+.newsfeedPostOptions iframe {
+	border: 0px;
+	height: 17px;
+	width: 120px;
+}
+
+.comment_like {
+	background-color: transparent;
+	border: none;
+	font-size: 14px;
+	color: #3498db;
+	padding: 0;
+	height: auto;
+	width: auto;
+	margin: 0;
+}
+
+.like_value {
+	display: inline;
+	font-size: 14px;
+}
+
+.resultsDisplay{
+	padding:5px 5px 0 5px;
+	height: 60px;
+	border-bottom: 1px solid #D3D3D3;
+}
+
+.resultsDisplay a{
+	float:none;
+}
+
+.resultsDisplay:hover {
+	background-color: #EBEBEB;
+	text-decoration: none;
+}
+
+.liveSearchProfilePic img{
+	height:50px;
+	border-radius: 25px;
+	margin:1px 12px 0 2px;
+	float:left;
+}
+
+.liveSearchText{
+	background-color: transparent;
+	color:#1E96CA;
+}
+
+.liveSearchText p{
+	margin-left:10px;
+	font-size: 12px;
+}

@@ -10,7 +10,7 @@
 		$user_obj = new UserClass($con, $username);
 	}
 	else {
-		header("Location: user.php");
+		header("Location: login.php");
 	}
 
 	?>

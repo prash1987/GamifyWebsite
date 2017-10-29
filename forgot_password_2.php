@@ -78,7 +78,7 @@
     <![endif]-->
 
     <script language="Javascript">
-    <!--
+
     function showQuestions()
     {
         document.Form1.action = "forgot_password_2.php"
@@ -92,7 +92,7 @@
         document.Form1.submit();
         return true;
     }
-    -->
+ 
     </script>
 
   </head>

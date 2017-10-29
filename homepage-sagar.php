@@ -12,7 +12,7 @@
 	}
 	else
 	{
-		header("Location: user.php");
+		header("Location: login.php");
 	}
 
 	$user_obj = new UserClass($con, $userLoggedIn);

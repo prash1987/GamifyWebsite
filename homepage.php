@@ -1,15 +1,18 @@
 <?php 
-    include("header.php");
+    
     include("config.php");
+    include("header.php");    
     include("classes/UserClass.php");
     include("classes/PostClass.php");
+    include("classes/MessageClass.php");
+
 
 	if(isset($_SESSION['login_user'])) {
 		$userLoggedIn = $_SESSION['login_user'];
 	}
 	else
 	{
-		header("Location: user.php");
+		header("Location: login.php");
 	}
 
 	$user_obj = new UserClass($con, $userLoggedIn);
@@ -36,29 +39,41 @@
    		<script>
 
 			function noPrefFunction()
-				{
-					// Unselecting Gender Preferences
-					document.getElementById("gender_pref_men_only").checked = false;
-					document.getElementById("gender_pref_women_only").checked = false;
-					document.getElementById("gender_pref_all").checked = false;
+			{
+				// Unselecting Gender Preferences
+				document.getElementById("gender_pref_men_only").checked = false;
+				document.getElementById("gender_pref_women_only").checked = false;
+				document.getElementById("gender_pref_all").checked = false;
 
-					//Unselecting Game preferences
-					document.getElementById("game_pref_cricket").checked = false;
-					document.getElementById("game_pref_badminton").checked = false;
-					document.getElementById("game_pref_tennis").checked = false;
-					document.getElementById("game_pref_squash").checked = false;
-					document.getElementById("game_pref_running").checked = false;
-					document.getElementById("game_pref_football").checked = false;
-					document.getElementById("game_pref_basketball").checked = false;
-					document.getElementById("game_pref_cycling").checked = false;
-					document.getElementById("game_pref_gym").checked = false;
-					document.getElementById("game_pref_dance").checked = false;
-					document.getElementById("game_pref_martialarts").checked = false;
-					document.getElementById("game_pref_dispall").checked = false;
-				    document.pref_form.action = "homepage.php";
-				    document.pref_form.submit(); 
-				    return true;
-				}
+				//Unselecting Game preferences
+				document.getElementById("game_pref_cricket").checked = false;
+				document.getElementById("game_pref_badminton").checked = false;
+				document.getElementById("game_pref_tennis").checked = false;
+				document.getElementById("game_pref_squash").checked = false;
+				document.getElementById("game_pref_running").checked = false;
+				document.getElementById("game_pref_football").checked = false;
+				document.getElementById("game_pref_basketball").checked = false;
+				document.getElementById("game_pref_cycling").checked = false;
+				document.getElementById("game_pref_gym").checked = false;
+				document.getElementById("game_pref_dance").checked = false;
+				document.getElementById("game_pref_martialarts").checked = false;
+				document.getElementById("game_pref_dispall").checked = false;
+			    document.pref_form.action = "homepage.php";
+			    document.pref_form.submit(); 
+			    return true;
+			}
+
+			function delete_function(id){
+				alert('data is reached' + id);
+				$.ajax({
+                	type:'POST',
+                	data: {'post_id' : id},
+                	url: 'delete_post.php',
+                	success: function(data) {
+                    	location.reload();
+                	}
+          		});
+			}
 		</script>
 
 	</head>
@@ -77,8 +92,8 @@
 			echo "Contact: " . $user_obj->getUserContact() ;
 			?>
 		</div>
-			<br><br>	
 			<form action="homepage.php" name="pref_form" method="POST">
+				<br>
 				<fieldset>
          			<legend>Select Pref</legend>
          				<p>Gender Pref</p>

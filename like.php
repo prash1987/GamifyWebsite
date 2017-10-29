@@ -16,7 +16,7 @@
 		$user = mysqli_fetch_array($user_details_query);
 	}
 	else {
-		header("Location: user.php");
+		header("Location: login.php");
 	}
 
 

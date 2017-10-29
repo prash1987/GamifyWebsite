@@ -28,7 +28,7 @@ class PostClass {
 		$posted_by = $this->user_obj->getUsername();
 
 		$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-		$insert_stmnt = "INSERT INTO posts(body, posted_by, time_stamp, location, play_time, image_path, likes,game,gender) VALUES('$body','$posted_by','$time_stamp', '$location', '$play_time', '$image_name',0,'$game', '$gender')";
+		$insert_stmnt = "INSERT INTO posts(body, posted_by, time_stamp, location, play_time, image_path, likes,game,gender,deleted) VALUES('$body','$posted_by','$time_stamp', '$location', '$play_time', '$image_name',0,'$game', '$gender', 0)";
 		$query = mysqli_query($con, $insert_stmnt);
 		$returned_id = mysqli_insert_id($con);
 	}
@@ -70,7 +70,7 @@ class PostClass {
 			$sql[] = "game IN ($userbio)";
 		}
 
-		$query = "SELECT * FROM posts WHERE location='$userLocation'";
+		$query = "SELECT * FROM posts WHERE location='$userLocation' AND deleted = 0";
 
 
 		if (!empty($sql)) {
@@ -79,12 +79,10 @@ class PostClass {
 
 		$query .= " ORDER BY time_stamp DESC";
 
-		//echo $query;  //Just for testing whether its working correctly or not
-
 		$str = ""; //String to return 
 		$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 		$data_query = mysqli_query($con, $query);  
-		
+		$delete_button = "";
 
 		if(mysqli_num_rows($data_query) > 0) {
 
@@ -103,13 +101,13 @@ class PostClass {
 				$game = $row['game'];
 				$gender = $row['gender'];
 				if ($gender == 'A'){
-					$gender = "open for All";
+					$gender = "This even is open for <b>All</b>";
 				}
 				elseif ($gender == 'M') {
-					$gender = "open to Males only";
+					$gender = "This even is open to <b>Males</b> only";
 				}
 				elseif ($gender == 'F') {
-					$gender = "open to Females only";
+					$gender = "This even is open to <b>Females</b> only";
 				}
 
 				//Prepare user_to string so it can be included even if not posted to a user
@@ -142,146 +140,160 @@ class PostClass {
 						$count++;
 					}*/
 
+				if(isset($_SESSION['login_user'])) {
+					$userLoggedIn = $_SESSION['login_user'];
+				}
+				else
+				{
+					header("Location: login.php");
+				}
+
+				/*This is the delete button logic*/
+				if($userLoggedIn == $added_by){
+					$id = "post_".$id;
+					$delete_button = "<button style='background-color:red;' class='delete_button' id='$id' onClick='delete_function(\"$id\");'>X</button>";
+				}
+				else {
+					$delete_button = "";
+				}
 
 
 
+				$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+				// Here we have to use user name I HAVE USED EMAIL ID
+				// WE NEED TO STORE USING USERNAME IN POSTS TABLE.
+				$user_details_query = mysqli_query($con, "SELECT first_name, last_name FROM user WHERE email='$added_by'");
+				$user_row = mysqli_fetch_array($user_details_query);
+				$first_name = $user_row['first_name'];
+				$last_name = $user_row['last_name'];
+				// $profile_pic = $user_row['profile_pic'];
 
-					$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-					// Here we have to use user name I HAVE USED EMAIL ID
-					// WE NEED TO STORE USING USERNAME IN POSTS TABLE.
-					$user_details_query = mysqli_query($con, "SELECT first_name, last_name FROM user WHERE email='$added_by'");
-					$user_row = mysqli_fetch_array($user_details_query);
-					$first_name = $user_row['first_name'];
-					$last_name = $user_row['last_name'];
-					// $profile_pic = $user_row['profile_pic'];
+				?>
+				<script> 
+					function toggle<?php echo $id; ?>() {
 
-					?>
-					<script> 
-						function toggle<?php echo $id; ?>() {
+						var target = $(event.target);
+						if (!target.is("a")) {
+							var element = document.getElementById("toggleComment<?php echo $id; ?>");
 
-							var target = $(event.target);
-							if (!target.is("a")) {
-								var element = document.getElementById("toggleComment<?php echo $id; ?>");
-
-								if(element.style.display == "block") 
-									element.style.display = "none";
-								else 
-									element.style.display = "block";
-							}
-						}
-
-					</script>
-					<?php
-
-					//Timeframe
-					$date_time_now = date("Y-m-d H:i:s");
-					$start_date = new DateTime($date_time); //Time of post
-					$end_date = new DateTime($date_time_now); //Current time
-					$interval = $start_date->diff($end_date); //Difference between dates 
-					if($interval->y >= 1) {
-						if($interval == 1)
-							$time_message = $interval->y . " year ago"; //1 year ago
-						else 
-							$time_message = $interval->y . " years ago"; //1+ year ago
-					}
-					else if ($interval-> m >= 1) {
-						if($interval->d == 0) {
-							$days = " ago";
-						}
-						else if($interval->d == 1) {
-							$days = $interval->d . " day ago";
-						}
-						else {
-							$days = $interval->d . " days ago";
-						}
-
-
-						if($interval->m == 1) {
-							$time_message = $interval->m . " month". $days;
-						}
-						else {
-							$time_message = $interval->m . " months". $days;
-						}
-
-					}
-					else if($interval->d >= 1) {
-						if($interval->d == 1) {
-							$time_message = "Yesterday";
-						}
-						else {
-							$time_message = $interval->d . " days ago";
+							if(element.style.display == "block") 
+								element.style.display = "none";
+							else 
+								element.style.display = "block";
 						}
 					}
-					else if($interval->h >= 1) {
-						if($interval->h == 1) {
-							$time_message = $interval->h . " hour ago";
-						}
-						else {
-							$time_message = $interval->h . " hours ago";
-						}
+
+				</script>
+				<?php
+				$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+				$comments_check = mysqli_query($this->con, "SELECT * FROM comments WHERE post_id='$id'");
+				$comments_check_num = mysqli_num_rows($comments_check);
+
+
+				//Timeframe
+				$date_time_now = date("Y-m-d H:i:s");
+				$start_date = new DateTime($date_time); //Time of post
+				$end_date = new DateTime($date_time_now); //Current time
+				$interval = $start_date->diff($end_date); //Difference between dates 
+				if($interval->y >= 1) {
+					if($interval == 1)
+						$time_message = $interval->y . " year ago"; //1 year ago
+					else 
+						$time_message = $interval->y . " years ago"; //1+ year ago
+				}
+				else if ($interval-> m >= 1) {
+					if($interval->d == 0) {
+						$days = " ago";
 					}
-					else if($interval->i >= 1) {
-						if($interval->i == 1) {
-							$time_message = $interval->i . " minute ago";
-						}
-						else {
-							$time_message = $interval->i . " minutes ago";
-						}
+					else if($interval->d == 1) {
+						$days = $interval->d . " day ago";
 					}
 					else {
-						if($interval->s < 30) {
-							$time_message = "Just now";
-						}
-						else {
-							$time_message = $interval->s . " seconds ago";
-						}
+						$days = $interval->d . " days ago";
 					}
 
-					$str .= "<div class='status_post' onClick='javascript:toggle$id()'>
-							
 
-								<div class='posted_by' style='color:#ACACAC;'>
-									<a href='$added_by'> $first_name $last_name </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$time_message
-								</div>
-								<div id='post_body'>
-									$body
-									<br>
-								</div>
-								<div id='post_loc_and_play_time'>
-									$location
-									&nbsp;&nbsp;&nbsp;&nbsp;$play_time
-									&nbsp;&nbsp;&nbsp;&nbsp;
-									<br>
-									<span>Game of Event: $game</span>
-									&nbsp;&nbsp;&nbsp;&nbsp;
-									<br>
-									<span> The event is $gender </span>
-									<br>
-								</div>
-								<img src='$image_path' height='20%' width='20%'></img>
-								<div class='newsfeedPostOptions'>
-									<iframe allowtransparency='true' src='like.php?post_id=$id' style='height: 70px; width: 70px;' frameBorder='0'  scrolling='no'></iframe>
-								</div>
+					if($interval->m == 1) {
+						$time_message = $interval->m . " month". $days;
+					}
+					else {
+						$time_message = $interval->m . " months". $days;
+					}
+
+				}
+				else if($interval->d >= 1) {
+					if($interval->d == 1) {
+						$time_message = "Yesterday";
+					}
+					else {
+						$time_message = $interval->d . " days ago";
+					}
+				}
+				else if($interval->h >= 1) {
+					if($interval->h == 1) {
+						$time_message = $interval->h . " hour ago";
+					}
+					else {
+						$time_message = $interval->h . " hours ago";
+					}
+				}
+				else if($interval->i >= 1) {
+					if($interval->i == 1) {
+						$time_message = $interval->i . " minute ago";
+					}
+					else {
+						$time_message = $interval->i . " minutes ago";
+					}
+				}
+				else {
+					if($interval->s < 30) {
+						$time_message = "Just now";
+					}
+					else {
+						$time_message = $interval->s . " seconds ago";
+					}
+				}
+
+				$str .= "<div class='status_post'>
+
+							<div class='posted_by' style='color:#ACACAC;'>
+								<a href='$added_by'> $first_name $last_name </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$time_message
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$delete_button
 
 							</div>
 
-								<div class='post_comment' id='toggleComment$id' style='display:none;'>
-								<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
+							<div id='post_body'>
+								$body
+								<br>
 							</div>
-							
-							<hr>";
-				
+							<div id='post_loc_and_play_time'>
+								$location
+								&nbsp;&nbsp;&nbsp;&nbsp;$play_time
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<br>
+								<span>Game of Event: $game</span>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<br>
+								<span> $gender </span>
+								<br>
+							</div>
+							<img src='$image_path' height='20%' width='20%'></img>
+							<div class='newsfeedPostOptions'>	
+								<button id='comment_anchor' onClick='javascript:toggle$id();'>Comments($comments_check_num)</button>&nbsp;&nbsp;&nbsp;
 
-			} //End while loop
+								<iframe allowtransparency='true' src='like.php?post_id=$id' style='height: 70px; width: 70px;' frameBorder='0'  scrolling='no'></iframe>
+							</div>
 
-			/*if($count > $limit) 
-				$str .= "<input type='hidden' class='nextPage' value='" . ($page + 1) . "'>
-							<input type='hidden' class='noMorePosts' value='false'>";
-			else 
-				$str .= "<input type='hidden' class='noMorePosts' value='true'><p style='text-align: centre;'> No more posts to show! </p>";*/
+						</div>
+
+							<div class='post_comment' id='toggleComment$id' style='display:none;'>
+							<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
+						</div>
+						
+						<hr>";
+			} 
+			echo $str;
 		}
-
-		echo $str;
 	}
 }
 ?>
