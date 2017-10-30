@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Gamify</title>
+    <title>GAMIFY</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -42,7 +42,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="#page-top">Gamify</a>
+                <a class="navbar-brand" href="#page-top" style="font-family: 'Bellota-BoldItalic', sans-serif;">GAMIFY</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -74,7 +74,7 @@
                 <div class="col-lg-12">
                     <img class="img-responsive" src="Startup.jpg" alt="">
                     <div class="intro-text">
-                        <h1 class="name">Gamify</h1>
+                        <h1 class="name">GAMIFY</h1>
                         <hr class="star-light">
                         <span class="skills">Do you know what my favorite part of the game is? The opportunity to play.</span>
                     </div>
@@ -199,7 +199,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        Developed as part of the course Software Engineering-I | Gamify&copy; 2017
+                        Developed as part of the course Software Engineering-I | GAMIFY&copy; 2017
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Gamify</title>
+    <title>GAMIFY</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +30,7 @@
 	           <div class="col-md-5">
 	              <!-- Logo -->
 	              <div class="logo">
-	                 <h1><a href="user_home.php">Gamify</a></h1>
+	                 <h1><a href="user_home.php">GAMIFY</a></h1>
 	              </div>
 	           </div>
 	           <div class="col-md-4">

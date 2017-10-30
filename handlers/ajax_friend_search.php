@@ -34,16 +34,20 @@ $names = explode(" ", $query);
 			//$user = new UserClass($con, $userLoggedIn);
 			// $user_id = str_replace("'", "", $row['user_id']);
 			// $user_id = mysqli_escape_string($con, $row['user_id']);
-
+			$profile_pic = "profile_pics/".$row['propic'];
 			if($row['user_id'] != $userLoggedIn) {
 				echo "<div class='resultsDisplay'>
 							<a href = message.php?u=" . $row['user_id'] ." style='color:#000'>
-								<div class='liveSearchText'>
-									".$row['first_name'] . " " . $row['last_name']."
-			 						<p>". $row['user_id'] . "</p>
-			 					</div>
-							</a>
-						</div>";
+
+							<div class='liveSearchProfilePic'>
+			 					<img src='".$profile_pic."'>
+			 				</div>
+							<div class='liveSearchText'>
+								".$row['first_name'] . " " . $row['last_name']."
+		 						<p>". $row['user_id'] . "</p>
+		 					</div>
+						</a>
+					</div>";
 			}
 
 			// if($row['user_id'] != $userLoggedIn) {

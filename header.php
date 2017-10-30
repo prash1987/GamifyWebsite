@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Gamify</title>
+    <title>GAMIFY</title>
     <!-- Theme CSS -->
     <link href="css/freelancer.min.css" rel="stylesheet">
 
@@ -32,7 +32,7 @@
 
     <div class="top_bar">
         <div class="logo">
-            <a href="index.php">Gamify</a>
+            <a href="index.php">GAMIFY</a>
         </div>
 
     <nav> 

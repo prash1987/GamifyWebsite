@@ -31,7 +31,7 @@
 	        $success_str = "";
 	        $success_str .="<html>
 					  <head>
-					    <title>Gamify</title>
+					    <title>GAMIFY</title>
 					    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 					    <!-- Bootstrap -->
 					    <link href='bootstrap/css/bootstrap.min.css' rel='stylesheet'>
@@ -52,7 +52,7 @@
 						           <div class='col-md-12'>
 						              <!-- Logo -->
 						              <div class='logo'>
-						                 <h1><a href='index.php'>Gamify</a></h1>
+						                 <h1><a href='index.php'>GAMIFY</a></h1>
 						              </div>
 						           </div>
 						        </div>
@@ -106,7 +106,7 @@
 			$failure_str = "";
 			$failure_str = "<html>
 					<head>
-					<title>Gamify</title>
+					<title>GAMIFY</title>
 					<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 					<!-- Bootstrap -->
 					<link href='bootstrap/css/bootstrap.min.css' rel='stylesheet'>
@@ -127,7 +127,7 @@
 							   <div class='col-md-12'>
 								  <!-- Logo -->
 								  <div class='logo'>
-									 <h1><a href='index.php'>Gamify</a></h1>
+									 <h1><a href='index.php'>GAMIFY</a></h1>
 								  </div>
 							   </div>
 							</div>

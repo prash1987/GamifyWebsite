@@ -105,7 +105,7 @@ nav a:hover {
 	float:right;
 	width: 70%;
 	z-index: -1;
-	min-height: 260px;
+	min-height: 300px;
 	/*max-height:700px;
 	overflow: scroll;*/
 }
