@@ -19,14 +19,14 @@ $names = explode(" ", $query);
 		$usersReturned = mysqli_query($con, "SELECT * FROM user WHERE (first_name LIKE '%$names[0]%' OR last_name LIKE '%$names[0]%') AND user_closed = 'no' LIMIT 8");
 	}*/
 
-	if(strpos($query, "_") !== false) {
-		$usersReturned = mysqli_query($con, "SELECT * FROM user WHERE username LIKE '$query%' LIMIT 8");
+	if(strpos($query, "@") !== false) {
+		$usersReturned = mysqli_query($con, "SELECT * FROM user WHERE user_id LIKE '%$query%' LIMIT 8");
 	}
 	else if(count($names) == 2){
-		$usersReturned = mysqli_query($con, "SELECT * FROM user WHERE (first_name LIKE '%$names[0]%' AND last_name LIKE '%$names[1]%') LIMIT 8");
+		$usersReturned = mysqli_query($con, "SELECT * FROM user WHERE (first_name LIKE '%$names[0]%' AND last_name LIKE '%$names[1]%' OR user_id LIKE '%$names[0]%' OR user_id LIKE '%names[1]%') LIMIT 8");
 	}
 	else{
-		$usersReturned = mysqli_query($con, "SELECT * FROM user WHERE (first_name LIKE '%$names[0]%' OR last_name LIKE '%$names[0]%') LIMIT 8");
+		$usersReturned = mysqli_query($con, "SELECT * FROM user WHERE (first_name LIKE '%$names[0]%' OR last_name LIKE '%$names[0]%' OR user_id LIKE '%$names[0]%') LIMIT 8");
 	}
 
 	if($query != ""){
