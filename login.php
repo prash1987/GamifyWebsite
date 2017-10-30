@@ -126,9 +126,9 @@
 			        </div>
 
               <div class="already">
-                  <p>Forgot Password?</p><br>
-                  <a href="forgot_password_2.php">Recover by answering security questions</a><br>
-                  <a href="forgot_password.php">Recover using OTP</a>
+                  <p><a href="fg_pwd.php">Forgot Password?</a></p><br>
+                  <!-- <a href="forgot_password_2.php">Recover by answering security questions</a><br>
+                  <a href="forgot_password.php">Recover using OTP</a> -->
               </div>
 
 			        <div class="already">

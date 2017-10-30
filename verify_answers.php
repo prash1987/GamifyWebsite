@@ -3,7 +3,7 @@
 <?php
 	include("config.php");
 
-	$error = ".";
+	$error = "";
 	
 	$db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 	
@@ -19,8 +19,8 @@
 		
 		if ( $ret_val  == FALSE ) 
 		{
-			echo "Email ID does not exist";
-			echo mysql_error();
+			$error .= "Email ID does not exist.<a href='login.php'> Please try again</a> ";
+			//echo mysql_error();
  		}
  		else 
  		{

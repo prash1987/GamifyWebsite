@@ -59,7 +59,7 @@
         ->setBody($body); //Actual body of the mail
 
         $result = $mailer->send($message);  //to check mail sent successfully
-        echo $result;
+        //echo $result;
 
         // $mail_body = "Your temporary password is\np@55w0rdX";
         // $mail_body = wordwrap($mail_body,70);
@@ -116,13 +116,13 @@
         document.Form1.submit(); 
         return true;
     }
-
     function verifyOTP()
     {
         document.Form1.action = "verify_otp.php"
         document.Form1.submit();
         return true;
     }
+    
     -->
     </script>
 
@@ -152,16 +152,17 @@
 	                            
 	                        </div>
                       <form name="Form1" action = "" method = "post">
-  			                <input class="form-control" type="text" name = "email_id" placeholder="Email ID" required>
-  			                <input class="form-control" type="text" name = "otp" placeholder="One-Time Password" style="display:none;">
+  			                <input class="form-control" type="text" name = "email_id" placeholder="Email ID" value="<?php echo $_SESSION['login_user']; ?>" readonly>
+  			                <input class="form-control" type="text" name = "otp" placeholder="One-Time Password" >
 
                         <div class="already">
                           <p><?php if (isset($msg)) echo $msg ?></p>
                         </div>
 
   			                <div class="action">
-                                  <input type = "button" class="btn btn-primary signup"  value = " Send OTP " onclick="sendOTP();" />
-                                  <input type = "button" class="btn btn-primary signup"  value = " Verify OTP " style="display:none;" onclick="verifyOTP();" /><br />
+                                  
+                                  <input type = "button" class="btn btn-primary signup"  value = " Verify OTP "  onclick="verifyOTP();" /><br />
+                                  <br />
   			                </div> 
                       </form>        
 			            </div>
