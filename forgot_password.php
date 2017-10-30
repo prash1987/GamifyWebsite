@@ -7,7 +7,7 @@
    include('swift/lib/swift_required.php');
 
    $msg = ".";
-   //session_stat();
+    $email_valid_flag = False;
 
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       // email ID sent from form
@@ -16,7 +16,7 @@
       $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
        
       $email_id = mysqli_real_escape_string($db,$_POST['email_id']);
-      $otp = mysqli_real_escape_string($db,$_POST['otp']); 
+      //$otp = mysqli_real_escape_string($db,$_POST['otp']); 
       
       $sql = "SELECT user_id FROM login WHERE email_id='$email_id'";
       $result = mysqli_query($db,$sql);
@@ -28,6 +28,7 @@
 		
       if($count == 1) {
         $_SESSION['login_user'] = $email_id;
+        $email_valid_flag = True;
         //require_once("random.php");
 
         //Send OTP to '$email_id' and also store it in the login table
@@ -112,7 +113,7 @@
     <!--
     function sendOTP()
     {
-        document.Form1.action = "forgot_password_otp.php"
+        document.Form1.action = "forgot_password.php"
         document.Form1.submit(); 
         return true;
     }
@@ -152,16 +153,77 @@
 	                            
 	                        </div>
                       <form name="Form1" action = "" method = "post">
+            <?php 
+              $form = "";
+              if (!isset($email_id)){
+                $form .=  "<input class='form-control' type='text' name = 'email_id' placeholder='Email ID' required><br>
+                  <div class='already'>";
+                  if (isset($msg)){
+                    $form .= "<p> $msg </p>";
+                  }
+                $form .= "
+                  </div>
+                  <div class='action'>
+                    <input type = 'button' class='btn btn-primary signup'  value = 'Send OTP' onclick='sendOTP();' />
+                  </div>
+                  </form>";
+                
+                echo $form;
+              }
+              else{
+                if ($email_valid_flag){
+                  $form .= "<input class='form-control' type='hidden' name = 'email_id' placeholder='Email ID' value = $email_id readonly><br>
+                    <input class='form-control' type='text' name = 'otp' placeholder='One-Time Password' >
+
+                    
+                    <div class='already'>";
+                    if (isset($msg)){
+                      $form .= "<p> $msg </p>";
+                    }
+                  $form .= "  
+                    </div>
+                    
+                     <div class='action'>
+                      <input type = 'button' class='btn btn-primary signup'  value = 'Verify OTP' onclick='verifyOTP();' /><br />
+                    </div> 
+                    </form>";
+                    
+                  echo $form;
+                }
+                else{
+                  $form .=  "<input class='form-control' type='text' name = 'email_id' placeholder='Email ID' required><br>
+                    <div class='already'>";
+                    if (isset($msg)){
+                      $form .= "<p> $msg </p>";
+                    }
+                  $form .= "
+                    </div>
+                    <div class='action'>
+                      <input type = 'button' class='btn btn-primary signup'  value = 'Send OTP' onclick='sendOTP();' />
+                    </div>
+                    </form>";
+                  
+                  echo $form;
+                  
+                }
+                
+              }
+            ?>         
+
+
+                      <!-- <form name="Form1" action = "" method = "post">
   			                <input class="form-control" type="text" name = "email_id" placeholder="Email ID" required>
-  			                <input class="form-control" type="text" name = "otp" placeholder="One-Time Password" style="display:none;">
+  			               
 
                         <div class="already">
-                          <p><?php if (isset($msg)) echo $msg ?></p>
+                          <p><?php //if (isset($msg)) echo $msg ?></p>
                         </div>
 
   			                <div class="action">
-                                  <input type = "button" class="btn btn-primary signup"  value = " Send OTP " onclick="sendOTP();" />
-                                  <input type = "button" class="btn btn-primary signup"  value = " Verify OTP " style="display:none;" onclick="verifyOTP();" /><br />
+                                  <input type = "button" class="btn btn-primary signup"  value = " Send OTP " onclick="sendOTP();" /> -->
+
+                        
+                                  
   			                </div> 
                       </form>        
 			            </div>
