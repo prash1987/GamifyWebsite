@@ -29,35 +29,41 @@
 
         //If the password is correct
         if($password_hash == $myhash){
-          $_SESSION['login_user'] = $myusername;
-          $_SESSION['loggedin'] = true;
+			$_SESSION['login_user'] = $myusername;
+			$_SESSION['loggedin'] = true;
 
-          //Send OTP to '$myusername' and also store it in the login table
-          $random =  rand(100000,999999);
-          $sql2 = "UPDATE login SET otp=". $random ." WHERE User_id='". $myusername. "'";
-          $querry = mysqli_query($db,$sql2);
+			//Send OTP to '$myusername' and also store it in the login table
+			$random =  rand(100000,999999);
+			$sql2 = "UPDATE login SET otp=". $random ." WHERE User_id='". $myusername. "'";
+			$querry = mysqli_query($db,$sql2);
 
-          $transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl") //smtp for mailing
-          ->setUsername('gamify101@gmail.com')  //username for account to mail
-          ->setPassword('gamify123456789'); //password for the account to mail
+			/*$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl") //smtp for mailing
+			->setUsername('gamify101@gmail.com')  //username for account to mail
+			->setPassword('gamify123456789'); //password for the account to mail
 
-          $mailer = Swift_Mailer::newInstance($transport);  //mailer to mail to admin
+			$mailer = Swift_Mailer::newInstance($transport);  //mailer to mail to admin*/
+			
+			$to = $myusername;
+			$subject = 'Dual Authentication for Gamify';
+			$body = 'Greetings. Your one time password is: '.$random;
+			$headers = 'From: Gamify <gamify101@gmail.com>' . "\r\n" .
+				'Reply-To: Gamify <gamify101@gmail.com>' . "\r\n" .
+				'X-Mailer: PHP/' . phpversion();
+				
+			
+			//$myemail= "gamify101@gmail.com"; //initializing the FROM mail id
+			//$toemail= $myusername;
 
-          $text = "Greetings. Your one time password is";
-          $body = "$text $random";
-            
-          $myemail= "gamify101@gmail.com"; //initializing the FROM mail id
-          $toemail= $myusername;
+			/*$message = Swift_Message::newInstance('Query')  //heading of the mail
+			->setFrom(array($myemail=>'Gamify'))  //FROM field in the mail 
+			->setTo(array($toemail))  //TO Field in the mail
+			->setSubject('Dual Authentication for Gamify')  //SUBJECT of the mail
+			->setBody($body); //Actual body of the mail*/
 
-          $message = Swift_Message::newInstance('Query')  //heading of the mail
-          ->setFrom(array($myemail=>'Gamify'))  //FROM field in the mail 
-          ->setTo(array($toemail))  //TO Field in the mail
-          ->setSubject('Dual Authentication for Gamify')  //SUBJECT of the mail
-          ->setBody($body); //Actual body of the mail
-
-          $result = $mailer->send($message);  //to check mail sent successfully
-  
-          header('Location: duo_auth.php'); 
+			//$result = $mailer->send($message);  //to check mail sent successfully
+			$result = mail($to, $subject, $body, $headers);
+			
+			header('Location: duo_auth.php'); 
         }
         else{
           $error = "Your Login Name or Password is invalid";
@@ -133,7 +139,7 @@
 
 			        <div class="already">
 			            <p>Don't have an account yet?</p>
-			            <a href="user.php">Register</a>
+			            <a href="email_id_verification.php">Register</a>
 			        </div>
 			    </div>
 			</div>

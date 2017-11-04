@@ -18,55 +18,56 @@
       $email_id = mysqli_real_escape_string($db,$_POST['email_id']);
       //$otp = mysqli_real_escape_string($db,$_POST['otp']); 
       
-      $sql = "SELECT user_id FROM login WHERE email_id='$email_id'";
-      $result = mysqli_query($db,$sql);
-      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+      //$sql = "SELECT user_id FROM login WHERE email_id='$email_id'";
+      //$result = mysqli_query($db,$sql);
+      //$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       
-      $count = mysqli_num_rows($result);
+      //$count = mysqli_num_rows($result);
       
       // If result has a match, table row must be 1 row
 		
-      if($count == 1) {
-        $_SESSION['login_user'] = $email_id;
+      if(filter_var($email_id, FILTER_VALIDATE_EMAIL)) {
+        //$_SESSION['login_user'] = $email_id;
         $email_valid_flag = True;
         //require_once("random.php");
 
         //Send OTP to '$email_id' and also store it in the login table
         $random =  rand(100000,999999);
-        $sql2 = "UPDATE login SET otp=". $random ." WHERE User_id='". $email_id. "'";
+        /*$sql2 = "UPDATE login SET otp=". $random ." WHERE User_id='". $email_id. "'";
         $querry = mysqli_query($db,$sql2);
-        //$sql1 = "SELECT * from login WHERE User_id=". $em1;
-        //$querry1 = mysqli_query($conn,$sql1);
-        //$result1 = $conn->query($sql1);
+        $sql1 = "SELECT * from login WHERE User_id=". $em1;
+        $querry1 = mysqli_query($conn,$sql1);
+        $result1 = $conn->query($sql1);
 
-        //$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl") //smtp for mailing
-        //->setUsername('gamify101@gmail.com')  //username for account to mail
-        //->setPassword('gamify123456789'); //password for the account to mail
+        $transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl") //smtp for mailing
+        ->setUsername('gamify101@gmail.com')  //username for account to mail
+        ->setPassword('gamify123456789'); //password for the account to mail
 
-        //$mailer = Swift_Mailer::newInstance($transport);  //mailer to mail to admin
+        $mailer = Swift_Mailer::newInstance($transport);  //mailer to mail to admin
+		
+		$first_name = $got_member_name;
+        $email_from = "sagar.panchal11@gmail.com";
+        $text = "Greetings. Your one time password is";
+        $body = "$text $random";
+          
+        $myemail= "gamify101@gmail.com"; //initializing the FROM mail id
+        $toemail= $email_id;
+
+        $message = Swift_Message::newInstance('Query')  //heading of the mail
+        ->setFrom(array($myemail=>'Gamify'))  //FROM field in the mail 
+        ->setTo(array($toemail))  //TO Field in the mail
+        ->setSubject('Password-Recovery for Gamify')  //SUBJECT of the mail
+        ->setBody($body); //Actual body of the mail*/
 		
 		$to = $email_id;
-		$subject = 'Password-Recovery for Gamify';
+		$subject = 'New Email verification OTP for Gamify';
 		$body = 'Greetings. Your one time password is: '.$random;
 		$headers = 'From: Gamify <gamify101@gmail.com>' . "\r\n" .
 			'Reply-To: Gamify <gamify101@gmail.com>' . "\r\n" .
 			'X-Mailer: PHP/' . phpversion();
 
-        //$first_name = $got_member_name;
-        //$email_from = "sagar.panchal11@gmail.com";
-        //$text = "Greetings. Your one time password is";
-        //$body = "$text $random";
-          
-        //$myemail= "gamify101@gmail.com"; //initializing the FROM mail id
-        //$toemail= $email_id;
-
-        /*$message = Swift_Message::newInstance('Query')  //heading of the mail
-        ->setFrom(array($myemail=>'Gamify'))  //FROM field in the mail 
-        ->setTo(array($toemail))  //TO Field in the mail
-        ->setSubject('Password-Recovery for Gamify')  //SUBJECT of the mail
-        ->setBody($body); //Actual body of the mail*/
-
         //$result = $mailer->send($message);  //to check mail sent successfully
+		
 		$result = mail($to, $subject, $body, $headers);
       
 
@@ -95,7 +96,7 @@
         //$msg = "Password sent to your Phone number/Email ID successfully";
         //header('Location: user_home.php');    
       }else {
-         $msg = "Email ID is blank or invalid";
+         $msg = "Email ID is invalid. Please provide a valid email id.";
       }
    }
 ?>
@@ -121,14 +122,14 @@
     <!--
     function sendOTP()
     {
-        document.Form1.action = "forgot_password.php"
+        document.Form1.action = "email_id_verification.php"
         document.Form1.submit(); 
         return true;
     }
 
     function verifyOTP()
     {
-        document.Form1.action = "verify_otp.php"
+        document.Form1.action = "verify_email.php"
         document.Form1.submit();
         return true;
     }
@@ -156,7 +157,7 @@
 				<div class="login-wrapper">
 			        <div class="box">
 			            <div class="content-wrap">
-			                <h6>Forgot Password</h6>
+			                <h6>New Email verification</h6>
 			                <div class="social">
 	                            
 	                        </div>
@@ -164,7 +165,7 @@
             <?php 
               $form = "";
               if (!isset($email_id)){
-                $form .=  "<input class='form-control' type='text' name = 'email_id' placeholder='Email ID' required><br>
+                $form .=  "<input class='form-control' type='email' name = 'email_id' placeholder='Email ID' required><br>
                   <div class='already'>";
                   if (isset($msg)){
                     $form .= "<p> $msg </p>";
@@ -181,7 +182,8 @@
               else{
                 if ($email_valid_flag){
                   $form .= "<input class='form-control' type='hidden' name = 'email_id' placeholder='Email ID' value = $email_id readonly><br>
-                    <input class='form-control' type='text' name = 'otp' placeholder='One-Time Password' >
+				  <input class='form-control' type='hidden' name = 'server_otp' value = $random readonly><br>
+                  <input class='form-control' type='text' name = 'user_otp' placeholder='One-Time Password' required>
 
                     
                     <div class='already'>";
@@ -199,7 +201,7 @@
                   echo $form;
                 }
                 else{
-                  $form .=  "<input class='form-control' type='text' name = 'email_id' placeholder='Email ID' required><br>
+                  $form .=  "<input class='form-control' type='email' name = 'email_id' placeholder='Email ID' required><br>
                     <div class='already'>";
                     if (isset($msg)){
                       $form .= "<p> $msg </p>";

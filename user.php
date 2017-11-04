@@ -1,7 +1,11 @@
 <?php
    include("config.php");
 
-   if($_SERVER["REQUEST_METHOD"] == "POST") {
+
+	$verified_email = $_POST['email_id'];
+	
+	
+	if($_SERVER["REQUEST_METHOD"] == "POST" and (isset($_POST['userEmail']))){
        
        
     $userid = $_POST["userEmail"];
@@ -76,7 +80,7 @@
 
 
 			if ($conn->query($sql) === TRUE && $conn->query($sql2) === TRUE) {
-				header('Location: login.php');    
+				header('Location: registraton_successful.html');    
 			} else {
 				//echo " --Something went wrong Error: " . $sql . "<br>" . $conn->error;
 				echo "User ID already exists";
@@ -271,7 +275,10 @@
                              <div class="form-group">
 								    <label  class="col-sm-2 control-label">Email/User Name</label>
 								    <div class="col-sm-10">
-								      <input type="email" class="form-control" name="userEmail" placeholder="Email" required>
+								      <input type="email" class="form-control" name="userEmail" placeholder="Email address" value="<?php
+											if(isset($verified_email)) {
+												echo $verified_email;
+											} ?>" readonly>
 								    </div>
 								  </div>
                                <div class="form-group">
