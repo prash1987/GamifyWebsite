@@ -85,7 +85,7 @@
 
 		<div class="user_details_left_right">
 			<a href="<?php echo $userLoggedIn;?>">
-			<?php echo $user_obj->getFirstAndLastName(); ?>
+			<b><?php echo $user_obj->getFirstAndLastName(); ?></b>
 			</a>
 			<br>
 			<?php echo "Location: " . $user_obj->getUserLocation() . "<br>"; 

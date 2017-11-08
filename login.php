@@ -132,15 +132,15 @@
 			        </div>
 
               <div class="already">
-                  <p><a href="fg_pwd.php">Forgot Password?</a></p><br>
+                  <p><h4><a href="fg_pwd.php">Forgot Password?</a></h4></p><br>
                   <!-- <a href="forgot_password_2.php">Recover by answering security questions</a><br>
                   <a href="forgot_password.php">Recover using OTP</a> -->
               </div>
 
-			        <div class="already">
+			        <div class="already"><h4>
 			            <p>Don't have an account yet?</p>
 			            <a href="email_id_verification.php">Register</a>
-			        </div>
+			        </h4></div>
 			    </div>
 			</div>
 		</div>

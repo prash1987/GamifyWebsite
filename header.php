@@ -28,12 +28,12 @@
 
 </head>
 
-<body id="page-top" class="index">
+<body id="page-top" class="index">    
 
     <div class="top_bar">
         <div class="logo">
-            <a href="index.php">GAMIFY</a>
-        </div>
+            <a class="navbar-brand" href="index.php" >GAMIFY</a>
+       </div>
 
     <nav> 
         <a href="homepage.php"><i class="fa fa-home fa-lg"></i></a>
