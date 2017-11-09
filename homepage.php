@@ -6,8 +6,8 @@
     include("classes/PostClass.php");
     include("classes/MessageClass.php");
 
-
-	if(isset($_SESSION['login_user'])) {
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && isset($_SESSION['login_user'])) 
+	{
 		$userLoggedIn = $_SESSION['login_user'];
 	}
 	else
@@ -33,6 +33,9 @@
          rel = "stylesheet">
         
 		<link href="css/styles.css" rel="stylesheet">
+		
+
+
    		<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
    		<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
@@ -79,9 +82,12 @@
 	</head>
 
 	<br><br><br>
-	<div class="user_details column">
-		<br><br>
+	<div class="col-md-2 column">
+	<!--<div class="user_details column">-->
+		
 		<a href="<?php echo $userLoggedIn;?>">  <img height='126' width='126' src="<?php echo $user_obj->getProPic(); ?>"> </a>
+
+		<br><br>
 
 		<div class="user_details_left_right">
 			<a href="<?php echo $userLoggedIn;?>">
@@ -91,14 +97,14 @@
 			<?php echo "Location: " . $user_obj->getUserLocation() . "<br>"; 
 			echo "Contact: " . $user_obj->getUserContact() ;
 			?>
-		</div>
+		
 			<form action="homepage.php" name="pref_form" method="POST">
 				<br>
 				<fieldset>
-         			<legend>Select Pref</legend>
-         				<p>Gender Pref</p>
+         			<h3>Select Preferences</h3>
+         				<h4>Gender Preferences</h4>
 	       				<input type = "radio" id = "gender_pref_men_only" name="gender_pref" value = "men" />
-     					<label for = "event_pref_men_only">Men Only</label> 
+     					<label class="pref_label" for = "event_pref_men_only">Men Only</label> 
      					<br>
      					<input type = "radio" id = "gender_pref_women_only" name= "gender_pref" value = "women" />
      					<label for = "event_pref_women_only">Women Only</label> 
@@ -151,10 +157,12 @@
      			</fieldset>
 
     		</form>
-		
-	</div>
+		</div>
+	<!--</div>-->
+</div>
 
-	<div class="main_column column">
+	<div class="col-md-7 column">
+	<!--<div class="main_column column">-->
 		<form class="post_form" action="homepage.php" method="POST" enctype="multipart/form-data">
 			<textarea name="post_text" id="post_text" placeholder="Post here" required></textarea>
 			<input type="submit" name="post" id="post_button" value="Post" style="color:#000000"><br>
@@ -251,5 +259,11 @@
 				?>
 
 	</div>
+<!--</div>-->
+
+<div class="col-md-3 column">
+	some text or add
+</div>
+
 </body>
 </html>

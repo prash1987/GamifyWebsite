@@ -159,7 +159,7 @@
 					<script src='js/custom.js'></script>
 				</body>
 			</html>"; 
-		if($user_otp === $server_otp) 
+		if($user_otp == $server_otp) 
 		{
 			echo $success_str;
 			//header('Location: user.php?email_id='.$u_name); 

@@ -30,7 +30,7 @@
         //If the password is correct
         if($password_hash == $myhash){
 			$_SESSION['login_user'] = $myusername;
-			$_SESSION['loggedin'] = true;
+			//$_SESSION['loggedin'] = true;
 
 			//Send OTP to '$myusername' and also store it in the login table
 			$random =  rand(100000,999999);
@@ -112,35 +112,25 @@
 			        <div class="box">
 			            <div class="content-wrap">
 			                <h6>Sign In</h6>
-			                <div class="social">
-	                            
-	                        </div>
+			                
                             <form action = "" method = "post">
 			                <input class="form-control" type="text" name = "username" placeholder="User Name" required>
 			                <input class="form-control" type="password" name = "password" placeholder="Password" required>
 
-                      <div class="already">
-                        <p><?php if (isset($error)) echo $error ?></p>
-                      </div>
+		                    <div class="already">
+		                    	<p><?php if (isset($error)) echo $error ?></p>
+		                    </div>
 
 			                <div class="action">
-                                <input type = "submit" class="btn btn-primary signup"  value = " Sign In "/><br />
-			                </div> 
-                      
-                            </form>        
+                                <input type = "submit" class="btn btn-primary signup"  value = " Sign In "/>
+			                </div>
+                            </form>
+                            <br><br>
+                  			<p><h4><a href="fg_pwd.php">Forgot Password?</a></h4></p><br>
+              		        <h4><p>Don't have an account?<a href="email_id_verification.php"> Register now!</a></p></h4>
+			            
 			            </div>
 			        </div>
-
-              <div class="already">
-                  <p><h4><a href="fg_pwd.php">Forgot Password?</a></h4></p><br>
-                  <!-- <a href="forgot_password_2.php">Recover by answering security questions</a><br>
-                  <a href="forgot_password.php">Recover using OTP</a> -->
-              </div>
-
-			        <div class="already"><h4>
-			            <p>Don't have an account yet?</p>
-			            <a href="email_id_verification.php">Register</a>
-			        </h4></div>
 			    </div>
 			</div>
 		</div>

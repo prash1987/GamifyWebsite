@@ -47,18 +47,18 @@ $username = $_SESSION['login_user'];
 
 	<div class="page-content container">
 		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
+			<div class="col-md-5 col-md-offset-4">
 				<div class="login-wrapper">
 			        <div class="box">
 			            <div class="content-wrap">
 			                <h6>Forgot Password?</h6>
-			                <div class="social">
+			                
 	                            
 
-	<div class="already">
-                  <a href="forgot_password_2.php">Recover by answering security questions</a><br>
-                  <a href="forgot_password.php">Recover using OTP</a>
-              </div>
+	<div class="social">
+                  <p><h4><a href="forgot_password_2.php">Recover by answering security questions</a><br></h4></p>
+                  <p><h4><a href="forgot_password.php">Recover using OTP</a></h4></p>
+    </div>
 
 </body>
 </html>

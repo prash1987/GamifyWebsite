@@ -205,7 +205,7 @@
   </script>
 
   </head>
-   <body onload = 'set_max_date_attribute()'>
+   <body class="login-bg" onload = 'set_max_date_attribute()'>
 	  	<div class="header">
 	     <div class="container">
 	        <div class="row">
@@ -230,15 +230,12 @@
 	     </div>
 	</div>
 
-      <div class="page-content">
+      <div class="page-content container">
     	<div class="row">
 		  <div class="col-md-2">
-		  
-            
-              
 		  </div>
-       <div class="row">
-           <div class="col-md-6">
+       		<div class="row">
+           	<div class="col-md-8">
                <div class="content-box-large">
                    <div class="panel-heading">
 					            <div class="panel-title"><h3>Registration Form</h3></div>

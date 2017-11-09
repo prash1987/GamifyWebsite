@@ -17,10 +17,10 @@ a {
 	text-decoration: none;	
 }
 
-
+/*
 .top_bar {
 	width: 100%;
-	/*min-width: 1050px;*/
+	
 	height: 40px;
 	background-color: #20aae5;
 	border-bottom: 0.25em solid #1894ca;
@@ -38,7 +38,7 @@ a {
 	top: 9px;
 	text-shadow: #73B6E2 0.5px 0.5px 0px;
 	color: #1086BA;
-}
+}*/
 
 a:hover {
 	color: blue ;
@@ -84,7 +84,7 @@ nav a:hover {
 }
 
 .user_details {
-	width: 24%;
+	width: 20%;
 	float: left;
 	margin-bottom: 20px;
 }
@@ -103,12 +103,14 @@ nav a:hover {
 
 .main_column {
 	float:right;
-	width: 70%;
+	width: 50%;
 	z-index: -1;
 	min-height: 300px;
+
 	/*max-height:700px;
 	overflow: scroll;*/
 }
+
 
 .post_form {
 	width: 100%;
@@ -357,4 +359,10 @@ textarea:focus {
 .liveSearchText p{
 	margin-left:10px;
 	font-size: 12px;
+}
+
+fieldset .pref_label{
+    display: inline-block;
+    margin-bottom: 5px;
+    
 }

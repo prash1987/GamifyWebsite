@@ -23,6 +23,7 @@
       // If result has a match, table row must be 1 row
       if($count == 1) {
         $_SESSION['login_user'] = $email_id;
+        $_SESSION['loggedin'] = true;
         header('Location: homepage.php');   
       }else {
          $msg = "Authentication failed";
