@@ -36,16 +36,6 @@ class PostClass {
 	//Load posts
 	public function loadPostsFriends($gender_pref,$game_pref)
 	{
-		/*$get_loc = strip_tags($pl);
-		$get_loc = mysqli_real_escape_string($this->con, $pl);*/
-
-
-		// $get_loc = getUserLocation();
-		// echo $get_loc;
-		// $con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-		// $data_query1 = mysqli_query($con, "SELECT * FROM user");
-		// $row = mysqli_fetch_array($data_query1);
-		// $get_loc = $row['address'];
 
 		$folder="images/";
 
@@ -101,44 +91,14 @@ class PostClass {
 				$game = $row['game'];
 				$gender = $row['gender'];
 				if ($gender == 'A'){
-					$gender = "This even is open for <b>All</b>";
+					$gender = "This event is open for <b>All</b>";
 				}
 				elseif ($gender == 'M') {
-					$gender = "This even is open to <b>Males</b> only";
+					$gender = "This event is open to <b>Males</b> only";
 				}
 				elseif ($gender == 'F') {
-					$gender = "This even is open to <b>Females</b> only";
+					$gender = "This event is open to <b>Females</b> only";
 				}
-
-				//Prepare user_to string so it can be included even if not posted to a user
-				/*if($row['user_to'] == "none") {
-					$user_to = "";
-				}
-				else {
-					$user_to_obj = new User($con, $row['user_to']);
-					$user_to_name = $user_to_obj->getFirstAndLastName();
-					$user_to = "to <a href='" . $row['user_to'] ."'>" . $user_to_name . "</a>";
-				}*/
-
-				//Check if user who posted, has their account closed
-				/*$added_by_obj = new User($this->con, $added_by);
-				if($added_by_obj->isClosed()) {
-					continue;
-				}*/
-
-				
-
-					/*if($num_iterations++ < $start)
-						continue; 
-
-
-					//Once 10 posts have been loaded, break
-					if($count > $limit) {
-						break;
-					}
-					else {
-						$count++;
-					}*/
 
 				if(isset($_SESSION['login_user'])) {
 					$userLoggedIn = $_SESSION['login_user'];
@@ -151,7 +111,7 @@ class PostClass {
 				/*This is the delete button logic*/
 				if($userLoggedIn == $added_by){
 					$id = "post_".$id;
-					$delete_button = "<button style='background-color:red;' class='delete_button' id='$id' onClick='delete_function(\"$id\");'>X</button>";
+					$delete_button = "<i class='delete_button glyphicon glyphicon-remove' id='$id' onClick='delete_function(\"$id\");'></i>";
 				}
 				else {
 					$delete_button = "";

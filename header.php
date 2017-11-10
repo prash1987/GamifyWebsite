@@ -15,8 +15,10 @@
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href="sn_styles.css" rel="stylesheet" type="text/css">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="sn_styles.css" rel="stylesheet" type="text/css">
+    <link href="css/styles.css" rel="stylesheet">
+    
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,7 +45,7 @@
                      <h1><a href="index.php">GAMIFY</a></h1>
                  </div>
 
-                <nav class="nav navbar-nav navbar-right">
+                <nav class="top_bar nav navbar-brand navbar-nav navbar-right">
                         <a href="homepage.php"><i class="fa fa-home fa-lg"></i></a>
                     
                         <a href="message.php"><i class="fa fa-comments fa-lg"></i></a>

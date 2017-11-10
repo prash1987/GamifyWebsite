@@ -1,7 +1,9 @@
 <html>
 <head>
 	<title></title>
+
 	<link href="sn_styles.css" rel="stylesheet" type="text/css">
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 	</head>
 <body>
@@ -59,7 +61,7 @@
 
 	if($num_rows > 0) {
 		echo '<form action="like.php?post_id=' . $post_id . '" method="POST">
-				<input type="submit" class="comment_like" name="unlike_button" value="Unlike">
+				<input type="submit" class="glyphicon glyphicon-thumbs-down comment_like" name="unlike_button" >
 				<div class="like_value" style="padding-top: 10px;">
 					'. $total_likes .' Likes
 				</div>
@@ -68,7 +70,7 @@
 	}
 	else {
 		echo '<form action="like.php?post_id=' . $post_id . '" method="POST">
-				<input type="submit" class="comment_like" name="like_button" value="Like">
+				<input type="submit" class="glyphicon glyphicon-thumbs-up comment_like" name="like_button" >
 				<div class="like_value" style="padding-top: 10px;">
 					'. $total_likes .' Likes
 				</div>

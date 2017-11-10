@@ -117,8 +117,10 @@ nav a:hover {
 }
 
 .post_form textarea {
-	width: 81%;
+	width: 75%;	
 	height: 60px;
+	max-width: 85%;
+	max-height: 100px;
 	border-radius: 3px;
 	margin-right: 5px;
 	border: 1px solid #D3D3D3;
@@ -244,7 +246,7 @@ textarea:focus {
 	border-radius: 4px;
 	right: -15px;
 	position: relative;
-	background-color: #e74c3c;
+	
 }
 
 .status_post {
@@ -319,8 +321,8 @@ textarea:focus {
 	font-size: 14px;
 	color: #3498db;
 	padding: 0;
-	height: auto;
-	width: auto;
+	height: 80px;
+	width: 150px;
 	margin: 0;
 }
 

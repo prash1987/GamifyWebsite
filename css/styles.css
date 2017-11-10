@@ -659,3 +659,6 @@ body {
       border-radius:10px;
    } 
 }
+.col-md-offset-0-5 {
+    margin-left: 2%;
+  }

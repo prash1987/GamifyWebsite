@@ -45,6 +45,7 @@ if(isset($_POST['post_message'])) {
 	<head>
 		<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
          rel = "stylesheet">
+         <link href = "css/styles.css" rel = "stylesheet">
    		<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
    		<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
    		<script src = "js/custom.js"></script>
@@ -59,23 +60,32 @@ if(isset($_POST['post_message'])) {
    	</head>
    	
    	<br><br><br>
-	<div class="user_details column">
-		<br><br>
+	<div class="col-md-2 column col-md-offset-0-5">
+		
 		<a href="<?php echo $userLoggedIn;?>">  <img height='126' width='126' src="<?php echo $user_obj->getProPic(); ?>"> </a>
 		
-
+		<br><br>
 		<div class="user_details_left_right">
 			<a href="<?php echo $userLoggedIn;?>">
-			<?php echo $user_obj->getFirstAndLastName(); ?>
+			<b><?php echo $user_obj->getFirstAndLastName(); ?></b>
 			</a>
 			<br>
 			<?php echo "Location: " . $user_obj->getUserLocation() . "<br>"; 
 			echo "Contact: " . $user_obj->getUserContact() ;
 			?>
 		</div>
-	</div>	
+		<br><br>
 
-	<div class="main_column column" id="main_column">
+		<h4>Conversations</h4>
+
+		<div class = 'loaded_conversations'>
+			<?php echo $message_obj->getConvos(); ?>
+		</div>
+		<br>
+		<a href="message.php?u=new">New Message</a>
+	</div>
+
+	<div class="col-md-6 column col-md-offset-0-5">
 		<?php  
 		if($user_to != "new"){
 			echo "<h4>You and <a href='$user_to'>" . $user_to_obj->getFirstAndLastName() . "</a></h4><hr><br>";
@@ -119,14 +129,3 @@ if(isset($_POST['post_message'])) {
    			}
    		</script>
 	</div>
-
-	<div class="user_details column" id='conversations' style='float:left;'>
-		<h4>Conversations</h4>
-
-		<div class = 'loaded_conversations'>
-			<?php echo $message_obj->getConvos(); ?>
-		</div>
-		<br>
-		<a href="message.php?u=new">New Message</a>
-	</div>
-

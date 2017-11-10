@@ -6,12 +6,10 @@
     include("classes/PostClass.php");
     include("classes/MessageClass.php");
 
-    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && isset($_SESSION['login_user'])) 
-	{
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && isset($_SESSION['login_user'])){
 		$userLoggedIn = $_SESSION['login_user'];
 	}
-	else
-	{
+	else{
 		header("Location: login.php");
 	}
 
@@ -30,12 +28,8 @@
 ?>
 	<head>
 		<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
-         rel = "stylesheet">
-        
+         rel = "stylesheet">        
 		<link href="css/styles.css" rel="stylesheet">
-		
-
-
    		<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
    		<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
@@ -82,7 +76,7 @@
 	</head>
 
 	<br><br><br>
-	<div class="col-md-2 column">
+	<div class="col-md-2 column col-md-offset-0-5">
 	<!--<div class="user_details column">-->
 		
 		<a href="<?php echo $userLoggedIn;?>">  <img height='126' width='126' src="<?php echo $user_obj->getProPic(); ?>"> </a>
@@ -95,14 +89,13 @@
 			</a>
 			<br>
 			<?php echo "Location: " . $user_obj->getUserLocation() . "<br>"; 
-			echo "Contact: " . $user_obj->getUserContact() ;
-			?>
+			echo "Contact: " . $user_obj->getUserContact() ; ?>
 		
 			<form action="homepage.php" name="pref_form" method="POST">
 				<br>
 				<fieldset>
-         			<h3>Select Preferences</h3>
-         				<h4>Gender Preferences</h4>
+         			<h4><b>Select Preferences</b></h4>
+         				<h5><b>Gender Preferences</b></h5>
 	       				<input type = "radio" id = "gender_pref_men_only" name="gender_pref" value = "men" />
      					<label class="pref_label" for = "event_pref_men_only">Men Only</label> 
      					<br>
@@ -112,9 +105,7 @@
 						<input type = "radio" id = "gender_pref_all" name= "gender_pref" value = "all" />
      					<label for = "event_pref_women_only">All Events</label> 
      					<br>
-    					<!--input type = "submit" value="Change Preferences" /-->
-     					<!--input type = "button" name ="clear_pref_button" id="clear_pref_button" value="Clear Preferences" onclick="noPrefFunction()" /-->
-         				<p>Game Pref</p>
+         				<h5><b>Game Preferences</b></h5>
 	       				<input type = "checkbox" id = "game_pref_cricket" name="game_pref_cricket" value="Cricket"/>
      					<label for = "game_pref_cricket">Cricket</label> 
      					<br>
@@ -161,12 +152,11 @@
 	<!--</div>-->
 </div>
 
-	<div class="col-md-7 column">
-	<!--<div class="main_column column">-->
+	<div class="col-md-6 column col-md-offset-0-5">
 		<form class="post_form" action="homepage.php" method="POST" enctype="multipart/form-data">
 			<textarea name="post_text" id="post_text" placeholder="Post here" required></textarea>
 			<input type="submit" name="post" id="post_button" value="Post" style="color:#000000"><br>
-			<label for="post_image">Upload Image</label> <input type="file" name="post_image" id="post_image">
+			<label for="post_image">Upload Image</label> <input type="file" name="post_image" id="post_image"><br>
 			<input type="text" name="post_location" id = "post_location" placeholder="Location" required>
 			<input type="datetime-local" name="post_time" id = "post_time" placeholder="Date and Time" required>
 			
@@ -259,10 +249,9 @@
 				?>
 
 	</div>
-<!--</div>-->
 
-<div class="col-md-3 column">
-	some text or add
+<div class="col-md-3 column col-md-offset-0-5">
+	Ads will appear here
 </div>
 
 </body>
