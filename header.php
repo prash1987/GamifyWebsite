@@ -1,3 +1,16 @@
+
+<?php
+
+    if(isset($_SESSION['login_user'])) {
+        $userLoggedIn = $_SESSION['login_user'];
+    }
+    else
+    {
+        header("Location: login.php");
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,6 +58,45 @@
                   <div class="logo">
                      <h1><a href="index.php">GAMIFY</a></h1>
                  </div>
+
+                <div class="search">
+
+            
+                <input type="search" onkeyup="getLiveSearchUsers(this.value, '<?php echo $userLoggedIn; ?>')" name="q" placeholder="Search..." autocomplete="off" id="search_text_input" onsearch="getLiveSearchUsers('','')" />
+
+                <div class="button_holder">
+                    <img src="img/Search/magnifying_glass.png" alt="some image" id="image_button">
+                </div>
+
+
+            <div class="search_results">
+            </div>
+
+            <div class="search_results_footer_empty">
+            </div>
+            
+
+        </div>
+        <script src="js/search.js"></script>
+        <script type="text/javascript">
+            function ready(){
+                var div = document.getElementById("scroll_messages");
+                div.scrollTop = div.scrollHeight;
+            }
+
+            function getLiveSearchUsers(value, user){
+                $.post("ajax_search.php", {query:value, userLoggedIn:user}, function (data){
+                    $(".search_results").html(data);
+                });
+            }
+        </script>
+   
+
+
+
+        </div>
+
+
 
                 <nav>
                         <a href="homepage.php"><i class="fa fa-home fa-lg"></i></a>

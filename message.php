@@ -49,6 +49,7 @@ if(isset($_POST['post_message'])) {
    		<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
    		<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
    		<script src = "js/custom.js"></script>
+   		<script src = "js/search.js"></script>
 
    		<script type="text/javascript">
    			function getUsers(value, user){
