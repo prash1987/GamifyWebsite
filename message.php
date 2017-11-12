@@ -49,6 +49,7 @@ if(isset($_POST['post_message'])) {
    		<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
    		<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
    		<script src = "js/custom.js"></script>
+
    		<script type="text/javascript">
    			function getUsers(value, user){
 			  $.post("handlers/ajax_friend_search.php", {query:value, userLoggedIn:user}, function (data){
@@ -105,7 +106,7 @@ if(isset($_POST['post_message'])) {
 				{
 					echo "Select the friend you would like to message <br><br>";
 					?>
-					To: <input type = 'text' onkeyup='getUsers(this.value, "<?php echo $userLoggedIn; ?>")' name='q' placeholder='Name' autocomplete='off' id='search_text_input'>
+					To: <input type = 'search' onkeyup='getUsers(this.value, "<?php echo $userLoggedIn; ?>")' name='q' placeholder='Name' autocomplete='off' id='search_text_input' onsearch="getUsers('','')">
 
 					<?php
 						echo "<div class='results'></div>";
