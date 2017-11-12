@@ -9,7 +9,8 @@
     <!--
     function likePost()
     {
-    	alert('clicked like button');    	    	
+    	alert('clicked like button');
+    	document.Form1.action = "like.php?post_id=' . $post_id . '"
         document.Form1.submit(); 
         return true;
     }
@@ -78,7 +79,7 @@
 	$num_rows = mysqli_num_rows($check_query);
 
 	if($num_rows > 0) {
-		echo '<form name="Form1" action="like.php?post_id=' . $post_id . '" method="POST">
+		echo '<form name="Form1" action="" method="POST">
 				<br><i class="glyphicon glyphicon-thumbs-down comment_like" onclick="unlikePost();" name="unlike_button" id="unlike_button" ></i>
 				<div class="like_value" style="padding-top: 10px;">
 					'. $total_likes .' Likes
@@ -87,7 +88,7 @@
 		';
 	}
 	else {
-		echo '<form name="Form1" action="like.php?post_id=' . $post_id . '" method="POST">
+		echo '<form name="Form1" action="" method="POST">
 				<br><i class="glyphicon glyphicon-thumbs-up comment_like" onclick="likePost();" name="like_button" id="like_button" ></i>
 				<div class="like_value" style="padding-top: 10px;">
 					'. $total_likes .' Likes
