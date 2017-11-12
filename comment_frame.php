@@ -2,7 +2,7 @@
 <head>
 	<title></title>
 	<link href="sn_styles.css" rel="stylesheet" type="text/css">
-
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -59,7 +59,7 @@
 	?>
 	<form action="comment_frame.php?post_id=<?php echo $post_id; ?>" id="comment_form" name="postComment<?php echo $post_id; ?>" method="POST">
 		<textarea name="post_body"></textarea>
-		<input type="submit" name="postComment<?php echo $post_id; ?>" value="Post">
+		<input type="submit" name="postComment<?php echo $post_id; ?>" class="btn btn-primary btn-sm" value="Post">
 	</form>
 
 	<!-- Load comments -->

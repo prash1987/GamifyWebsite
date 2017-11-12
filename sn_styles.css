@@ -47,8 +47,9 @@ a:hover {
 nav {
 	float: right;
 	right: 1px;
-	position: absolute;
-	margin: 10px;
+	position: relative;
+	margin-right: -50px;
+	margin-top: -35px;
 }
 
 nav a{
@@ -136,15 +137,7 @@ textarea:focus {
 	width: 11%;
 	height: 60px;
 	border: none;
-	border-radius: 3px;
-	background-color: #3498db;
-	font-family: 'Bellota-BoldItalic', sans-serif;
-	color: #1E75CA;
-	text-shadow: #73B6E2 0.5px 0.5px 0px;
-	font-size: 90%;
 	position: absolute;
-	outline: 0;
-	margin: 0;
 }
 
 .post_form input[type="submit"]:active {
@@ -183,22 +176,23 @@ textarea:focus {
 }
 
 .message#blue{
-	background-color: #3498db;
-	border-color: #2980b9;
+	background-color: #85C1E9;
+	border-color: #ffffff;
 	float:right;
 	/*margin-bottom: 5px;*/
 }
 
-.message#green{
-	background-color: #2ecc71;
-	border-color: #27ae60;
+.message#grey{
+	background-color: #BDC3C7;
+	border-color: #ffffff;
 	float:left;
 	/*margin-bottom: 5px;*/
 }
 
 .loaded_conversations{
-	max-height: 216px;
-	overflow:scroll;
+	
+	height: 300px;
+	overflow:auto;	
 }
 
 .user_found_messages{
@@ -272,26 +266,19 @@ textarea:focus {
 	border-radius: 3px;
 }
 
-#comment_form textarea {
-	border-color: #D3D3D3;
+#comment_form textarea {	
 	width: 85%;
 	height: 35px;
 	border-radius: 5px;
-	color: #616060;
-	font-size: 14px;
 	margin: 3px 3px 3px 5px;
 }
 #comment_form input[type="submit"] {
 	border:none;
-	background-color: #20AAE5;
-	color: #156588;
 	border-radius: 5px;
 	width: 13%;
 	height: 35px;
 	margin-top: 3px;
 	position: absolute;
-	font-family: 'Bellota-BoldItalic', sans-serif;
-	text-shadow: #73B6E2 0.5px 0.5px 0px;
 }
 
 .status_post {

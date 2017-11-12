@@ -5,6 +5,24 @@
 	<link href="sn_styles.css" rel="stylesheet" type="text/css">
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+	<script language="Javascript">
+    <!--
+    function likePost()
+    {
+    	alert('clicked like button');    	    	
+        document.Form1.submit(); 
+        return true;
+    }
+
+    function unlikePost()
+    {       
+    	alert('clicked unlike button');    	
+        document.Form1.submit();
+        return true;
+    }
+    -->
+    </script>
+
 	</head>
 <body>
 	<?php  
@@ -60,8 +78,8 @@
 	$num_rows = mysqli_num_rows($check_query);
 
 	if($num_rows > 0) {
-		echo '<form action="like.php?post_id=' . $post_id . '" method="POST">
-				<input type="submit" class="glyphicon glyphicon-thumbs-down comment_like" name="unlike_button" >
+		echo '<form name="Form1" action="like.php?post_id=' . $post_id . '" method="POST">
+				<br><i class="glyphicon glyphicon-thumbs-down comment_like" onclick="unlikePost();" name="unlike_button" id="unlike_button" ></i>
 				<div class="like_value" style="padding-top: 10px;">
 					'. $total_likes .' Likes
 				</div>
@@ -69,8 +87,8 @@
 		';
 	}
 	else {
-		echo '<form action="like.php?post_id=' . $post_id . '" method="POST">
-				<input type="submit" class="glyphicon glyphicon-thumbs-up comment_like" name="like_button" >
+		echo '<form name="Form1" action="like.php?post_id=' . $post_id . '" method="POST">
+				<br><i class="glyphicon glyphicon-thumbs-up comment_like" onclick="likePost();" name="like_button" id="like_button" ></i>
 				<div class="like_value" style="padding-top: 10px;">
 					'. $total_likes .' Likes
 				</div>

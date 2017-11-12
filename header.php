@@ -16,8 +16,9 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="sn_styles.css" rel="stylesheet" type="text/css">
     <link href="css/styles.css" rel="stylesheet">
+    <link href="sn_styles.css" rel="stylesheet" type="text/css">
+    
     
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -45,13 +46,14 @@
                      <h1><a href="index.php">GAMIFY</a></h1>
                  </div>
 
-                <nav class="top_bar nav navbar-brand navbar-nav navbar-right">
+                <nav>
                         <a href="homepage.php"><i class="fa fa-home fa-lg"></i></a>
                     
                         <a href="message.php"><i class="fa fa-comments fa-lg"></i></a>
                     
                         <a href="logout.php"><i class="fa fa-sign-out fa-lg"></i></a>
                 </nav>
+
 
 
                 <!--

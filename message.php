@@ -82,7 +82,7 @@ if(isset($_POST['post_message'])) {
 			<?php echo $message_obj->getConvos(); ?>
 		</div>
 		<br>
-		<a href="message.php?u=new">New Message</a>
+		<a href="message.php?u=new" class='btn btn-primary btn-xs'>New Message</a>
 	</div>
 
 	<div class="col-md-6 column col-md-offset-0-5">
@@ -112,8 +112,8 @@ if(isset($_POST['post_message'])) {
 				}
 				else
 				{
-					echo "<textarea name='message_body' id='message_textarea' placeholder='Write your message ...'></textarea>";
-					echo "<input type='submit' name='post_message' class='info' id='message_submit' value='Send'>";
+					echo "<hr><textarea name='message_body' id='message_textarea' placeholder='Write your message ...'></textarea>";
+					echo "<input type='submit' name='post_message' class='btn btn-primary' value='Send'>";
 				}
 
 				?>
@@ -122,10 +122,15 @@ if(isset($_POST['post_message'])) {
 			</form>
 
 		</div>
+
 		<script type="text/javascript">
 			function ready(){
    				var div = document.getElementById("scroll_messages");
    				div.scrollTop = div.scrollHeight;
    			}
    		</script>
+	</div>
+
+	<div class="col-md-3 column col-md-offset-0-5">
+		Ads will appear here
 	</div>

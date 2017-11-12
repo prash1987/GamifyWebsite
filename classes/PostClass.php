@@ -237,11 +237,11 @@ class PostClass {
 								<span> $gender </span>
 								<br>
 							</div>
-							<img src='$image_path' height='20%' width='20%'></img>
+							<img src='$image_path' height='40%' width='40%'></img>
 							<div class='newsfeedPostOptions'>	
-								<button id='comment_anchor' onClick='javascript:toggle$id();'>Comments($comments_check_num)</button>&nbsp;&nbsp;&nbsp;
+								<button id='comment_anchor' class='btn btn-primary btn-xs' onClick='javascript:toggle$id();'>Comments($comments_check_num)</button>&nbsp;&nbsp;&nbsp;
 
-								<iframe allowtransparency='true' src='like.php?post_id=$id' style='height: 70px; width: 70px;' frameBorder='0'  scrolling='no'></iframe>
+								<iframe allowtransparency='true' src='like.php?post_id=$id' style='height: 35px; width: 200px;' frameBorder='0'  scrolling='no'></iframe>
 							</div>
 
 						</div>

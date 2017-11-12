@@ -142,9 +142,9 @@
      					<input type = "checkbox" id = "game_pref_dispall" name= "game_pref_dispall" value="All" />
      					<label for = "game_pref_dispall">All Games</label>
      					<br><br>
-     					<input type = "submit" value="Change Preferences" />
+     					<input type = "submit" class="btn btn-primary btn-xs" value="Change Preferences" />
      					<br><br>
-     					<input type = "button" name ="no_pref_button" id="no_pref_button" value="Clear Preferences" onclick="noPrefFunction()" />
+     					<input type = "button" class="btn btn-primary btn-xs" name ="no_pref_button" id="no_pref_button" value="Clear Preferences" onclick="noPrefFunction()" />
      			</fieldset>
 
     		</form>
@@ -155,12 +155,9 @@
 	<div class="col-md-6 column col-md-offset-0-5">
 		<form class="post_form" action="homepage.php" method="POST" enctype="multipart/form-data">
 			<textarea name="post_text" id="post_text" placeholder="Post here" required></textarea>
-			<input type="submit" name="post" id="post_button" value="Post" style="color:#000000"><br>
-			<label for="post_image">Upload Image</label> <input type="file" name="post_image" id="post_image"><br>
-			<input type="text" name="post_location" id = "post_location" placeholder="Location" required>
-			<input type="datetime-local" name="post_time" id = "post_time" placeholder="Date and Time" required>
+			<input type="submit" name="post" id="post_button" value="Post" class="btn btn-primary btn-lg" ><br><br>
 			
-		    <label for="post_game">Game</label>
+			<label for="post_game">Game</label>
 			    <select id="post_game" name="post_game">
 			      <option value="Cricket">Cricket</option>
 			      <option value="Badminton">Badminton</option>
@@ -174,20 +171,28 @@
 				  <option value="Dance">Dance</option>
 				  <option value="MartialArts">Martial Arts</option>
 			    </select>
-		  	<br>
-		  	<label for="post_gender">Gender</label>
+		  	
+			<label for="post_gender">Gender</label>
 			
-			  <label class="form-check-label">
+			<label class="form-check-label">
 			    <input class="form-check-input" type="radio" name="post_gender" id="inlineRadio1" value="A" checked="checked"> All
-			  </label>
+			</label>
 			
-			  <label class="form-check-label">
+			<label class="form-check-label">
 			    <input class="form-check-input" type="radio" name="post_gender" id="inlineRadio2" value="M"> Male
-			  </label>
+			</label>
 			
-			  <label class="form-check-label">
+			<label class="form-check-label">
 			    <input class="form-check-input" type="radio" name="post_gender" id="inlineRadio3" value="F"> Female
-			  </label>
+			</label>
+
+			&nbsp;&nbsp;&nbsp;&nbsp;
+
+			<input type="text" name="post_location" id = "post_location" placeholder="Location" width="20px" required>
+			<input type="datetime-local" name="post_time" id = "post_time" placeholder="Date and Time" required>
+
+			<br>
+		    <label for="post_image">Upload Image</label> <input type="file" name="post_image" id="post_image"> <br>		  	
 			
 			<hr>
 		</form>
