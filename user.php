@@ -80,7 +80,7 @@
 
 
 			if ($conn->query($sql) === TRUE && $conn->query($sql2) === TRUE) {
-				header('Location: registraton_successful.html');    
+				header('Location: registration_successful.html');    
 			} else {
 				//echo " --Something went wrong Error: " . $sql . "<br>" . $conn->error;
 				echo "User ID already exists";

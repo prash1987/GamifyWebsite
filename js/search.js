@@ -15,7 +15,7 @@ $(document).ready(function() {
  
  
 function getLiveSearchUsers(value, user) {
-              alert(value);
+              
               $.post("handlers/ajax_search.php", {query:value, userLoggedIn: user}, function(data) {
                            if($(".search_results_footer_empty")[0]) {
                               	$(".search_results_footer_empty").toggleClass("search_results_footer");
