@@ -15,7 +15,7 @@
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="css/freelancer.min.css" rel="stylesheet">
+    <link href="css/freelancer.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -28,6 +28,22 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <style type="text/css">
+        .container_s {
+            position: relative;
+            text-align: center;
+            color: white;
+            padding-bottom:180px;
+        }
+        /* Centered text */
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
 
 </head>
 
@@ -42,7 +58,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="#page-top" style="font-family: 'Bellota-BoldItalic', sans-serif;">GAMIFY</a>
+                <a class="navbar-brand" href="#page-top" style="font-family: Bellota-BoldItalic, sans-serif;">GAMIFY</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -69,15 +85,15 @@
 
     <!-- Header -->
     <header>
-        <div class="container" id="maincontent" tabindex="-1">
+        <div class="container container_s" id="maincontent" tabindex="-1">
             <div class="row">
                 <div class="col-lg-12">
-                    <img class="img-responsive" src="Startup.jpg" alt="">
-                    <div class="intro-text">
+                    <img class="img-responsive" src="images/all_in_one.jpg" alt="" style="opacity: 0.5;">
+                    <div class="intro-text centered">
                         <h1 class="name">GAMIFY</h1>
-                        <hr class="star-light">
                         <span class="skills">Do you know what my favorite part of the game is? The opportunity to play.</span>
                     </div>
+                    
                 </div>
             </div>
         </div>

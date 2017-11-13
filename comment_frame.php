@@ -37,7 +37,7 @@
 	if(isset($_GET['post_id'])) {
 		$post_id = $_GET['post_id'];
 	}
-
+	
 	$user_query = mysqli_query($con, "SELECT posted_by FROM posts WHERE id='$post_id'");
 	$row = mysqli_fetch_array($user_query);
 

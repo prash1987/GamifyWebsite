@@ -40,7 +40,7 @@ if(isset($_POST['post_message'])) {
 }
 
 ?>
-
+<!DOCTYPE html>
 <!-- user details column -->
 	<head>
 		<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
@@ -90,7 +90,7 @@ if(isset($_POST['post_message'])) {
 	<div class="col-md-6 column col-md-offset-0-5">
 		<?php  
 		if($user_to != "new"){
-			echo "<h4>You and <a href='$user_to'>" . $user_to_obj->getFirstAndLastName() . "</a></h4><hr><br>";
+			echo "<h4><a href='$user_to'><img src='".$user_to_obj->getProPic()."' style='border-radius:5px; margin-right:5px;height: 35px;float: left;'>" . $user_to_obj->getFirstAndLastName() . "</a> and You</h4><hr><br>";
 			echo "<div class='loaded_messages' id='scroll_messages'>";
 				echo $message_obj->getMessages($user_to);
 			echo "</div>";
@@ -107,7 +107,7 @@ if(isset($_POST['post_message'])) {
 				{
 					echo "Select the friend you would like to message <br><br>";
 					?>
-					To: <input type = 'search' onkeyup='getUsers(this.value, "<?php echo $userLoggedIn; ?>")' name='q' placeholder='Name' autocomplete='off' id='search_text_input' onsearch="getUsers('','')">
+					To: <input type="search" onkeyup='getUsers(this.value, "<?php echo $userLoggedIn; ?>")' name='q' placeholder='Name' autocomplete='off' id='search_text_input' onsearch="getUsers('','')">
 
 					<?php
 						echo "<div class='results'></div>";

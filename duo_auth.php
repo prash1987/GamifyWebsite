@@ -75,7 +75,7 @@
 	                        </div>
                       <form name="Form1" action = "" method = "post">
   			                <input class="form-control" type="text" name = "email_id" value="<?php echo $_SESSION['login_user']; ?>" readonly>
-  			                <input class="form-control" type="text" name = "otp" placeholder="One-Time Password">
+  			                <input class="form-control" type="text" name = "otp" placeholder="One-Time Password" autofocus>
 
                         <div class="already">
                           <p><?php if (isset($msg)) echo $msg ?></p>

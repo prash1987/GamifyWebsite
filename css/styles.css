@@ -466,7 +466,7 @@ body {
   float: none;
   text-align: center;
   font-size: 13px;
-  margin-top: 30px;
+  /*margin-top: 30px;*/
 }
 .login-wrapper .already p {
   display: inline-block;

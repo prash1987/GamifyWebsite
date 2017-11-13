@@ -6,22 +6,19 @@
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 	<script language="Javascript">
-    <!--
-    function likePost()
-    {
-    	alert('clicked like button');
-    	document.Form1.action = "like.php?post_id=' . $post_id . '"
-        document.Form1.submit(); 
-        return true;
-    }
+    // function likePost()
+    // {
+    // 	alert('clicked like button');    	    	
+    //     document.Form_like.submit(); 
+    //     return true;
+    // }
 
-    function unlikePost()
-    {       
-    	alert('clicked unlike button');    	
-        document.Form1.submit();
-        return true;
-    }
-    -->
+    // function unlikePost()
+    // {       
+    // 	alert('clicked unlike button');    	
+    //     document.Form_unlike.submit();
+    //     return true;
+    // }
     </script>
 
 	</head>
@@ -51,12 +48,14 @@
 	$total_likes = $row['likes']; 
 	$user_liked = $row['posted_by'];
 
+
 	$user_details_query = mysqli_query($con, "SELECT * FROM user WHERE user_id='$user_liked'");
 	$row = mysqli_fetch_array($user_details_query);
 	//$total_user_likes = $row['num_likes'];
 
 	//Like button
 	if(isset($_POST['like_button'])) {
+		//echo "Liked button is clicked";
 		$total_likes++;
 		$query = mysqli_query($con, "UPDATE posts SET likes='$total_likes' WHERE id='$post_id'");
 		//$total_user_likes++;
@@ -65,8 +64,10 @@
 
 		//Insert Notification
 	}
+	
 	//Unlike button
 	if(isset($_POST['unlike_button'])) {
+		//echo "Unlike button is clicked";
 		$total_likes--;
 		$query = mysqli_query($con, "UPDATE posts SET likes='$total_likes' WHERE id='$post_id'");
 		//$total_user_likes--;
@@ -79,20 +80,28 @@
 	$num_rows = mysqli_num_rows($check_query);
 
 	if($num_rows > 0) {
-		echo '<form name="Form1" action="" method="POST">
-				<br><i class="glyphicon glyphicon-thumbs-down comment_like" onclick="unlikePost();" name="unlike_button" id="unlike_button" ></i>
-				<div class="like_value" style="padding-top: 10px;">
-					'. $total_likes .' Likes
-				</div>
+		echo '<form name="Form_like" action="like.php?post_id=' . $post_id . '" method="POST" style="padding: 0px">
+				<br>
+				<button type="submit" name="unlike_button" class="btn btn-link" style="background-color: Transparent;background-repeat:no-repeat;   border: none;cursor:pointer;overflow: hidden;outline:none;" id="unlike_button">
+  					<span class="glyphicon glyphicon-thumbs-down comment_like">
+						<div class="like_value" style="padding-top: 10px;">
+							Likes('. $total_likes .')
+						</div>
+  					</span>
+				</button>
 			</form>
 		';
 	}
 	else {
-		echo '<form name="Form1" action="" method="POST">
-				<br><i class="glyphicon glyphicon-thumbs-up comment_like" onclick="likePost();" name="like_button" id="like_button" ></i>
-				<div class="like_value" style="padding-top: 10px;">
-					'. $total_likes .' Likes
-				</div>
+		echo '<form name="Form_unlike" action="like.php?post_id=' . $post_id . '" method="POST" style="padding: 0px">
+				<br>
+				<button type="submit" class="btn btn-link" name="like_button" style="background-color: Transparent;background-repeat:no-repeat;   border: none;cursor:pointer;overflow: hidden;outline:none;" id="like_button">
+  					<span class="glyphicon glyphicon-thumbs-up comment_like">	
+						<div class="like_value" style="padding-top: 10px;">
+							Likes('. $total_likes .')
+						</div>
+  					</span>
+				</button>
 			</form>
 		';
 	}
