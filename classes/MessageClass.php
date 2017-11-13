@@ -163,7 +163,7 @@ class MessageClass {
 			$split = $split[0] . $dots;
 
 			$return_string .="<a href = 'message.php?u=$username'><div class='user_found_messages'>
-								<img src='".$user_found_obj->getProPic()."' style='border-radius:5px; margin-right:5px;'>
+								<img class='img-circle' src='".$user_found_obj->getProPic()."' style='margin-right:5px;'>
 								".$user_found_obj->getFirstAndLastName(). " 
 								<br><span class='timestamp_smaller' id='grey'> " .$latest_message_details[2]." </span>
 								<br><br><p id='grey' style='margin: 0; font-size:16px;'> ". $latest_message_details[0].$split." </p>

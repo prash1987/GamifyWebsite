@@ -27,7 +27,7 @@
 
 	<br><br><br><br>
 	<div class="col-md-2 column col-md-offset-0-5">
-		<img height='126' width='126' src="<?php echo $user_obj->getProPic(); ?>">
+		<img class="img-circle" height='126' width='126' src="<?php echo $user_obj->getProPic(); ?>">
 		<br><br>
 
 		<div class="user_details_left_right">				

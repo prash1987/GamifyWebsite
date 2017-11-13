@@ -662,3 +662,7 @@ body {
 .col-md-offset-0-5 {
     margin-left: 2%;
   }
+
+.img-circle {
+    border-radius: 50%;
+}

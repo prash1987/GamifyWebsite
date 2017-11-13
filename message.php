@@ -45,7 +45,7 @@ if(isset($_POST['post_message'])) {
 	<head>
 		<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
          rel = "stylesheet">
-         <link href = "css/styles.css" rel = "stylesheet">
+         <link href = "css/styles.css" rel ="stylesheet">
    		<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
    		<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
    		<script src = "js/custom.js"></script>
@@ -64,7 +64,7 @@ if(isset($_POST['post_message'])) {
    	<br><br><br>
 	<div class="col-md-2 column col-md-offset-0-5">
 		
-		<a href="<?php echo $userLoggedIn;?>">  <img height='126' width='126' src="<?php echo $user_obj->getProPic(); ?>"> </a>
+		<a href="<?php echo $userLoggedIn;?>">  <img class="img-circle" height='126' width='126' src="<?php echo $user_obj->getProPic(); ?>"> </a>
 		
 		<br><br>
 		<div class="user_details_left_right">
@@ -90,7 +90,7 @@ if(isset($_POST['post_message'])) {
 	<div class="col-md-6 column col-md-offset-0-5">
 		<?php  
 		if($user_to != "new"){
-			echo "<h4><a href='$user_to'><img src='".$user_to_obj->getProPic()."' style='border-radius:5px; margin-right:5px;height: 35px;float: left;'>" . $user_to_obj->getFirstAndLastName() . "</a> and You</h4><hr><br>";
+			echo "<h4><a href='$user_to'><img class='img-circle' src='".$user_to_obj->getProPic()."' style='margin-right:5px; height: 35px; float: left;'>" . $user_to_obj->getFirstAndLastName() . "</a> and You</h4><hr><br>";
 			echo "<div class='loaded_messages' id='scroll_messages'>";
 				echo $message_obj->getMessages($user_to);
 			echo "</div>";
