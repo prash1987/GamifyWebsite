@@ -297,16 +297,16 @@ textarea:focus {
 }
 
 .newsfeedPostOptions {
-	padding: 0px;
+	/*padding: 0px;*/
 	text-decoration: none;
 	color:#20AAE5;
 	border:none;
 }
 
 .newsfeedPostOptions iframe {
-	border: 0px;
+/*	border: 0px;
 	height: 17px;
-	width: 120px;
+	width: 120px;*/
 }
 
 .comment_like {
@@ -315,9 +315,18 @@ textarea:focus {
 	font-size: 14px;
 	color: #3498db;
 	padding: 0;
-	height: 80px;
-	width: 150px;
+/*	height: 80px;
+	width: 150px;*/
 	margin: 0;
+}
+
+.like_button_icon {
+	background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
 }
 
 .like_value {

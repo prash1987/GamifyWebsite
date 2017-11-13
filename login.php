@@ -118,11 +118,11 @@
 			                <input class="form-control" type="password" name = "password" placeholder="Password" required>
 
 		                    <div class="already">
-		                    	<p><?php if (isset($error)) echo $error ?></p>
+		                    	<span><?php if (isset($error)) echo $error ?></span>
 		                    </div>
 
 			                <div class="action">
-                                <input type = "submit" class="btn btn-primary signup"  value = " Sign In "/>
+                                <input type = "submit" class="btn btn-primary btn-block signup"  value = " Login "/>
 			                </div>
                             </form>
                             <br><br>

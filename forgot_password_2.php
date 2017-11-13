@@ -132,7 +132,7 @@
 								$form .= "
 									</div>
 									<div class='action'>
-										<input type = 'button' class='btn btn-primary signup'  value = 'Show security questions' onclick='showQuestions();' />
+										<input type = 'button' class='btn btn-primary btn-block signup'  value = 'Show security questions' onclick='showQuestions();' />
 									</div>
 									</form>";
 								
@@ -153,7 +153,7 @@
 										</div>
 										
 										 <div class='action'>
-											<input type = 'button' class='btn btn-primary signup'  value = 'Verify Answers' onclick='verifyAns();' /><br />
+											<input type = 'button' class='btn btn-primary btn-block signup'  value = 'Verify Answers' onclick='verifyAns();' /><br />
 										</div> 
 										</form>";
 										
@@ -168,7 +168,7 @@
 									$form .= "
 										</div>
 										<div class='action'>
-											<input type = 'button' class='btn btn-primary signup'  value = 'Show security questions' onclick='showQuestions();' />
+											<input type = 'button' class='btn btn-primary btn-block signup'  value = 'Show security questions' onclick='showQuestions();' />
 										</div>
 										</form>";
 									

@@ -110,8 +110,8 @@ class PostClass {
 
 				/*This is the delete button logic*/
 				if($userLoggedIn == $added_by){
-					$id = "post_".$id;
-					$delete_button = "<i class='delete_button glyphicon glyphicon-remove' id='$id' onClick='delete_function(\"$id\");'></i>";
+					$delete_id = "post_".$id;
+					$delete_button = "<i class='delete_button glyphicon glyphicon-remove' id='$delete_id' onClick='delete_function(\"$delete_id\");'></i>";
 				}
 				else {
 					$delete_button = "";
@@ -239,9 +239,9 @@ class PostClass {
 							</div>
 							<img src='$image_path' height='40%' width='40%'></img>
 							<div class='newsfeedPostOptions'>	
-								<button id='comment_anchor' class='btn btn-primary btn-xs' onClick='javascript:toggle$id();'>Comments($comments_check_num)</button>&nbsp;&nbsp;&nbsp;
-
-								<iframe allowtransparency='true' src='like.php?post_id=$id' style='height: 35px; width: 200px;' frameBorder='0'  scrolling='no'></iframe>
+								<button id='comment_anchor' class='btn btn-primary btn-xs' onClick='javascript:toggle$id();'>Comments($comments_check_num)</button>&nbsp;&nbsp;&nbsp;	
+								<span style='margin-top:10px;'><iframe allowtransparency='true' src='like.php?post_id=$id' style='height: 47px; width: 130px;' frameBorder='0'  scrolling='no'></iframe>
+								</span>
 							</div>
 
 						</div>

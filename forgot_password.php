@@ -172,7 +172,7 @@
                 $form .= "
                   </div>
                   <div class='action'>
-                    <input type = 'button' class='btn btn-primary signup'  value = 'Send OTP' onclick='sendOTP();' />
+                    <input type = 'button' class='btn btn-primary btn-block signup'  value = 'Send OTP' onclick='sendOTP();' />
                   </div>
                   </form>";
                 
@@ -192,7 +192,7 @@
                     </div>
                     
                      <div class='action'>
-                      <input type = 'button' class='btn btn-primary signup'  value = 'Verify OTP' onclick='verifyOTP();' /><br />
+                      <input type = 'button' class='btn btn-primary btn-block signup'  value = 'Verify OTP' onclick='verifyOTP();' /><br />
                     </div> 
                     </form>";
                     
@@ -207,7 +207,7 @@
                   $form .= "
                     </div>
                     <div class='action'>
-                      <input type = 'button' class='btn btn-primary signup'  value = 'Send OTP' onclick='sendOTP();' />
+                      <input type = 'button' class='btn btn-primary btn-block signup'  value = 'Send OTP' onclick='sendOTP();' />
                     </div>
                     </form>";
                   

@@ -56,8 +56,8 @@ $username = $_SESSION['login_user'];
 	                            
 
 	<div class="social">
-                  <p><h4><a href="forgot_password_2.php">Recover by answering security questions</a><br></h4></p>
-                  <p><h4><a href="forgot_password.php">Recover using OTP</a></h4></p>
+                  <p><h4><a href="forgot_password_2.php">Recover by answering security questions?</a><br></h4></p>
+                  <p><h4><a href="forgot_password.php">Recover using OTP?</a></h4></p>
     </div>
 
 </body>

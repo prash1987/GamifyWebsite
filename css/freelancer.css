@@ -68,7 +68,7 @@ hr.star-primary:after {
 }
 header {
   text-align: center;
-  background: #18BC9C;
+  background: #378f9c;
   color: white;
 }
 header .container {
@@ -93,7 +93,7 @@ header .intro-text .skills {
 @media (min-width: 768px) {
   header .container {
     padding-top: 200px;
-    padding-bottom: 100px;
+    padding-bottom: 180px;
   }
   header .intro-text .name {
     font-size: 4.75em;
@@ -173,15 +173,22 @@ header .intro-text .skills {
     font-size: 1.5em;
   }
 }
-section {
+/*section {
   padding: 100px 0;
+}
+*/
+section#about {
+  padding: 250px 0;
+}
+section#contact {
+  padding: 80px 0;
 }
 section h2 {
   margin: 0;
   font-size: 3em;
 }
 section.success {
-  background: #18BC9C;
+  background: #378f9c;
   color: white;
 }
 @media (max-width: 767px) {
