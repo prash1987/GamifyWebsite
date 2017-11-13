@@ -56,7 +56,7 @@ nav {
 	right: 1px;
 	position: relative;
 	margin-right: -50px;
-	margin-top: -35px;
+	margin-top: -20px;
 }
 
 nav a{
@@ -374,7 +374,9 @@ fieldset .pref_label{
 }
 
 .search {
-	margin: 2px 0 0 15%;
+	margin: 2px 0 0 15%;	
+	position: relative;
+	margin-top: -60px;
 }
 
 .search #search_text_input {

@@ -1,14 +1,10 @@
-
 <?php
-
     if(isset($_SESSION['login_user'])) {
         $userLoggedIn = $_SESSION['login_user'];
     }
-    else
-    {
+    else{
         header("Location: login.php");
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -43,13 +39,7 @@
 
 </head>
 
-<body id="page-top" class="index">    
-
-    <!--<div class="top_bar">
-        <div class="logo">
-            <a class="navbar-brand" href="index.php" >GAMIFY</a>
-       </div> -->
-
+<body id="page-top" class="index">
     <div class="header">
          <div class="container">
             <div class="row">
@@ -60,7 +50,6 @@
                  </div>
 
                 <div class="search">
-
             
                 <input type="search" onkeyup="getLiveSearchUsers(this.value, '<?php echo $userLoggedIn; ?>')" name="q" placeholder="Search..." autocomplete="off" id="search_text_input" onsearch="getLiveSearchUsers('','')" />
 
@@ -68,13 +57,11 @@
                     <img src="img/Search/magnifying_glass.png" alt="some image" id="image_button">
                 </div>
 
-
             <div class="search_results">
             </div>
 
             <div class="search_results_footer_empty">
-            </div>
-            
+            </div>            
 
         </div>
         <script src="js/search.js"></script>
@@ -90,37 +77,16 @@
                 });
             }
         </script>
-   
-
-
 
         </div>
-
-
-
                 <nav>
-                        <a href="homepage.php"><i class="fa fa-home fa-lg"></i></a>
-                    
-                        <a href="message.php"><i class="fa fa-comments fa-lg"></i></a>
-                    
-                        <a href="logout.php"><i class="fa fa-sign-out fa-lg"></i></a>
+                        <a href="homepage.php"><i class="fa fa-home fa-lg" title="Homepage"></i></a> &nbsp;&nbsp;
+                        <a href="message.php"><i class="fa fa-comments fa-lg" title="Chat"></i></a> &nbsp;&nbsp;
+                        <a href="logout.php"><i class="fa fa-sign-out fa-lg" title="Sign out"></i></a>
                 </nav>
 
-
-
-                <!--
-                     <nav>
-                 
-                        <a href="homepage.php"><i class="fa fa-home fa-lg"></i></a>
-                        <a href="message.php"><i class="fa fa-comments fa-lg"></i></a>
-                        <!-a href="#"><i class="fa fa-cog fa-lg"></i></a->
-                        <a href="logout.php"><i class="fa fa-sign-out fa-lg"></i></a>
-                    </nav>
-                -->
-
             </div>
-         </div>
-        
+         </div>        
     </div>
 
 

@@ -80,12 +80,12 @@
 	<div class="col-md-2 column col-md-offset-0-5">
 	<!--<div class="user_details column">-->
 		
-		<a href="<?php echo $userLoggedIn;?>">  <img height='126' width='126' src="<?php echo $user_obj->getProPic(); ?>"> </a>
+		<a href="<?php echo 'profile.php?profile_username=' . $userLoggedIn;?>"><img height='126' width='126' src="<?php echo $user_obj->getProPic(); ?>"> </a>
 
 		<br><br>
 
 		<div class="user_details_left_right">
-			<a href="<?php echo $userLoggedIn;?>">
+			<a href="<?php echo 'profile.php?profile_username=' . $userLoggedIn;?>">
 			<b><?php echo $user_obj->getFirstAndLastName(); ?></b>
 			</a>
 			<br>
