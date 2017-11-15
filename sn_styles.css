@@ -164,7 +164,7 @@ textarea:focus {
 	width:13%;
 	margin:0;
 	border:none;
-	color:#fff;
+	color:#FFF;
 	background-color: #20AAE5;
 	color:#156588;
 	border-radius: 5px;
@@ -178,26 +178,23 @@ textarea:focus {
 	border-radius: 5px;
 	padding: 5px 10px;
 	display: inline-block;
-	color: #fff;
-	font-size: 18px;
+	color: #000000;
+	font-size: 16px;
 }
 
 .message#blue{
-	background-color: #85C1E9;
-	border-color: #ffffff;
+	background-color: #9FB0FF;
+	border-color: #FFFFFF;
 	float:right;
-	/*margin-bottom: 5px;*/
 }
 
 .message#grey{
-	background-color: #BDC3C7;
-	border-color: #ffffff;
+	background-color: #98C8C0;
+	border-color: #FFFFFF;
 	float:left;
-	/*margin-bottom: 5px;*/
 }
 
-.loaded_conversations{
-	
+.loaded_conversations{	
 	height: 300px;
 	overflow:auto;	
 }
@@ -214,10 +211,6 @@ textarea:focus {
 .user_found_messages img {
 	height: 35px;
 	float: left;
-}
-
-#grey{
-	color:#8C8C8C;
 }
 
 .danger {
@@ -274,7 +267,7 @@ textarea:focus {
 }
 
 #comment_form textarea {	
-	width: 85%;
+	width: 45%;
 	height: 35px;
 	border-radius: 5px;
 	margin: 3px 3px 3px 5px;
@@ -315,8 +308,7 @@ textarea:focus {
 	font-size: 14px;
 	color: #3498db;
 	padding: 0;
-/*	height: 80px;
-	width: 150px;*/
+	height: 10px;	
 	margin: 0;
 }
 

@@ -151,7 +151,7 @@
 		}
 	}
 	else {
-		echo "<center><br><br>No Comments to Show!</center>";
+		echo "<center><br>No Comments to Show!</center>";
 	}
 
 	?>

@@ -88,7 +88,7 @@
         <div class="container container_s" id="maincontent" tabindex="-1">
             <div class="row">
                 <div class="col-lg-12">
-                    <img class="img-responsive" src="images/all_in_one.jpg" alt="" style="opacity: 0.5;">
+                    <img class="img-responsive" src="images/all_in_one.png" alt="" style="opacity: 0.8;">
                     <div class="intro-text centered">
                         <h1 class="name">GAMIFY</h1>
                         <span class="skills">Do you know what my favorite part of the game is? The opportunity to play.</span>

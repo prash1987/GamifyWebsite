@@ -64,11 +64,11 @@ if(isset($_POST['post_message'])) {
    	<br><br><br>
 	<div class="col-md-2 column col-md-offset-0-5">
 		
-		<a href="<?php echo $userLoggedIn;?>">  <img height='126' width='126' src="<?php echo $user_obj->getProPic(); ?>"> </a>
+		<a href="<?php echo 'profile.php?profile_username=' . $userLoggedIn;?>"><img height='126' width='126' src="<?php echo $user_obj->getProPic(); ?>"> </a>
 		
 		<br><br>
 		<div class="user_details_left_right">
-			<a href="<?php echo $userLoggedIn;?>">
+			<a href="<?php echo 'profile.php?profile_username=' . $userLoggedIn;?>">
 			<b><?php echo $user_obj->getFirstAndLastName(); ?></b>
 			</a>
 			<br>
@@ -90,7 +90,7 @@ if(isset($_POST['post_message'])) {
 	<div class="col-md-6 column col-md-offset-0-5">
 		<?php  
 		if($user_to != "new"){
-			echo "<h4><a href='$user_to'><img src='".$user_to_obj->getProPic()."' style='border-radius:5px; margin-right:5px;height: 35px;float: left;'>" . $user_to_obj->getFirstAndLastName() . "</a> and You</h4><hr><br>";
+			echo "<h4><a href='profile.php?profile_username=$user_to'><img src='".$user_to_obj->getProPic()."' style='border-radius:5px; margin-right:5px;height: 35px;float: left;'>" . $user_to_obj->getFirstAndLastName() . "</a> and You</h4><hr><br>";
 			echo "<div class='loaded_messages' id='scroll_messages'>";
 				echo $message_obj->getMessages($user_to);
 			echo "</div>";

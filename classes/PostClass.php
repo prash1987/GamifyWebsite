@@ -63,6 +63,7 @@ class PostClass {
 				$body = $row['body'];
 				$location = $row['location'];
 				$play_time = $row['play_time'];
+				$play_time = date_format(date_create($play_time), 'g:iA \o\n jS F Y');
 				$added_by = $row['posted_by'];
 				$date_time = $row['time_stamp'];
 				$image_path = $folder . $row['image_path'];
@@ -194,8 +195,10 @@ class PostClass {
 
 							<div class='posted_by' style='color:#ACACAC;'>
 								<a href='profile.php?profile_username=$added_by'>
-								<b> $first_name $last_name </b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$time_message
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$delete_button
+								<b> $first_name $last_name </b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								$time_message
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								$delete_button
 
 							</div>
 
@@ -204,14 +207,14 @@ class PostClass {
 								<br>
 							</div>
 							<div id='post_loc_and_play_time'>
+								Game: $game
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								$location
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								$play_time								
-								<br>
-								<span>Game: $game</span>
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								
+								$play_time
+								<br>								
 								<span> $gender </span>								
 							</div>
 							<br>
@@ -287,6 +290,7 @@ class PostClass {
 				$body = $row['body'];
 				$location = $row['location'];
 				$play_time = $row['play_time'];
+				$play_time = date_format(date_create($play_time), 'g:iA \o\n jS F Y');
 				$added_by = $row['posted_by'];
 				$date_time = $row['time_stamp'];
 				$image_path = $folder . $row['image_path'];
@@ -428,16 +432,16 @@ class PostClass {
 							<div id='post_body'>
 								$body
 								<br>
-							</div>
+							</div>							
 							<div id='post_loc_and_play_time'>
+								Game: $game
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								$location
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								$play_time								
-								<br>
-								<span>Game: $game</span>
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								
+								$play_time
+								<br>								
 								<span> $gender </span>								
 							</div>
 							<br>

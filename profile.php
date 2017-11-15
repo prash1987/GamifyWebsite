@@ -4,6 +4,14 @@
 	include("classes/UserClass.php");
 	include("classes/PostClass.php");
 
+	if(isset($_SESSION['login_user'])) {
+		$userLoggedIn = $_SESSION['login_user'];
+	}
+	else
+	{
+		header("Location: login.php");
+	}
+
 	if (isset($_GET['profile_username'])) {
 		$username = $_GET['profile_username'];
 		$user_details_query = mysqli_query($con, "SELECT * FROM user WHERE user_id='$username'");
@@ -36,6 +44,12 @@
 				<?php echo "Location: " . $user_obj->getUserLocation() . "<br>"; 
 				echo "Contact: " . $user_obj->getUserContact() ; ?>
 		</div>
+		<br><br>
+		<?php if($username==$userLoggedIn){
+			echo "<button name='update_profile' class='btn btn-primary btn-sm'>Update Profile</button>";
+		}
+		?>
+
 	</div>
 
 	<div class="col-md-6 column col-md-offset-0-5">
