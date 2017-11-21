@@ -37,7 +37,7 @@ $names = explode(" ", $query);
 			$profile_pic = "profile_pics/".$row['propic'];
 			if($row['user_id'] != $userLoggedIn) {
 				echo "<div class='resultsDisplay'>
-							<a href = message.php?u=" . $row['user_id'] ." style='color:#000'>
+							<a href = profile.php?profile_username=" . $row['user_id'] ." style='color:#000'>
 
 							<div class='liveSearchProfilePic'>
 			 					<img src='".$profile_pic."'>
