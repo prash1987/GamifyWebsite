@@ -83,6 +83,8 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- styles -->
     <link href="css/styles.css" rel="stylesheet">
+    <link href="fa-css/css/font-awesome.min.css" rel="stylesheet">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -114,9 +116,16 @@
 			                <h6>Sign In</h6>
 			                
                             <form action = "" method = "post">
-			                <input class="form-control" type="text" name = "username" placeholder="User Name" required>
-			                <input class="form-control" type="password" name = "password" placeholder="Password" required>
-
+                            <div class="input-group">
+      							<span class="input-group-addon"><i class="fa fa-envelope"></i></span>	
+			                	<input class="form-control" type="text" name = "username" placeholder="User Name" required>
+			                </div>
+			                <br>
+			                <div class="input-group">
+      							<span class="input-group-addon"><i class="fa fa-key"></i></span>
+			                	<input class="form-control" type="password" name = "password" placeholder="Password" required>
+			                </div>
+			                <br>
 		                    <div class="already">
 		                    	<span><?php if (isset($error)) echo $error ?></span>
 		                    </div>
