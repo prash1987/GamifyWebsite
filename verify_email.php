@@ -176,7 +176,7 @@
 	}
 	function countdown() {
 		var i = document.getElementById('counter');
-		if (parseInt(i.innerHTML)<1) {
+		if (parseInt(i.innerHTML)<2) {
 			//location.href = 'user.php';
 			document.getElementById("register").click();
 		}

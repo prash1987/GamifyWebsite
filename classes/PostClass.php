@@ -27,10 +27,10 @@ class PostClass {
 		$time_stamp = date("Y-m-d H:i:s");
 		$posted_by = $this->user_obj->getUsername();
 
-		$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+		//$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 		$insert_stmnt = "INSERT INTO posts(body, posted_by, time_stamp, location, play_time, image_path, likes,game,gender,deleted) VALUES('$body','$posted_by','$time_stamp', '$location', '$play_time', '$image_name',0,'$game', '$gender', 0)";
-		$query = mysqli_query($con, $insert_stmnt);
-		$returned_id = mysqli_insert_id($con);
+		$query = mysqli_query($this->con, $insert_stmnt);
+		$returned_id = mysqli_insert_id($this->con);
 	}
 
 	//Load my posts
@@ -48,8 +48,8 @@ class PostClass {
 
 		$query = "SELECT * FROM posts WHERE posted_by='$username' AND deleted = 0 ORDER BY time_stamp DESC";
 		$str = ""; //String to return 
-		$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-		$data_query = mysqli_query($con, $query);  
+		//$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+		$data_query = mysqli_query($this->con, $query);  
 		$delete_button = "";
 
 			//chaos start from here
@@ -96,10 +96,10 @@ class PostClass {
 					$delete_button = "";
 				}
 
-				$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+				//$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 				// Here we have to use user name I HAVE USED EMAIL ID
 				// WE NEED TO STORE USING USERNAME IN POSTS TABLE.
-				$user_details_query = mysqli_query($con, "SELECT first_name, last_name FROM user WHERE email='$added_by'");
+				$user_details_query = mysqli_query($this->con, "SELECT first_name, last_name FROM user WHERE email='$added_by'");
 				$user_row = mysqli_fetch_array($user_details_query);
 				$first_name = $user_row['first_name'];
 				$last_name = $user_row['last_name'];
@@ -122,7 +122,7 @@ class PostClass {
 
 				</script>
 				<?php
-				$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+				//$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 				$comments_check = mysqli_query($this->con, "SELECT * FROM comments WHERE post_id='$id'");
 				$comments_check_num = mysqli_num_rows($comments_check);
 
@@ -275,8 +275,8 @@ class PostClass {
 		$query .= " ORDER BY time_stamp DESC";
 
 		$str = ""; //String to return 
-		$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-		$data_query = mysqli_query($con, $query);  
+		//$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+		$data_query = mysqli_query($this->con, $query);  
 		$delete_button = "";
 
 		if(mysqli_num_rows($data_query) > 0) {
@@ -325,10 +325,10 @@ class PostClass {
 
 
 
-				$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+				//$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 				// Here we have to use user name I HAVE USED EMAIL ID
 				// WE NEED TO STORE USING USERNAME IN POSTS TABLE.
-				$user_details_query = mysqli_query($con, "SELECT first_name, last_name FROM user WHERE email='$added_by'");
+				$user_details_query = mysqli_query($this->con, "SELECT first_name, last_name FROM user WHERE email='$added_by'");
 				$user_row = mysqli_fetch_array($user_details_query);
 				$first_name = $user_row['first_name'];
 				$last_name = $user_row['last_name'];
@@ -351,7 +351,7 @@ class PostClass {
 
 				</script>
 				<?php
-				$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+				//$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 				$comments_check = mysqli_query($this->con, "SELECT * FROM comments WHERE post_id='$id'");
 				$comments_check_num = mysqli_num_rows($comments_check);
 

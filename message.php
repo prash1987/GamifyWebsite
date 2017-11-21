@@ -35,7 +35,6 @@ if(isset($_POST['post_message'])) {
 		$body = mysqli_real_escape_string($con, $_POST['message_body']);
 		$date = date("Y-m-d H:i:s");
 		$message_obj->sendMessage($user_to, $body, $date);
-
 	}
 }
 
@@ -57,6 +56,19 @@ if(isset($_POST['post_message'])) {
 			    $(".results").html(data);
 			  });
 			}
+
+			function getMessagesForLiveChat(){
+				var user_to = "<?php if(isset($user_to) and ($user_to != 'new')) echo ($user_to); ?>";
+				//alert(user_to);
+				var func = "getMessages";
+				$.post("handlers/ajax_live_chat.php", {user_to:user_to, func:func}, function (data){
+			    	$(".loaded_messages").html(data);
+			  });	
+			}
+
+			getMessagesForLiveChat();
+
+			var myVar = setInterval(getMessagesForLiveChat, 1000);
    		</script>
 
    	</head>
@@ -92,7 +104,7 @@ if(isset($_POST['post_message'])) {
 		if($user_to != "new"){
 			echo "<h4><a href='profile.php?profile_username=$user_to'><img src='".$user_to_obj->getProPic()."' style='border-radius:5px; margin-right:5px;height: 35px;float: left;'>" . $user_to_obj->getFirstAndLastName() . "</a> and You</h4><hr><br>";
 			echo "<div class='loaded_messages' id='scroll_messages'>";
-				echo $message_obj->getMessages($user_to);
+				//echo $message_obj->getMessages($user_to);
 			echo "</div>";
 		}
 		else {

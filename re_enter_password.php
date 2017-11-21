@@ -165,7 +165,7 @@ window.onload = function WindowLoad(event) {
 }
 function countdown() {
     var i = document.getElementById('counter');
-    if (parseInt(i.innerHTML)<=1) {
+    if (parseInt(i.innerHTML)<2) {
         location.href = 'login.php';
     }
     i.innerHTML = parseInt(i.innerHTML)-1;
