@@ -25,9 +25,9 @@
 			$sql2 = "UPDATE login SET Password='". $password_hash ."', salt='". $salt ."' WHERE User_id='". $email_id. "'";
 			$querry = mysqli_query($db,$sql2);
 			$success_flag = TRUE;
-			$success_msg = "Password changed successfully
+			$success_msg = "<h4>Password changed successfully</h4>
 					<br>
-					<p>You will be redirected to login page in <span id='counter'>3</span> second(s).</p>";
+					<h5>You will be redirected to login page in <span id='counter'>3</span> second(s).</h5>";
 						
         }
         else{
@@ -128,9 +128,9 @@
 								<div class='login-wrapper'>
 									<div class='box'>
 										<div class='content-wrap'>
-											<span>$msg</span>
+											<span><h4>$msg</h4></span>
 											<br>
-											<a href='forgot_password_2.php'>Forgot Password using Security Questions<a>
+											<h5><a href='forgot_password_2.php'>Forgot Password using Security Questions<a></h5>
 										</div>
 									</div>
 								</div>

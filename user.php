@@ -107,6 +107,7 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- styles -->
     <link href="css/styles.css" rel="stylesheet">
+    <link href="fa-css/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -189,20 +190,104 @@
 			return false;
 		} else{
 		
-    	secQ1_error.innerHTML = "";
-		if (secQues2.value == "default"){
-			secQ2_error.innerHTML = "Please select a question from the list";
-			secQues2.focus();
-			return false;
-		}
-		else {
-			secQ1_error.innerHTML = "";
-			secQ2_error.innerHTML = "";
-			return true;
+    		secQ1_error.innerHTML = "";
+			if (secQues2.value == "default"){
+				secQ2_error.innerHTML = "Please select a question from the list";
+				secQues2.focus();
+				return false;
+			}
+			else {
+				secQ1_error.innerHTML = "";
+				secQ2_error.innerHTML = "";
+				return true;
+			}
 		}
 	}
-}
+
+	$(document).on('click', '#close-preview', function(){ 
+    	$('.image-preview').popover('hide');
+    	// Hover befor close the preview
+    	$('.image-preview').hover(
+    	    function () {
+       		    $('.image-preview').popover('show');
+        	}, 
+        	function () {
+           		$('.image-preview').popover('hide');
+        	}
+    	);    
+	});
+
+	$(function() {
+	    // Create the close button
+	    var closebtn = $('<button/>', {
+	        type:"button",
+	        text: 'x',
+	        id: 'close-preview',
+	        style: 'font-size: initial;',
+	    });
+	    closebtn.attr("class","close pull-right");
+	    // Set the popover default content
+	    $('.image-preview').popover({
+	        trigger:'manual',
+	        html:true,
+	        title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+	        content: "There's no image",
+	        placement:'bottom'
+	    });
+	    // Clear event
+	    $('.image-preview-clear').click(function(){
+	        $('.image-preview').attr("data-content","").popover('hide');
+	        $('.image-preview-filename').val("");
+	        $('.image-preview-clear').hide();
+	        $('.image-preview-input input:file').val("");
+	        $(".image-preview-input-title").text("Browse"); 
+	    }); 
+	    // Create the preview image
+	    $(".image-preview-input input:file").change(function (){     
+	        var img = $('<img/>', {
+	            id: 'dynamic',
+	            width:250,
+	            height:200
+	        });      
+	        var file = this.files[0];
+	        var reader = new FileReader();
+	        // Set preview image into the popover data-content
+	        reader.onload = function (e) {
+	            $(".image-preview-input-title").text("Change");
+	            $(".image-preview-clear").show();
+	            $(".image-preview-filename").val(file.name);            
+	            img.attr('src', e.target.result);
+	            $(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+	        }        
+	        reader.readAsDataURL(file);
+	    });  
+	});
   </script>
+
+  <style type="text/css">
+.image-preview-input {
+    position: relative;
+	overflow: hidden;
+	margin: 0px;    
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;    
+}
+.image-preview-input input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+    margin-left:2px;
+}
+  </style>
 
   </head>
    <body class="login-bg" onload = 'set_max_date_attribute()'>
@@ -237,147 +322,200 @@
        		<div class="row">
            	<div class="col-md-8">
                <div class="content-box-large">
-                   <div class="panel-heading">
-					            <div class="panel-title"><h3>Registration Form</h3></div>
-					        </div>
-                     <div class="panel-body">
-                         <form action=" " method="post" class="form-horizontal"  enctype="multipart/form-data">
-                                  
-                                   <div class="form-group">
-								    <label  class="col-sm-2 control-label">First Name</label>
-								    <div class="col-sm-10">
-								      <input type="text" class="form-control" name="firstName" placeholder="First Name" required>
-								    </div>
-								  </div>
-                                     <div class="form-group">
-								    <label  class="col-sm-2 control-label">Last Name</label>
-								    <div class="col-sm-10">
-								      <input type="text" class="form-control" name="lastName" placeholder="Last Name" required>
-								    </div>
-								  </div>
-								<div class="form-group">
-									<label  class="col-sm-2 control-label">Password</label>
-								    <div class="col-sm-10">
-										<input type="password" class="form-control" name="password" id="password" placeholder="Password" onblur= 'return regexCheck();' required>
-										<p id="pass_error" style="color:red; font-size:small;"></p>
+                	<div class="panel-heading">
+						<div class="panel-title">
+							<h3>Registration Form</h3>
+						</div>
+					</div>
+                    <div class="panel-body">
+                        <form action=" " method="post" class="form-horizontal"  enctype="multipart/form-data">
+                        	<div class="form-group">
+								<label  class="col-sm-2 control-label">First Name</label>
+								<div class="col-sm-10">
+                            		<div class="input-group">
+      									<span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>	
+								      	<input type="text" class="form-control" name="firstName" placeholder="First Name" required autofocus>
 								    </div>
 								</div>
-								<div class="form-group">
-									<label  class="col-sm-2 control-label">Confirm Password</label>
-									<div class="col-sm-10">
-										<input type="password" class="form-control" name="confirm_password" id="confirm_password" onblur='return matchPasswords();' placeholder="Confirm Password" required>
-										<p id="cpass_error" style="color:red; font-size:small;"></p>
+							</div>
+                            <div class="form-group">
+								<label  class="col-sm-2 control-label">Last Name</label>
+								<div class="col-sm-10">
+									<div class="input-group">
+      									<span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>	
+								      	<input type="text" class="form-control" name="lastName" style="height:35px;" placeholder="Last Name" required>
 								    </div>
 								</div>
-                             <div class="form-group">
-								    <label  class="col-sm-2 control-label">Email/User Name</label>
-								    <div class="col-sm-10">
-								      <input type="email" class="form-control" name="userEmail" placeholder="Email address" value="<?php
+							</div>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label">Password</label>
+							    <div class="col-sm-10">
+									<div class="input-group">
+      									<span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
+										<input type="password" class="form-control" name="password" id="password" style="height:36px;" placeholder="Password" onblur= 'return regexCheck();' required>
+									</div>
+									<p id="pass_error" style="color:red; font-size:small;"></p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label">Confirm Password</label>
+								<div class="col-sm-10">
+									<div class="input-group">
+      									<span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
+										<input type="password" class="form-control" name="confirm_password" style="height:35px;" id="confirm_password" onblur='return matchPasswords();' placeholder="Confirm Password" required>
+									</div>
+									<p id="cpass_error" style="color:red; font-size:small;"></p>
+								</div>
+							</div>
+                            <div class="form-group">
+							    <label  class="col-sm-2 control-label">Email/User Name</label>
+							    <div class="col-sm-10">
+									<div class="input-group">
+      									<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+								      	<input type="email" class="form-control" name="userEmail" placeholder="Email address" value="<?php
 											if(isset($verified_email)) {
 												echo $verified_email;
 											} ?>" readonly>
+									</div>
+								</div>
+							</div>
+                            <div class="form-group">
+							    <label  class="col-sm-2 control-label">Location</label>
+							    <div class="col-sm-10">
+									<div class="input-group">
+      									<span class="input-group-addon"><i class="fa fa-globe" aria-hidden="true"></i></span>						
+								      	<input type="text" class="form-control" id = "userAddress" style="height:36px;" name="userAddress" value="<?php echo @$city_name;?>"placeholder="Address" required>
 								    </div>
-								  </div>
-                               <div class="form-group">
-								    <label  class="col-sm-2 control-label">Location</label>
-								    <div class="col-sm-10">
-								      <input type="text" class="form-control" id = "userAddress" name="userAddress" value="<?php echo @$city_name;?>"placeholder="Address" required>
+								</div>
+							</div>
+                            <div class="form-group">
+							    <label  class="col-sm-2 control-label">Phone Number</label>
+							    <div class="col-sm-10">
+									<div class="input-group">
+      									<span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>							    	
+								      	<input type="text" pattern="\d*" maxlength="10" class="form-control" name="userContact" title='Invalid phone number' placeholder="Phone Number" required>
 								    </div>
-								  </div>
-                              <div class="form-group">
-								    <label  class="col-sm-2 control-label">Phone Number</label>
-								    <div class="col-sm-10">
-								      <input type="text" pattern="\d*" maxlength="10" class="form-control" name="userContact" title='Invalid phone number' placeholder="Phone Number" required>
+								</div>
+							</div>
+                            <div class="form-group">
+								<label  class="col-sm-2 control-label">Date of Birth</label>
+								<div class="col-sm-10">
+									<div class="input-group">
+      									<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>						
+								      	<input type="date" class="form-control" id = "userDOB" name="userDOB" placeholder="Date of Birth" required>
 								    </div>
-								  </div>
-                    
-                              <div class="form-group">
-								    <label  class="col-sm-2 control-label">Date of Birth</label>
-								    <div class="col-sm-10">
-								      <input type="date" class="form-control" id = "userDOB" name="userDOB" placeholder="Date of Birth" required>
-								    </div>
-								  </div>
-
-							   <div class="form-group">
+								</div>
+							</div>
+							<div class="form-group">
 							    <label class="col-sm-2 control-label" for="userBIO2">Interests</label>
 							    <div class="col-sm-10">
-							    <select multiple class="form-control" id="userBIO2" name="userBIO2[]">
-							      <option value="Cricket">Cricket</option>
-							      <option value="Badminton">Badminton</option>
-							      <option value="Tennis">Tennis</option>
-							      <option value="Squash">Squash</option>
-								  <option value="Running">Running</option>
-								  <option value="Football">Football</option>
-								  <option value="Basketball">Basketball</option>
-								  <option value="Cycling">Cycling</option>
-								  <option value="Gym">Gym</option>
-								  <option value="Dance">Dance</option>
-								  <option value="MartialArts">Martial Arts</option>
-							    </select>
+								    <select multiple class="form-control" id="userBIO2" name="userBIO2[]">
+								    	<option value="Cricket">Cricket</option>
+								    	<option value="Badminton">Badminton</option>
+								    	<option value="Tennis">Tennis</option>
+								    	<option value="Squash">Squash</option>
+										<option value="Running">Running</option>
+										<option value="Football">Football</option>
+										<option value="Basketball">Basketball</option>
+										<option value="Cycling">Cycling</option>
+										<option value="Gym">Gym</option>
+										<option value="Dance">Dance</option>
+										<option value="MartialArts">Martial Arts</option>
+								    </select>
 								</div>
-							  </div>
-
-							  <div class="form-group">
-							  	<label class="col-sm-2 control-label">Other Games (if any)</label>
-							  	<div class="col-sm-10"><input type="text" class="form-control" name="userBIO" id="userBIO" placeholder="Other Games"></div>
-							  
-							  <p style="color:red; font-size:small;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Separate game names with commas. Do not enter any spaces after or before commas.</p>
-							  </div>
-
-							  <div class="form-group">
-							  	<label class="col-sm-2 control-label">Profile Picture</label>
-							  	<div class="col-sm-10"><input type="file" name="userPic" id="userPic"></div>
-							  </div>
-
-                             <div class="form-group">
-                    <label  class="col-sm-2 control-label">Security Question-1</label>
-                    <div class="col-sm-10">
-                    <select class="form-control" id= "SecQues1" name="secQ1" onblur="return securityQuestionCheck();">
-                            <option value='default'>Select one from below</option>
-                            <option value="born">Where were you born?</option>
-                            <option value="club">What is your favorite sports club?</option>
-                            <option value="hero">Who is your childhood sports hero?</option>
-                            <option value="job">How old were you when you got your first job?</option>
-                        </select>
-                        <p id="secQ1_error" style="color:red; font-size:small;"></p>
-                    
-                </div>
-                  </div>
-
-                             <div class="form-group">
-                    <label  class="col-sm-2 control-label">Security Question-2</label>
-                    <div class="col-sm-10">
-                    <!--input type="text" class="form-control" id = "secQ2" placeholder="Security Question goes here" name="secQ2" required-->
-                    	<select class="form-control" id ="SecQues2" name="secQ2" onblur="return securityQuestionCheck();">
-                            <option value="default">Select one from below</option>
-                            <option value="father">In what year was your father born?</option>
-                            <option value="pet">What is your pet’s name?</option>
-                            <option value="school">What was the name of your elementary school?</option> 
-                        </select>
-                        <p id="secQ2_error" style="color:red; font-size:small;"></p>
-                       
-                </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label  class="col-sm-2 control-label">Security Answer-1</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" id = "secAns1" placeholder="Your Answer" name="secAns1" required>
-                </div>
-                  </div>
-
-                             <div class="form-group">
-                    <label  class="col-sm-2 control-label">Security Answer-2</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" id = "secAns2" placeholder="Your Answer" name="secAns2" required>
-                </div>
-                  </div>                 
-                             <br><div class="action">
-                                <input type = "submit" class="btn btn-primary signup"  value = "Register" onclick="return securityQuestionCheck();" /><br />
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Other Games (if any)</label>
+							  	<div class="col-sm-10">
+									<div class="input-group">
+      									<span class="input-group-addon"><i class="fa fa-trophy" aria-hidden="true"></i></span>							
+							  			<input type="text" class="form-control" name="userBIO" id="userBIO" placeholder="Other Games">
+							  		</div>
+							  	</div>
+							  	<p style="color:red; font-size:small;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Separate game names with commas. Do not enter any spaces after or before commas.</p>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Profile Picture</label>
+							  	<div class="col-sm-10">
+									<!--div class="input-group">
+      									<span class="input-group-addon"><i class="fa fa-camera" aria-hidden="true"></i></span>
+      									<label class="btn-bs-file btn btn-info">
+                							Browse
+                							<input type="file" name="userPic" id="userPic" />
+                						</label>
+							  		</div-->
+							  		<div class="input-group image-preview">
+                						<input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+                						<span class="input-group-btn">
+                    						<!-- image-preview-clear button -->
+                    						<button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                        						<span class="glyphicon glyphicon-remove"></span> Clear
+                    						</button>
+                    						<!-- image-preview-input -->
+                    						<div class="btn btn-default image-preview-input">
+                        						<span class="glyphicon glyphicon-folder-open"></span>
+                        						<span class="image-preview-input-title">Browse</span>
+                        						<input type="file" accept="image/png, image/jpeg, image/gif" name="userPic" id="userPic" /> <!-- rename it -->
+                    						</div>
+                						</span>
+            						</div><!-- /input-group image-preview [TO HERE]-->
+							  	</div>
+							</div>
+                            <div class="form-group">
+                    			<label  class="col-sm-2 control-label">Security Question-1</label>
+                    			<div class="col-sm-10">
+									<div class="input-group">
+      									<span class="input-group-addon"><i class="fa fa-question-circle" aria-hidden="true"></i></span>
+                    					<select class="form-control" id= "SecQues1" name="secQ1" onblur="return securityQuestionCheck();">
+                            				<option value='default'>Select one from below</option>
+                            				<option value="born">Where were you born?</option>
+                            				<option value="club">What is your favorite sports club?</option>
+                            				<option value="hero">Who is your childhood sports hero?</option>
+                            				<option value="job">How old were you when you got your first job?</option>
+                        				</select>
+                        			</div>
+                        			<p id="secQ1_error" style="color:red; font-size:small;"></p>
+                              	</div>
+                            </div>
+                            <div class="form-group">
+                    			<label  class="col-sm-2 control-label">Security Question-2</label>
+                    			<div class="col-sm-10">
+                    				<div class="input-group">
+      									<span class="input-group-addon"><i class="fa fa-question-circle" aria-hidden="true"></i></span>
+                    					<select class="form-control" id ="SecQues2" name="secQ2" onblur="return securityQuestionCheck();">
+                            				<option value="default">Select one from below</option>
+                            				<option value="father">In what year was your father born?</option>
+                            				<option value="pet">What is your pet’s name?</option>
+                            				<option value="school">What was the name of your elementary school?</option> 
+                        				</select>
+                        			</div>
+                        			<p id="secQ2_error" style="color:red; font-size:small;"></p>
+                       			</div>
+                       		</div>
+                  			<div class="form-group">
+                    			<label  class="col-sm-2 control-label">Security Answer-1</label>
+                    			<div class="col-sm-10">
+                    				<div class="input-group">
+      									<span class="input-group-addon"><i class="fa fa-clipboard" aria-hidden="true"></i></span>
+                    					<input type="text" class="form-control" id = "secAns1" style="height:36px;" placeholder="Your Answer" name="secAns1" required>
+                    				</div>
+                				</div>
+                  			</div>
+                            <div class="form-group">
+                    			<label  class="col-sm-2 control-label">Security Answer-2</label>
+                    			<div class="col-sm-10">
+                    				<div class="input-group">
+      									<span class="input-group-addon"><i class="fa fa-clipboard" aria-hidden="true"></i></span>
+                    					<input type="text" class="form-control" id = "secAns2" placeholder="Your Answer" name="secAns2" required>
+                    				</div>
+                				</div>
+                  			</div>                 
+                            <br>
+                            <div class="action">
+                            	<input type = "submit" class="btn btn-primary signup"  value = "Register" onclick="return securityQuestionCheck();"/>
                             </div> 
-                         </form>
-                   </div>
-                   
+                        </form>
+                   	</div> 
                </div>
            </div>
            

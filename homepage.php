@@ -1,10 +1,6 @@
 <?php 
     
-    include("config.php");
-    include("header.php");    
-    include("classes/UserClass.php");
-    include("classes/PostClass.php");
-    include("classes/MessageClass.php");
+    include("header.php");   
 
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && isset($_SESSION['login_user'])){
 		$userLoggedIn = $_SESSION['login_user'];

@@ -1,10 +1,5 @@
 <?php 
-    include("config.php");
     include("header.php");  
-	include("classes/UserClass.php");
-	include("classes/PostClass.php");
-	include("classes/MessageClass.php");
-
 
 	if(isset($_SESSION['login_user'])) {
 		$userLoggedIn = $_SESSION['login_user'];
@@ -14,7 +9,7 @@
 		header("Location: login.php");
 	}
 
-
+$date = date("Y-m-d H:i:s");
 $user_obj = new UserClass($con, $userLoggedIn);
 $message_obj = new MessageClass($con, $userLoggedIn);
 
@@ -28,6 +23,8 @@ else {
 
 if($user_to != "new")
 	$user_to_obj = new UserClass($con, $user_to);
+
+//echo $user_to;
 
 if(isset($_POST['post_message'])) {
 
@@ -58,7 +55,8 @@ if(isset($_POST['post_message'])) {
 			}
 
 			function getMessagesForLiveChat(){
-				var user_to = "<?php if(isset($user_to) and ($user_to != 'new')) echo ($user_to); ?>";
+				var user_to = "<?php if(isset($user_to) and ($user_to != 'new')) echo $user_to; ?>";
+				//alert("This is the get function");
 				//alert(user_to);
 				var func = "getMessages";
 				$.post("handlers/ajax_live_chat.php", {user_to:user_to, func:func}, function (data){
@@ -69,6 +67,21 @@ if(isset($_POST['post_message'])) {
 			getMessagesForLiveChat();
 
 			var myVar = setInterval(getMessagesForLiveChat, 1000);
+
+			/*function sendMessagesForLiveChat(){
+				var user_to = "<?php if(isset($user_to) and ($user_to != 'new')) echo ($user_to); ?>";
+				alert("This is the send function");
+				alert(user_to);
+				var date = "<?php //echo $date; ?>";
+				//var date = document.getElementById('message_date').value;
+				//var body = "<?php //echo $body; ?>";
+				var body = document.getElementById('message_textarea').value;
+				alert(date);
+				alert(body);
+				document.getElementById('message_textarea').value = "";
+				var func = "sendMessages";
+				$.post("handlers/ajax_live_chat.php", {user_to:user_to, date:date, body:body, func:func});
+			}*/
    		</script>
 
    	</head>
@@ -128,6 +141,7 @@ if(isset($_POST['post_message'])) {
 				{
 					echo "<hr><textarea name='message_body' id='message_textarea' placeholder='Write your message ...'></textarea>";
 					echo "<input type='submit' name='post_message' class='btn btn-primary' value='Send'>";
+					//echo "<input type='button' name='post_message' class='btn btn-primary' onclick='sendMessagesForLiveChat()' value='Send'>";
 				}
 
 				?>

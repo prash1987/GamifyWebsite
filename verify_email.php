@@ -6,6 +6,7 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- styles -->
     <link href="css/styles.css" rel="stylesheet">
+    <link href="fa-css/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -83,11 +84,11 @@
 								            <div class='content-wrap'>
 								                <h6>Congratulations!</h6>
 								                <div class='social'>
-													<p>Your email id is valid and you are good to register.</p>
+													<span style='color:green;'><h5>Your email id is valid and you are good to register.</h5></span>
 													<br>
-													<p>You will be redirected to User registration page in <span id='counter'>3</span> second(s).</p>
+													<span><h5>You will be redirected to User registration page in <span id='counter'>3</span> second(s).</h5></span>
 						                        </div>
-					                            <form action = 'user.php' method = 'POST'>
+					                            <form action='user.php' method='POST'>
 													<input class='form-control' type='hidden' name ='email_id' value=$u_name readonly>
 													<input type = 'submit' style='display: none;' id='register' class='btn btn-primary signup'  value = 'Submit' />
 												</form>
@@ -142,7 +143,7 @@
 								<div class='login-wrapper'>
 									<div class='box'>
 										<div class='content-wrap'>
-											<span>Your OTP is incorrect. Please <a href='email_id_verification.php'>click here</a> to try again from the beginning</span>
+											<span><h4>Your OTP is incorrect. Please <a href='email_id_verification.php'>click here</a> to try again from the beginning</h4></span>
 										</div>
 									</div>
 								</div>

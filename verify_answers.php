@@ -37,6 +37,7 @@
 					    <link href='bootstrap/css/bootstrap.min.css' rel='stylesheet'>
 					    <!-- styles -->
 					    <link href='css/styles.css' rel='stylesheet'>
+					    <link href='fa-css/css/font-awesome.min.css' rel='stylesheet'>
 
 					    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 					    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -70,13 +71,22 @@
 						                            
 						                        </div>
 					                            <form action = 're_enter_password.php' method = 'post'>
-													<input class='form-control' type='text' name = 'email_id' value=$email_id readonly>
-													<input class='form-control' type='password' id = 'new_password' name = 'new_password' placeholder='New Password' onblur= 'return regexCheck();' required>
+					                            	<div class='input-group'>
+                            							<span class='input-group-addon'><i class='fa fa-envelope' aria-hidden='true'></i></span>
+														<input class='form-control' type='text' name = 'email_id' value=$email_id readonly>
+													</div>
+													<br>
+													<div class='input-group'>
+                            							<span class='input-group-addon'><i class='fa fa-key' aria-hidden='true'></i></span>
+														<input class='form-control' type='password' id = 'new_password' name = 'new_password' placeholder='New Password' onblur= 'return regexCheck();' required autofocus>
+													</div>
 													<p id='pass_error' style='color:red; font-size:small;'></p>
-													<input class='form-control' type='password' id = 'confirm_password' name = 'confirm_password' onblur='return matchPasswords();' 
-													placeholder='Confirm Password' required>
+													<br>
+													<div class='input-group'>
+                            							<span class='input-group-addon'><i class='fa fa-key' aria-hidden='true'></i></span>
+														<input class='form-control' type='password' id = 'confirm_password' name = 'confirm_password' onblur='return matchPasswords();' placeholder='Confirm Password' required>
+													</div>
 													<p id='cpass_error' style='color:red; font-size:small;'></p>
-
 
 								                    <div class='already'>
 								                    	<p><?php if (isset($error)) echo $error ?></p>
@@ -140,7 +150,7 @@
 								<div class='login-wrapper'>
 									<div class='box'>
 										<div class='content-wrap'>
-											<span>Security answers are not correct. Please <a href='forgot_password_2.php'>try again</a> from the beginning</span>
+											<span><h4>Security answers are not correct. Please <a href='forgot_password_2.php'>try again</a> from the beginning</h4></span>
 										</div>
 									</div>
 								</div>

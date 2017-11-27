@@ -109,6 +109,7 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- styles -->
     <link href="css/styles.css" rel="stylesheet">
+    <link href="fa-css/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -164,7 +165,10 @@
             <?php 
               $form = "";
               if (!isset($email_id)){
-                $form .=  "<input class='form-control' type='text' name = 'email_id' placeholder='Email ID' required><br>
+                $form .=  "<div class='input-group'>
+                            <span class='input-group-addon'><i class='fa fa-envelope' aria-hidden='true'></i></span>
+                            <input class='form-control' type='text' name = 'email_id' placeholder='Email ID' required autofocus>
+                          </div>
                   <div class='already'>";
                   if (isset($msg)){
                     $form .= "<p> $msg </p>";
@@ -181,8 +185,10 @@
               else{
                 if ($email_valid_flag){
                   $form .= "<input class='form-control' type='hidden' name = 'email_id' placeholder='Email ID' value = $email_id readonly><br>
-                    <input class='form-control' type='text' name = 'otp' placeholder='One-Time Password' >
-
+                            <div class='input-group'>
+                              <span class='input-group-addon'><i class='fa fa-key' aria-hidden='true'></i></span>
+                              <input class='form-control' type='text' name = 'otp' placeholder='One-Time Password' autofocus required>
+                            </div>
                     
                     <div class='already'>";
                     if (isset($msg)){
@@ -199,7 +205,11 @@
                   echo $form;
                 }
                 else{
-                  $form .=  "<input class='form-control' type='text' name = 'email_id' placeholder='Email ID' required><br>
+                  $form .=  "<div class='input-group'>
+                              <span class='input-group-addon'><i class='fa fa-envelope' aria-hidden='true'></i></span>
+                              <input class='form-control' type='text' name = 'email_id' placeholder='Email ID' required autofocus>
+                            </div>
+
                     <div class='already'>";
                     if (isset($msg)){
                       $form .= "<p> $msg </p>";

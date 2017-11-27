@@ -29,7 +29,7 @@
 
 
 	if ($_POST['func'] == "sendMessages")
-		echo "Funcation racehed here";
+		//echo "Function racehed here";
 	{
 		if (isset($_POST['body']))
 		{

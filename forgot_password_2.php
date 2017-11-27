@@ -69,6 +69,7 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- styles -->
     <link href="css/styles.css" rel="stylesheet">
+    <link href="fa-css/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -124,7 +125,10 @@
 						<?php 
 							$form = "";
 							if (!isset($email_id)){
-								$form .=  "<input class='form-control' type='text' name = 'email_id' placeholder='Email ID' required><br>
+								$form .=  "<div class='input-group'>
+      											<span class='input-group-addon'><i class='fa fa-envelope' aria-hidden='true'></i></span>
+      											<input class='form-control' type='text' name = 'email_id' placeholder='Email ID' autofocus required>
+      										</div>
 									<div class='already'>";
 									if (isset($msg)){
 										$form .= "<p> $msg </p>";
@@ -141,10 +145,26 @@
 							else{
 								if ($email_valid_flag){
 									$form .= "<input class='form-control' type='hidden' name = 'email_id' placeholder='Email ID' value = $email_id readonly><br>
-										<input class='form-control' type='text' id = 'sec_ques1' name = 'sec_ques1' value = '$my_sec_q1' readonly>
-										<input class='form-control' type='text' id = 'sec_ans1' name = 'sec_ans1' placeholder='Answer for Question 1'>
-										<input class='form-control' type='text' id = 'sec_ques2' name = 'sec_ques2' value = '$my_sec_q2' readonly>
-										<input class='form-control' type='text' id = 'sec_ans2' name = 'sec_ans2' placeholder='Answer for Question 2'>
+										<div class='input-group'>
+      										<span class='input-group-addon'><i class='fa fa-question-circle' aria-hidden='true'></i></span>	
+											<input class='form-control' type='text' id = 'sec_ques1' name = 'sec_ques1' value = '$my_sec_q1' readonly>
+										</div>
+										<br>
+										<div class='input-group'>
+      										<span class='input-group-addon'><i class='fa fa-clipboard' aria-hidden='true'></i></span>
+											<input class='form-control' type='text' id = 'sec_ans1' name = 'sec_ans1' placeholder='Answer for Question 1' autofocus>
+										</div>
+										<br>
+										<div class='input-group'>
+      										<span class='input-group-addon'><i class='fa fa-question-circle' aria-hidden='true'></i></span>
+											<input class='form-control' type='text' id = 'sec_ques2' name = 'sec_ques2' value = '$my_sec_q2' readonly>
+										</div>
+										<br>
+										<div class='input-group'>
+      										<span class='input-group-addon'><i class='fa fa-clipboard' aria-hidden='true'></i></span>
+											<input class='form-control' type='text' id = 'sec_ans2' name = 'sec_ans2' placeholder='Answer for Question 2'>
+										</div>
+
 										<div class='already'>";
 										if (isset($msg)){
 											$form .= "<p> $msg </p>";
@@ -160,7 +180,10 @@
 									echo $form;
 								}
 								else{
-									$form .=  "<input class='form-control' type='text' name = 'email_id' placeholder='Email ID' required><br>
+									$form .=  "<div class='input-group'>
+      											<span class='input-group-addon'><i class='fa fa-envelope' aria-hidden='true'></i></span>
+      											<input class='form-control' type='text' name = 'email_id' placeholder='Email ID' autofocus required>
+      										</div>
 										<div class='already'>";
 										if (isset($msg)){
 											$form .= "<p> $msg </p>";

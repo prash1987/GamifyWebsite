@@ -40,6 +40,7 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- styles -->
     <link href="css/styles.css" rel="stylesheet">
+    <link href="fa-css/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -74,8 +75,15 @@
 	                            
 	                        </div>
                       <form name="Form1" action = "" method = "post">
-  			                <input class="form-control" type="text" name = "email_id" value="<?php echo $_SESSION['login_user']; ?>" readonly>
-  			                <input class="form-control" type="text" name = "otp" placeholder="One-Time Password" autofocus>
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                          <input class="form-control" type="text" name = "email_id" value="<?php echo $_SESSION['login_user']; ?>" readonly>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
+                          <input class="form-control" type="text" name = "otp" placeholder="One-Time Password" autofocus>
+                        </div>
 
                         <div class="already">
                           <p><?php if (isset($msg)) echo $msg ?></p>

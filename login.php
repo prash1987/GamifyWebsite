@@ -118,14 +118,14 @@
                             <form action = "" method = "post">
                             <div class="input-group">
       							<span class="input-group-addon"><i class="fa fa-envelope"></i></span>	
-			                	<input class="form-control" type="text" name = "username" placeholder="User Name" required>
+			                	<input class="form-control" type="text" name = "username" placeholder="User Name" autofocus required>
 			                </div>
 			                <br>
 			                <div class="input-group">
       							<span class="input-group-addon"><i class="fa fa-key"></i></span>
 			                	<input class="form-control" type="password" name = "password" placeholder="Password" required>
 			                </div>
-			                <br>
+			         
 		                    <div class="already">
 		                    	<span><?php if (isset($error)) echo $error ?></span>
 		                    </div>
