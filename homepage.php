@@ -253,7 +253,7 @@
 	</div>
 
 <div class="col-md-3 column col-md-offset-0-5">
-	Ads will appear here
+	<a href='https://www.ebates.com/r/SAGARP89?eeid=28585' target='_blank' rel='nofollow'><img src='https://www.ebates.com/images/referral/2017/ebates-referral-button.png' alt='Ebates Coupons and Cash Back' height='51' width='200' border='0'/></a>
 </div>
 
 </body>

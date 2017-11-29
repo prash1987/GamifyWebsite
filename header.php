@@ -7,6 +7,10 @@
 
     if(isset($_SESSION['login_user'])) {
         $userLoggedIn = $_SESSION['login_user'];
+        
+        $time = time();
+        $status_query = mysqli_query($con, "UPDATE user SET status_timestamp = '$time' WHERE User_id = '$userLoggedIn'");
+
         $user_details_query = mysqli_query($con, "SELECT * FROM user WHERE user_id='$userLoggedIn'");
         $user = mysqli_fetch_array($user_details_query);
     }
@@ -177,15 +181,12 @@
                     <a href="homepage.php"><i class="fa fa-home fa-lg" title="Homepage"></i></a>&nbsp;&nbsp;
 
                     <a href="javascript:void(0);" onclick="getDropdownData('<?php echo  $userLoggedIn; ?>','message')" title="Chat">
-                        <i class="fa fa-comments fa-lg" title="Chat"></i>
-                        <?php 
+                        <i class="fa fa-comments fa-lg" title="Chat"></i><?php 
                         if($num_messages > 0)
                             echo "<span class='notification_badge' id='unread_message'>". $num_messages ."</span>";
-                        ?>
-                    </a>&nbsp;&nbsp;
+                        ?></a>&nbsp;&nbsp;
 
-                    <a href="message.php"><i class="fa fa-envelope fa-lg" title="Messages"></i>
-                    </a>&nbsp;&nbsp;
+                    <a href="message.php"><i class="fa fa-envelope fa-lg" title="Messages"></i></a>&nbsp;&nbsp;
 
                     <a href="logout.php"><i class="fa fa-sign-out fa-lg" title="Sign out"></i></a>
                 </nav>

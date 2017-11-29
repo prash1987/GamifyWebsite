@@ -69,7 +69,7 @@ if(isset($_POST['post_message'])) {
 			var myVar = setInterval(getMessagesForLiveChat, 1000);
 
 			/*function sendMessagesForLiveChat(){
-				var user_to = "<?php if(isset($user_to) and ($user_to != 'new')) echo ($user_to); ?>";
+				var user_to = "<?php //if(isset($user_to) and ($user_to != 'new')) echo ($user_to); ?>";
 				alert("This is the send function");
 				alert(user_to);
 				var date = "<?php //echo $date; ?>";

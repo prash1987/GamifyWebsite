@@ -162,11 +162,16 @@ class MessageClass {
 			$split = str_split($latest_message_details[1], 12);
 			$split = $split[0] . $dots;
 
+			if($user_found_obj->getStatus())
+				$status = "<img src='images/icons/online.png' style='float:right; height:16px;' title='".$user_found_obj->getFirstAndLastName()." is online'>";
+			else
+				$status = "<img src='images/icons/offline.png' style='float:right; height:16px;' title='".$user_found_obj->getFirstAndLastName()." is offline'>";
+
 			$return_string .="<a href = 'message.php?u=$username'><div class='user_found_messages'>
 								<img class='img-circle' src='".$user_found_obj->getProPic()."' style='margin-right:5px;'>
 								<span style='font-size:14px;'>".$user_found_obj->getFirstAndLastName(). " </span>
 								<span class='timestamp_smaller' id='grey' style='font-size:10px;'> " .$latest_message_details[2]." </span>
-								<br><p id='grey' style='margin: 0; font-size:12px;'> ". $latest_message_details[0].$split." </p>
+								<br><p id='grey' style='margin: 0; font-size:12px;'> ". $latest_message_details[0].$split." ".$status."</p>
 								</div>
 								</a>";
 
@@ -214,7 +219,7 @@ class MessageClass {
 			$is_unread_query = mysqli_query($this->con, "SELECT opened FROM messages WHERE user_to='$userLoggedIn' AND user_from='$username' ORDER BY id DESC");
 			$row = mysqli_fetch_array($is_unread_query);
 
-			$style=($row['opened'] == 1) ? "background-color: #DDEDFF;" : "";
+			$style=($row['opened'] == 0) ? "background-color: #DDEDFF;" : "";
 
 			$user_found_obj = new UserClass($this->con, $username);
 			$latest_message_details = $this->getLatestMessage($userLoggedIn, $username);
@@ -223,12 +228,17 @@ class MessageClass {
 			$split = str_split($latest_message_details[1], 12);
 			$split = $split[0] . $dots;
 
+			if($user_found_obj->getStatus())
+				$status = "<img src='images/icons/online.png' style='float:right; height:16px;' title='".$user_found_obj->getFirstAndLastName()." is online'>";
+			else
+				$status = "<img src='images/icons/offline.png' style='float:right; height:16px;' title='".$user_found_obj->getFirstAndLastName()." is offline'>";
+
 			$return_string .="<a href = 'message.php?u=$username'>
 			<div class='user_found_messages' style='" . $style ."'>
 								<img class='img-circle' src='".$user_found_obj->getProPic()."' style='margin-right:5px;'>
 								<span style='font-size:14px;'>".$user_found_obj->getFirstAndLastName(). " </span>
 								<span class='timestamp_smaller' id='grey' style='font-size:10px;'> " .$latest_message_details[2]." </span>
-								<br><p id='grey' style='margin: 0; font-size:12px;'> ". $latest_message_details[0].$split." </p>
+								<br><p id='grey' style='margin: 0; font-size:12px;'> ". $latest_message_details[0].$split." ".$status."</p>
 								</div>
 								</a>";
 

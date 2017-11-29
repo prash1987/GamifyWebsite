@@ -9,21 +9,24 @@
       
       $msg = ".";
 
-      $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+      //$db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
        
-      $email_id = mysqli_real_escape_string($db,$_POST['email_id']);
-      $otp = mysqli_real_escape_string($db,$_POST['otp']); 
+      $email_id = mysqli_real_escape_string($con,$_POST['email_id']);
+      $otp = mysqli_real_escape_string($con,$_POST['otp']); 
       
       $sql = "SELECT email_id, otp FROM login WHERE email_id='$email_id' AND otp='$otp'";
-      $result = mysqli_query($db,$sql);
+      $result = mysqli_query($con,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-      
+
       $count = mysqli_num_rows($result);
       
       // If result has a match, table row must be 1 row
       if($count == 1) {
         $_SESSION['login_user'] = $email_id;
         $_SESSION['loggedin'] = true;
+        $time = time();
+        $status_query = mysqli_query($con, "UPDATE user SET status_timestamp = '$time' WHERE User_id = '$email_id'");
+
         header('Location: homepage.php');   
       }else {
          $msg = "Authentication failed";
