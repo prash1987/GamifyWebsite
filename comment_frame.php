@@ -138,11 +138,12 @@
 			}
 
 			$user_obj = new UserClass($con, $posted_by);
+			$user_profile = $user_obj->getUserName();
 
 ?>
 			<div class="comment_section">
-				<b> <?php echo $user_obj->getFirstAndLastName();
-				 ?> </b>
+				<b><a href='profile.php?profile_username=<?php echo $user_profile; ?>' target='_parent'><?php echo $user_obj->getFirstAndLastName();
+				 ?></a></b>
 				&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $time_message . "<br>" . $comment_body; ?> 
 				<hr>
 			</div>

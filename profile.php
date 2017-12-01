@@ -61,7 +61,7 @@
 		</div>
 		<br><br>
 		<?php if($username==$userLoggedIn){
-			echo "<button name='update_profile' class='btn btn-primary btn-sm'>Update Profile</button>";
+			echo "<a href='settings.php'><button name='update_profile' class='btn btn-primary btn-sm'>Update Profile</button></a>";
 		}
 		?>
 

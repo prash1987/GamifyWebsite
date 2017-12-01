@@ -188,6 +188,7 @@
                         ?></a>&nbsp;&nbsp;
 
                     <a href="message.php"><i class="fa fa-envelope fa-lg" title="Messages"></i></a>&nbsp;&nbsp;
+                    <a href="groups.php"><i class="fa fa-users fa-lg" title="Groups"></i></a>&nbsp;&nbsp;
 
                     <a href="logout.php"><i class="fa fa-sign-out fa-lg" title="Sign out"></i></a>
                 </nav>

@@ -40,6 +40,21 @@
 			return $userbio;
 		}
 
+		public function getFirstName() {
+			$username = $this->user['first_name'];
+			return $username;
+		}
+
+		public function getLastName() {
+			$address = $this->user['last_name'];
+			return $address;
+		}
+		
+		public function getDOB() {
+			$contact = $this->user['dob'];
+			return $contact;
+		}
+
 		public function getProPic() {
 			$propic = $this->user['propic'];
 			$folder="profile_pics/";
@@ -47,12 +62,11 @@
 		}
 
 		public function getStatus(){
-			$user_lastactive = $this->user['status_timestamp'];
-			if (time() > $user_lastactive + 300)
-				return False;
-			else
-				return True;
+				$user_lastactive = $this->user['status_timestamp'];
+				if (time() > $user_lastactive + 300)
+					return False;
+				else
+					return True;
 		}
-		
 	}
 ?>

@@ -184,7 +184,7 @@
 	<!--</div>-->
 </div>
 
-	<div class="col-md-6 column col-md-offset-0-5">
+	<div class="col-md-6 column col-md-offset-0-5">		
 		<form class="post_form" action="homepage.php" method="POST" enctype="multipart/form-data">
 			<textarea name="post_text" id="post_text" placeholder="Post here" required></textarea>
 			<input type="submit" name="post" id="post_button" value="Post" class="btn btn-primary btn-lg" ><br><br>
@@ -286,7 +286,6 @@
 				?>
 
 	</div>
-
 <div class="col-md-3 column col-md-offset-0-5">
 	<a href='https://www.ebates.com/r/SAGARP89?eeid=28585' target='_blank' rel='nofollow'><img src='https://www.ebates.com/images/referral/2017/ebates-referral-button.png' alt='Ebates Coupons and Cash Back' height='51' width='200' border='0'/></a>
 </div>
