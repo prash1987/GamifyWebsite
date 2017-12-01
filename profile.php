@@ -64,6 +64,26 @@
    		<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
    		<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
    		<script src = "js/search.js"></script>
+   		<script type="text/javascript">
+   			function getMessagesForLiveChat(){
+				var user_to = "<?php if(isset($username) and ($username != 'new')) echo $username; ?>";
+				//alert("This is the get function");
+				//alert(user_to);
+				var func = "getMessages";
+				$.post("handlers/ajax_live_chat.php", {user_to:user_to, func:func}, function (data){
+			    	$(".loaded_messages").html(data);
+			  });	
+			}
+
+			$('#message_textarea').keyup(function() {
+				var data = document.getElementById('message_textarea').value;
+    			alert(data)
+			});
+
+			getMessagesForLiveChat();
+
+			var myVar = setInterval(getMessagesForLiveChat, 1000);
+   		</script>>
    	</head>
 
 	<br><br><br><br>
@@ -129,32 +149,16 @@
 				?>
 			</div>
 
-
-				<div class="tab-content">
-			<div role ="tabpanel" class="tab-pane fade in active" id="newsfeed_div">
-				<?php
-					echo "<h3>Posts by ";
-					echo $user_obj->getFirstAndLastName();
-					echo "</h3><hr>";
-					$post = new PostClass($con, $username);
-					$post->loadPostsOwn($username);
-				?>
-			</div>
-			
-
 			<!--div role ="tabpanel" class="tab-pane fade in active" id="about_div">
 				
 			</div-->
 			
-			
-
-
 			<div role ="tabpanel" class="tab-pane fade" id="messages_div">
 				<?php  
 					
-					echo "<h4><a href='profile.php?profile_username='".$username."'><img src='".$user_obj->getProPic()."' style='border-radius:5px; margin-right:5px;height: 35px;float: left;'>" . $user_obj->getFirstAndLastName() . "</a> and You</h4><hr><br>";
+					echo "<h4><a href='message.php?u=". $username ."''><img src='".$user_obj->getProPic()."' style='border-radius:5px; margin-right:5px;height: 35px;float: left;'>" . $user_obj->getFirstAndLastName() . "</a> and You</h4><hr><br>";
 					echo "<div class='loaded_messages' id='scroll_messages'>";
-						echo $message_obj->getMessages($username);
+						//echo $message_obj->getMessages($username);
 					echo "</div>";
 				?>
 				<br>
