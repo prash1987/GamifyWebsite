@@ -39,6 +39,7 @@
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
         <link href="css/styles.css" rel="stylesheet">
         <link href="sn_styles.css" rel="stylesheet" type="text/css">
+        <link href="fa-css/css/font-awesome.min.css" rel="stylesheet">
         
         
 

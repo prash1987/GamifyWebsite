@@ -1,6 +1,41 @@
+<!--html>
+ <head>
+  <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
+ </head>
+ <body>
+  <script language="Javascript"> 
+	alert("Welcome to our visitors from "+geoplugin_city()+", "+geoplugin_countryName()); 
+  </script>
+ </body>
+</html-->
+
 <?php 
-    
-    include("header.php");   
+// 	{
+//   "geoplugin_request":"140.182.72.188",
+//   "geoplugin_status":200,
+//   "geoplugin_credit":"Some of the returned data includes GeoLite data created by MaxMind, available from <a href='http:\/\/www.maxmind.com'>http:\/\/www.maxmind.com<\/a>.",
+//   "geoplugin_city":"Bloomington",
+//   "geoplugin_region":"IN",
+//   "geoplugin_areaCode":"812",
+//   "geoplugin_dmaCode":"527",
+//   "geoplugin_countryCode":"US",
+//   "geoplugin_countryName":"United States",
+//   "geoplugin_continentCode":"NA",
+//   "geoplugin_latitude":"39.0836",
+//   "geoplugin_longitude":"-86.4321",
+//   "geoplugin_regionCode":"IN",
+//   "geoplugin_regionName":"Indiana",
+//   "geoplugin_currencyCode":"USD",
+//   "geoplugin_currencySymbol":"&#36;",
+//   "geoplugin_currencySymbol_UTF8":"$",
+//   "geoplugin_currencyConverter":1
+// }    
+
+//    $ip = file_get_contents('https://api.ipify.org');
+//    echo "My public IP address is: " . $ip;
+
+
+	include("header.php");   
 
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && isset($_SESSION['login_user'])){
 		$userLoggedIn = $_SESSION['login_user'];
@@ -58,7 +93,7 @@
 			}
 
 			function delete_function(id){
-				alert('data is reached' + id);
+				//alert('data is reached' + id);
 				$.ajax({
                 	type:'POST',
                 	data: {'post_id' : id},

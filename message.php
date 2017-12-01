@@ -64,6 +64,11 @@ if(isset($_POST['post_message'])) {
 			  });	
 			}
 
+			$('#message_textarea').keyup(function() {
+				var data = document.getElementById('message_textarea').value;
+    			alert(data)
+			});
+
 			getMessagesForLiveChat();
 
 			var myVar = setInterval(getMessagesForLiveChat, 1000);
@@ -115,7 +120,7 @@ if(isset($_POST['post_message'])) {
 	<div class="col-md-6 column col-md-offset-0-5">
 		<?php  
 		if($user_to != "new"){
-			echo "<h4><a href='profile.php?profile_username=$user_to'><img src='".$user_to_obj->getProPic()."' style='border-radius:5px; margin-right:5px;height: 35px;float: left;'>" . $user_to_obj->getFirstAndLastName() . "</a> and You</h4><hr><br>";
+			echo "<h4><a href='profile.php?profile_username=$user_to'><img src='".$user_to_obj->getProPic()."' style='border-radius:5px; margin-right:5px;height: 35px;float: left;'>" . $user_to_obj->getFirstAndLastName() . "</a> and You</h4><p class='user_typing'></p><hr><br>";
 			echo "<div class='loaded_messages' id='scroll_messages'>";
 				//echo $message_obj->getMessages($user_to);
 			echo "</div>";

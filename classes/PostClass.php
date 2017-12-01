@@ -90,7 +90,7 @@ class PostClass {
 				/*This is the delete button logic*/
 				if($userLoggedIn == $added_by){
 					$delete_id = "post_".$id;
-					$delete_button = "<i class='delete_button glyphicon glyphicon-remove' id='$delete_id' onClick='delete_function(\"$delete_id\");'></i>";
+					$delete_button = "<i class='delete_button fa fa-minus-square' id='$delete_id' onClick='delete_function(\"$delete_id\");'></i>";
 				}
 				else {
 					$delete_button = "";
@@ -99,11 +99,11 @@ class PostClass {
 				//$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 				// Here we have to use user name I HAVE USED EMAIL ID
 				// WE NEED TO STORE USING USERNAME IN POSTS TABLE.
-				$user_details_query = mysqli_query($this->con, "SELECT first_name, last_name FROM user WHERE email='$added_by'");
+				$user_details_query = mysqli_query($this->con, "SELECT first_name, last_name, propic FROM user WHERE email='$added_by'");
 				$user_row = mysqli_fetch_array($user_details_query);
 				$first_name = $user_row['first_name'];
 				$last_name = $user_row['last_name'];
-				// $profile_pic = $user_row['profile_pic'];
+				$profile_pic = "profile_pics/" . $user_row['propic']; 
 
 				?>
 				<script> 
@@ -194,40 +194,41 @@ class PostClass {
 				$str .= "<div class='status_post'>
 
 							<div class='posted_by' style='color:#ACACAC;'>
+								<img src=$profile_pic class='img-circle' height='50' width='50' alt=$first_name $last_name style='margin-left: 5px; vertical-align: middle;'></a>
 								<a href='profile.php?profile_username=$added_by'>
-								<b> $first_name $last_name </b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<b style='margin-left: 15px;'> $first_name $last_name </b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								$time_message
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								$delete_button
 
 							</div>
-
-							<div id='post_body'>
-								$body
+							<div style='margin-left: 75px;'>
+								<div id='post_body'>
+									$body
+									<br>
+								</div>
+								<div id='post_loc_and_play_time'>
+									Game: $game
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									$location
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									$play_time
+									<br>								
+									<span> $gender </span>								
+								</div>
 								<br>
+								<img src='$image_path' height='40%' width='40%'></img>
+								<div class='newsfeedPostOptions'>	
+									<button id='comment_anchor' class='btn btn-primary btn-xs' onClick='javascript:toggle$id();'>Comments($comments_check_num)</button>&nbsp;&nbsp;&nbsp;	
+									<span style='margin-top:10px;'><iframe allowtransparency='true' src='like.php?post_id=$id' style='height: 47px; width: 130px;' frameBorder='0'  scrolling='no'></iframe>
+									</span>
+								</div>
 							</div>
-							<div id='post_loc_and_play_time'>
-								Game: $game
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								$location
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								$play_time
-								<br>								
-								<span> $gender </span>								
-							</div>
-							<br>
-							<img src='$image_path' height='40%' width='40%'></img>
-							<div class='newsfeedPostOptions'>	
-								<button id='comment_anchor' class='btn btn-primary btn-xs' onClick='javascript:toggle$id();'>Comments($comments_check_num)</button>&nbsp;&nbsp;&nbsp;	
-								<span style='margin-top:10px;'><iframe allowtransparency='true' src='like.php?post_id=$id' style='height: 47px; width: 130px;' frameBorder='0'  scrolling='no'></iframe>
-								</span>
-							</div>
-
 						</div>
 
-							<div class='post_comment' id='toggleComment$id' style='display:none;'>
+							<div class='post_comment' id='toggleComment$id' style='display:none; margin-left: 75px;'>
 							<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
 						</div>
 						
@@ -317,7 +318,7 @@ class PostClass {
 				/*This is the delete button logic*/
 				if($userLoggedIn == $added_by){
 					$delete_id = "post_".$id;
-					$delete_button = "<i class='delete_button glyphicon glyphicon-remove' id='$delete_id' onClick='delete_function(\"$delete_id\");'></i>";
+					$delete_button = "<i class='delete_button glyphicon glyphicon-trash' id='$delete_id' onClick='delete_function(\"$delete_id\");'></i>";
 				}
 				else {
 					$delete_button = "";
@@ -328,11 +329,11 @@ class PostClass {
 				//$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 				// Here we have to use user name I HAVE USED EMAIL ID
 				// WE NEED TO STORE USING USERNAME IN POSTS TABLE.
-				$user_details_query = mysqli_query($this->con, "SELECT first_name, last_name FROM user WHERE email='$added_by'");
+				$user_details_query = mysqli_query($this->con, "SELECT first_name, last_name, propic FROM user WHERE email='$added_by'");
 				$user_row = mysqli_fetch_array($user_details_query);
 				$first_name = $user_row['first_name'];
 				$last_name = $user_row['last_name'];
-				// $profile_pic = $user_row['profile_pic'];
+				$profile_pic = "profile_pics/" . $user_row['propic']; 
 
 				?>
 				<script> 
@@ -424,37 +425,39 @@ class PostClass {
 
 							<div class='posted_by' style='color:#ACACAC;'>
 								<a href='profile.php?profile_username=$added_by'>
-								<b> $first_name $last_name </b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$time_message
+								<img src=$profile_pic class='img-circle' height='50' width='50' alt=$first_name $last_name style='margin-left: 5px; vertical-align: middle;'></a>
+								<a href='profile.php?profile_username=$added_by'>
+								<b style='margin-left: 15px;'> $first_name $last_name </b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$time_message
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$delete_button
 
 							</div>
-
-							<div id='post_body'>
-								$body
+							<div style='margin-left: 75px;'>
+								<div id='post_body'>
+									$body
+									<br>
+								</div>							
+								<div id='post_loc_and_play_time'>
+									Game: $game
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									$location
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									$play_time
+									<br>								
+									<span> $gender </span>								
+								</div>
 								<br>
-							</div>							
-							<div id='post_loc_and_play_time'>
-								Game: $game
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								$location
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								$play_time
-								<br>								
-								<span> $gender </span>								
-							</div>
-							<br>
-							<img src='$image_path' height='40%' width='40%'></img>
-							<div class='newsfeedPostOptions'>	
-								<button id='comment_anchor' class='btn btn-primary btn-xs' onClick='javascript:toggle$id();'>Comments($comments_check_num)</button>&nbsp;&nbsp;&nbsp;	
-								<span style='margin-top:10px;'><iframe allowtransparency='true' src='like.php?post_id=$id' style='height: 47px; width: 130px;' frameBorder='0'  scrolling='no'></iframe>
-								</span>
-							</div>
-
+								<img src='$image_path' height='40%' width='40%'></img>
+								<div class='newsfeedPostOptions'>	
+									<button id='comment_anchor' class='btn btn-primary btn-xs' onClick='javascript:toggle$id();'>Comments($comments_check_num)</button>&nbsp;&nbsp;&nbsp;	
+									<span style='margin-top:10px;'><iframe allowtransparency='true' src='like.php?post_id=$id' style='height: 47px; width: 130px;' frameBorder='0'  scrolling='no'></iframe>
+									</span>
+								</div>
+							</div>		
 						</div>
 
-							<div class='post_comment' id='toggleComment$id' style='display:none;'>
+							<div class='post_comment' id='toggleComment$id' style='display:none;margin-left:75px;'>
 							<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
 						</div>
 						

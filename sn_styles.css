@@ -189,13 +189,13 @@ textarea:focus {
 }
 
 .message#grey{
-	background-color: #98C8C0;
+	background-color: #EAEAEA;
 	border-color: #FFFFFF;
 	float:left;
 }
 
 .loaded_conversations{	
-	height: 300px;
+	height: auto;
 	overflow:auto;	
 }
 

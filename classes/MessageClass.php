@@ -47,9 +47,17 @@ class MessageClass {
 			$user_to = $row['user_to'];
 			$user_from = $row['user_from'];
 			$body = $row['body'];
+			$opened = $row['opened'];
+
+			if ($opened == 1)
+				$icon = "<img src='images/icons/read_tick.jpg' style='float:right; height:16px;'>";
+			else
+				$icon = "<img src='images/icons/delivered_tick.jpg' style='float:right; height:16px;'>";
 
 			$div_top = ($user_to == $userLoggedIn) ? "<div class='message' id='grey'>" : "<div class='message' id='blue'>";
-			$data = $data . $div_top . $body . "</div><br><br>";
+			$read_receipt = ($user_to == $userLoggedIn) ? "" : $icon;
+
+			$data = $data . $div_top . $body . $read_receipt. "</div><br><br>";
 		}
 		return $data;
 	}
