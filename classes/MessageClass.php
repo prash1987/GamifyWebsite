@@ -50,9 +50,9 @@ class MessageClass {
 			$opened = $row['opened'];
 
 			if ($opened == 1)
-				$icon = "<img src='images/icons/read_tick.jpg' style='float:right; height:16px;'>";
+				$icon = "<img src='images/icons/read_tick.png' style='float:right; height:16px;'>";
 			else
-				$icon = "<img src='images/icons/delivered_tick.jpg' style='float:right; height:16px;'>";
+				$icon = "<img src='images/icons/delivered_tick.png' style='float:right; height:16px;'>";
 
 			$div_top = ($user_to == $userLoggedIn) ? "<div class='message' id='grey'>" : "<div class='message' id='blue'>";
 			$read_receipt = ($user_to == $userLoggedIn) ? "" : $icon;

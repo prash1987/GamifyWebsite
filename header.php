@@ -169,7 +169,6 @@
                 </div>
 
                 <nav>
-
                     <?php 
                         //Unread messages 
                         $message_obj = new MessageClass($con, $userLoggedIn);
