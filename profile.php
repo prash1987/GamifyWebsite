@@ -16,10 +16,28 @@
 		$user_details_query = mysqli_query($con, "SELECT * FROM user WHERE user_id='$username'");
 		$user_info = mysqli_fetch_array($user_details_query);
 		$user_obj = new UserClass($con, $username);
+		$user_obj1 = new UserClass($con, $userLoggedIn);
 	}
 	else {
 		header("Location: login.php");
 	}
+
+
+	if(isset($_GET['block_status']) and $_GET['block_status'] == "unblock") {
+		$user_obj2 = new UserClass($con, $userLoggedIn);
+		$user_obj2->unBlock($username);
+		header("Location: homepage.php");
+	}
+
+	if(isset($_POST['block_friend'])) {
+		// echo "ok...its working";
+		$user_obj3 = new UserClass($con, $userLoggedIn);
+		$user_obj3->Block($username);
+		header("Location: block.php");
+
+	}
+
+
 
 	if(isset($_POST['post_message'])) {
 		if(isset($_POST['message_body'])) {
@@ -60,10 +78,29 @@
 				echo "Contact: " . $user_obj->getUserContact() ; ?>
 		</div>
 		<br><br>
-		<?php if($username==$userLoggedIn){
-			echo "<a href='settings.php'><button name='update_profile' class='btn btn-primary btn-sm'>Update Profile</button></a>";
-		}
+		<form action="" method="POST">
+		<?php 
+
+		// if($username==$userLoggedIn){
+		// 	echo "<button name='update_profile' class='btn btn-primary btn-sm'>Update Profile</button>";
+		// }
+
+		if($userLoggedIn == $username)
+					{
+						echo "<button name='update_profile' class='btn btn-primary btn-sm'>Update Profile</button>";
+					}
+					else if($user_obj1->isFriend1($username)) 
+					{
+						echo '<input type="submit" id= "blockBtn" name="unblock_friend" class="btn btn-primary btn-block signup" value="UnBlock"><br>';
+					}
+					else
+					{
+						echo '<input type="submit" id= "blockBtn" name="block_friend" class="btn btn-primary btn-block signup" value="Block"><br>';
+
+					}
+
 		?>
+	</form>
 
 	</div>
 
@@ -73,10 +110,11 @@
   			<li class="active"><a href="#newsfeed_div" aria-controls="newsfeed_div" role="tab" data-toggle="tab">Posts</a></li>
   			<!--li><a href="#about_div" aria-controls="about_div" role="tab" data-toggle="tab">About</a></li-->
   			<?php 
-  				if($username != $userLoggedIn) {
+  				if($username != $userLoggedIn and $user_obj1->isFriend($username)) {
   					echo "<li><a href='#messages_div' aria-controls='messages_div' role='tab' data-toggle='tab'>Messages</a></li>";
   				}
   			?>
+
 
 		</ul>
 
@@ -91,9 +129,25 @@
 				?>
 			</div>
 
+
+				<div class="tab-content">
+			<div role ="tabpanel" class="tab-pane fade in active" id="newsfeed_div">
+				<?php
+					echo "<h3>Posts by ";
+					echo $user_obj->getFirstAndLastName();
+					echo "</h3><hr>";
+					$post = new PostClass($con, $username);
+					$post->loadPostsOwn($username);
+				?>
+			</div>
+			
+
 			<!--div role ="tabpanel" class="tab-pane fade in active" id="about_div">
 				
 			</div-->
+			
+			
+
 
 			<div role ="tabpanel" class="tab-pane fade" id="messages_div">
 				<?php  
@@ -117,6 +171,7 @@
 		   			}
 		   		</script>
 			</div>
+	
 		</div>
 	</div>
 

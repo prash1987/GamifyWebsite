@@ -10,6 +10,8 @@ $time = time();
 $status_query = mysqli_query($con, "UPDATE user SET status_timestamp = '$time' WHERE User_id = '$userLoggedIn'");
 
 $names = explode(" ", $query);
+$user_logged_obj = new UserClass($con, $userLoggedIn);
+	
 	
 	// The below code is commented because still not added the column to check whether user has deleted the account or not.
 	/*if(strpos($query, "_") !== false) {
@@ -36,20 +38,19 @@ $names = explode(" ", $query);
 
 		$searched_users = array();
 		while ($row = mysqli_fetch_array($usersReturned)){
-			if($row['user_id'] != $userLoggedIn)
+			if($row['user_id'] != $userLoggedIn and $user_logged_obj->isFriend($row['user_id']))
 				array_push($searched_users, $row['user_id']);
 		}
 
 		foreach($searched_users as $username){
 			$user_found_obj = new UserClass($con, $username);
-
 			if($user_found_obj->getStatus())
 				$status = "<img src='images/icons/online.png' style='float:right; height:16px;' title='".$user_found_obj->getFirstAndLastName()." is online'>";
 			else
 				$status = "<img src='images/icons/offline.png' style='float:right; height:16px;' title='".$user_found_obj->getFirstAndLastName()." is offline'>";
 
 			echo "<div class='resultsDisplay'>
-		 					<a href = message.php?u=" . $user_found_obj->getUserName() ." style='color:#000'>
+		 					<a href = profile.php?profile_username=" . $user_found_obj->getUserName() ." style='color:#000'>
 
 		 					<div class='liveSearchProfilePic'>
 		 	 					<img src='".$user_found_obj->getProPic()."'>

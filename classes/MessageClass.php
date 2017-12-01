@@ -157,7 +157,7 @@ class MessageClass {
 		while($row = mysqli_fetch_array($query)){
 			$user_to_push = ($row['user_to'] != $userLoggedIn) ? $row['user_to'] : $row['user_from'];
 
-			if (!in_array($user_to_push, $convos)){
+			if (!in_array($user_to_push, $convos) and $this->user_obj->isFriend($user_to_push)){
 				array_push($convos, $user_to_push);
 			}
 		}
@@ -206,7 +206,7 @@ class MessageClass {
 		while($row = mysqli_fetch_array($query)){
 			$user_to_push = ($row['user_to'] != $userLoggedIn) ? $row['user_to'] : $row['user_from'];
 
-			if (!in_array($user_to_push, $convos)){
+			if (!in_array($user_to_push, $convos) and $this->user_obj->isFriend($user_to_push)){
 				array_push($convos, $user_to_push);
 			}
 		}

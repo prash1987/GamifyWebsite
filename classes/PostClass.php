@@ -126,12 +126,19 @@ class PostClass {
 				$comments_check = mysqli_query($this->con, "SELECT * FROM comments WHERE post_id='$id'");
 				$comments_check_num = mysqli_num_rows($comments_check);
 
+				$user_logged_obj = new UserClass($this->con, $userLoggedIn);
+				if($user_logged_obj->isFriend($added_by))
+				{
+
 
 				//Timeframe
 				$date_time_now = date("Y-m-d H:i:s");
 				$start_date = new DateTime($date_time); //Time of post
 				$end_date = new DateTime($date_time_now); //Current time
 				$interval = $start_date->diff($end_date); //Difference between dates 
+				
+
+
 				if($interval->y >= 1) {
 					if($interval == 1)
 						$time_message = $interval->y . " year ago"; //1 year ago
@@ -233,6 +240,7 @@ class PostClass {
 						</div>
 						
 						<hr>";
+					}
 			} 
 			echo $str;
 		}
@@ -356,6 +364,9 @@ class PostClass {
 				$comments_check = mysqli_query($this->con, "SELECT * FROM comments WHERE post_id='$id'");
 				$comments_check_num = mysqli_num_rows($comments_check);
 
+				$user_logged_obj = new UserClass($this->con, $userLoggedIn);
+				if($user_logged_obj->isFriend($added_by))
+				{
 
 				//Timeframe
 				$date_time_now = date("Y-m-d H:i:s");
@@ -462,9 +473,101 @@ class PostClass {
 						</div>
 						
 						<hr>";
+					} 
 			} 
 			echo $str;
 		}
 	}
+
+
+	public function display_blocked($username) {
+		
+		$folder="images/";
+		$str = "";
+
+		if(isset($_SESSION['login_user'])) {
+				$userLoggedIn = $_SESSION['login_user'];
+
+		}
+		else
+		{
+			header("Location: login.php");
+		}
+		
+		
+
+			$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+				// Here we have to use user name I HAVE USED EMAIL ID
+				// WE NEED TO STORE USING USERNAME IN POSTS TABLE.
+			$user_details_query = mysqli_query($con, "SELECT * FROM user WHERE user_id='$userLoggedIn'");
+			$user_row = mysqli_fetch_array($user_details_query);
+			$first_name = $user_row['first_name'];
+			$last_name = $user_row['last_name'];
+			// $profile_pic = $user_row['profile_pic'];
+			$block = $user_row['my_blocks'];
+			//$name_array = $block;
+			// if ($block != null)
+			// 	echo "not empty";
+ 			$myArr = explode(",", $block);
+ 			// echo ($myArr[3]);
+
+
+
+			
+			if(mysqli_num_rows($user_details_query) > 0) {
+
+				$num_iterations = 0; //Number of results checked (not necasserily posted)
+				$count = 1;
+
+				?>
+				
+
+				<?php
+				for ($i=1; $i < (sizeof($myArr))-1; $i++)
+				{
+ 					// print_r($myArr[$i]);
+ 					// echo $myArr[$i];
+ 					// echo $i;
+
+ 					$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+				// THIS IS THE LOGIC TO DISPLAY BLOCKED PEOPLE
+					$user_details_query1 = mysqli_query($con, "SELECT * FROM user WHERE user_id='$myArr[$i]'");
+					$user_row1 = mysqli_fetch_array($user_details_query1);
+					$first_name1 = $user_row1['first_name'];
+					$last_name1 = $user_row1['last_name'];
+					$id1 = $user_row1['user_id'];
+
+
+
+					$user_logged_obj1 = new UserClass($this->con, $userLoggedIn);
+					if($user_logged_obj1->isFriend1($myArr[$i])){
+
+					
+						
+
+						$str .= "<div class='status_post'>
+
+									<div class='posted_by' style='color:#ACACAC;'>
+										<b> $first_name1 $last_name1</b>	
+										<span style='float:right;'><a href='profile.php?block_status=unblock&profile_username=$myArr[$i]'>
+										<input type='button' id= 'blockBtn' name='unblock_friend' class='btn btn-primary btn-block signup' value='UnBlock'></a></span>
+									</div>
+								</div>
+								<hr>";
+
+					}
+			}
+		
+		echo $str;
+		
+		}
+	}
+
+
+
+
+
+
+
 }
 ?>
