@@ -1,7 +1,6 @@
 	<?php  
-	require 'config.php';
+	
 	include("header.php");
-	include("classes/UserClass.php");
 
 	if(isset($_SESSION['login_user'])) {
 		$userLoggedIn = $_SESSION['login_user'];
@@ -67,10 +66,12 @@
 			}
 
 			function selectUser(selectedUser){
+
+				var test = "";
 				selectedUser += ",";
 			    document.getElementById('members').value += selectedUser;			    
 			    document.getElementById("results").style.display = "none";
-			    document.getElementById("search_text_input").value = ".";			    
+			    document.getElementById('search_text_input').value = test;			    
 	            
 			}
    		</script>
