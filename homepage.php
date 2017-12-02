@@ -73,7 +73,10 @@
 
 
 		<style>
-			.mySlides {display:none;}
+			.mySlides {
+				display:none;
+				z-index: -1;
+			}
 		</style>
 	</head>
 
@@ -259,119 +262,113 @@
 
 	</div>
 
-<!--@Author- Harsha: Ads-->
-<div class="col-md-3 column col-md-offset-0-5">
-	<a href="message.php">Testing</a>
-</div>
-<div class="col-md-3" style="margin-left: 13px; margin-top: 10px;">
-	<div style="max-width: 500px;">	
-  
-  		<a target="_blank" href="https://www.ebay.com/b/Mens-Fitness-Running-Shoes/158952/bn_1965202">
-  		<img class="mySlides" src="images/ads/ad_ebay.jpg" style="width:100%"></a>
-  
-  		<a target="_blank" href="http://www.indianavolleyballcamps.com/index.html">
-  		<img class="mySlides" src="images/ads/ad_volleyball.jpg" style="width:100%"></a>
-
-  		<a target="_blank" href="http://northamericasports.blogspot.ca/2012/09/new-nike-epl-match-ball-maxim-for.html">
-  		<img class="mySlides" src="images/ads/ad_nike.jpg" style="width:100%"></a>
-  
-  		<a target="_blank" href="https://www.anytimefitness.com/gyms/2822/bloomington-in-47401/">
-  		<img class="mySlides" src="images/ads/ad_gym.jpg" style="width:100%"></a>
-
-  		<a target="_blank" href="https://www.pinterest.com/pin/316659417526781056/">
-  		<img class="mySlides" src="images/ads/ad_adidas.jpg" style="width:100%"></a>
-
-  		<a target="_blank" href="https://www.amazon.com/Best-Sellers-Health-Personal-Care-Sports-Nutrition-Protein/zgbs/hpc/6973704011/ref=zg_bs_unv_hpc_3_6973717011_2">
-  		<img class="mySlides" src="images/ads/ad_protein.jpg" style="width:100%"></a>
+	<!--@Author- Harsha: Ads-->
+	<div class="col-md-3 column col-md-offset-0-5">
+		<a href="message.php">Testing</a>
 	</div>
-</div>
-	
-<script>
-		var myIndex = 0;
-		carousel();
+	<div class="col-md-3" style="margin-left: 13px; margin-top: 10px;">
+		<div style="max-width: 500px;">	
+	  
+	  		<a target="_blank" href="https://www.ebay.com/b/Mens-Fitness-Running-Shoes/158952/bn_1965202">
+	  		<img class="mySlides" src="images/ads/ad_ebay.jpg" style="width:100%"></a>
+	  
+	  		<a target="_blank" href="http://www.indianavolleyballcamps.com/index.html">
+	  		<img class="mySlides" src="images/ads/ad_volleyball.jpg" style="width:100%"></a>
 
-		function carousel() {
-    	var i;
-    	var x = document.getElementsByClassName("mySlides");
-    	for (i = 0; i < x.length; i++) {
-       		x[i].style.display = "none";  
-    	}
-    	myIndex++;
-    	if (myIndex > x.length) {myIndex = 1}    
-    	x[myIndex-1].style.display = "block";  
-    	setTimeout(carousel, 3000); // Change image every 3 seconds
+	  		<a target="_blank" href="http://northamericasports.blogspot.ca/2012/09/new-nike-epl-match-ball-maxim-for.html">
+	  		<img class="mySlides" src="images/ads/ad_nike.jpg" style="width:100%"></a>
+	  
+	  		<a target="_blank" href="https://www.anytimefitness.com/gyms/2822/bloomington-in-47401/">
+	  		<img class="mySlides" src="images/ads/ad_gym.jpg" style="width:100%"></a>
+
+	  		<a target="_blank" href="https://www.pinterest.com/pin/316659417526781056/">
+	  		<img class="mySlides" src="images/ads/ad_adidas.jpg" style="width:100%"></a>
+
+	  		<a target="_blank" href="https://www.amazon.com/Best-Sellers-Health-Personal-Care-Sports-Nutrition-Protein/zgbs/hpc/6973704011/ref=zg_bs_unv_hpc_3_6973717011_2">
+	  		<img class="mySlides" src="images/ads/ad_protein.jpg" style="width:100%"></a>
+		</div>
+	</div>
+		
+	<script>
+			var myIndex = 0;
+			carousel();
+
+			function carousel() {
+	    	var i;
+	    	var x = document.getElementsByClassName("mySlides");
+	    	for (i = 0; i < x.length; i++) {
+	       		x[i].style.display = "none";  
+	    	}
+	    	myIndex++;
+	    	if (myIndex > x.length) {myIndex = 1}    
+	    	x[myIndex-1].style.display = "block";  
+	    	setTimeout(carousel, 3000); // Change image every 3 seconds
+			}
+	</script>
+
+	<!--@Author: Harsha- User Location Checker-->
+
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script>
+		function getLocation() {
+		    if (navigator.geolocation) {
+		        navigator.geolocation.getCurrentPosition(showPosition, showError);
+		    } else {
+		       alert('Geolocation is not supported by this browser');
+		    }
 		}
-</script>
+
+		function showPosition(position) {
+		    var defaultUserLocation = "<?php echo($user_obj->getUserLocation()); ?>";
+		    var latlon = position.coords.latitude + "," + position.coords.longitude;
+		    var locDetails = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+latlon+"&sensor=true";
+		    
+		    $.get({
+		        url: locDetails,
+		        success: function(data){
+		            console.log(data);
+		            var update_location;
+		         	var current_location = data.results[5].address_components[0].long_name.split(" ",1);
+		         	
+		            if (current_location!=defaultUserLocation) {
+
+		            	swal("Your default location is "+defaultUserLocation+". Change it to "+current_location+"?", {
+		  				buttons: ["No, Use default", "Yes"],
+						})
+						.then((Yes) => {
+		  					if (Yes) {
+								var ajax_location = current_location;
+								$.post("handlers/ajax_update_location.php", {location:ajax_location});
+		    					swal("Your location changed to "+current_location);
+		    					setTimeout(function(){location.reload();}, 2000);
+		    				}
+		  					else
+		    			 		swal("You'll only be able to see posts in "+defaultUserLocation);
+						});
+		            }
+		        } 
+			});
+		}
+
+		function showError(error) {
+		    switch(error.code) {
+		        case error.PERMISSION_DENIED:
+		            alet("User denied the request for Geolocation.");
+		            break;
+		            
+		        case error.POSITION_UNAVAILABLE:
+		            alert("Location information is unavailable.");
+		            break;
+		        case error.TIMEOUT:
+		            alert("The request to get user location timed out.");
+		            break;
+		        case error.UNKNOWN_ERROR:
+		            alert("An unknown error occurred.");
+		            break;
+		    }
+		}
+	</script>
 
 
-
-<!--@Author: Harsha- User Location Checker-->
-
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
-    } else {
-       alert('Geolocation is not supported by this browser');
-    }
-}
-
-function updateLocation(newLocation){
-
-}
-
-function showPosition(position) {
-    var defaultUserLocation = "<?php echo($user_obj->getUserLocation()); ?>";
-    var latlon = position.coords.latitude + "," + position.coords.longitude;
-    var locDetails = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+latlon+"&sensor=true";
-    
-    $.get({
-        url: locDetails,
-        success: function(data){
-            console.log(data);
-            var update_location;
-         	var current_location = data.results[5].address_components[0].long_name.split(" ",1);
-         	
-            if (current_location!=defaultUserLocation) {
-
-            	swal("Your default location is "+defaultUserLocation+". Change it to "+current_location+"?", {
-  				buttons: ["No, Use default", "Yes"],
-				})
-				.then((Yes) => {
-  					if (Yes) {
-							var ajax_location = current_location;
-							$.post("handlers/ajax_update_location.php", {location:ajax_location});
-    					swal("Your location changed to "+current_location);
-    				}
-
-  					 else
-    			 		swal("You'll only be able to see posts in "+defaultUserLocation);
-				});
-            }
-        } 
-	});
-}
-
-function showError(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            alet("User denied the request for Geolocation.");
-            break;
-            
-        case error.POSITION_UNAVAILABLE:
-            alert("Location information is unavailable.");
-            break;
-        case error.TIMEOUT:
-            alert("The request to get user location timed out.");
-            break;
-        case error.UNKNOWN_ERROR:
-            alert("An unknown error occurred.");
-            break;
-    }
-}
-</script>
-
-
-</body>
+	</body>
 </html>

@@ -70,104 +70,16 @@
                             <img src="img/Search/magnifying_glass.png" alt="some image" id="image_button">
                         </div>
 
+                        
                         <div class="search_results">
                         </div>
-
-                        <div class="search_results_footer_empty">
-                        </div>            
-
+                        <!--The above div is closed through php page so please dont close it-->
+                        <!--div class='search_results_footer_empty'>
+                        </div-->
                     </div>
-
-                    <script src="js/search.js"></script>
-                    <script type="text/javascript">
-                        function ready(){
-                            var div = document.getElementById("scroll_messages");
-                            div.scrollTop = div.scrollHeight;
-                        }
-
-                        function getLiveSearchUsers(value, user){
-                            $.post("ajax_search.php", {query:value, userLoggedIn:user}, function (data){
-                                $(".search_results").html(data);
-                            });
-                        }
-
-                        function getDropdownData(user, type){ 
-                            if($(".dropdown_data_window").css("height") == "0px"){
-                                var pageName;
-
-                                if(type == 'notification'){
-
-                                }
-                                else if(type == 'message'){
-                                    pageName = "ajax_load_messages.php";
-                                    $("span").remove("#unread_message");
-                                }
-
-                                var ajaxreq = $.ajax({
-                                    url: "handlers/" +pageName,
-                                    type: "POST",
-                                    data: "page=1&userLoggedIn=" + user,
-                                    cache:false,
-
-                                    success: function(response){
-                                        $(".dropdown_data_window").html(response);
-                                        $(".dropdown_data_window").css({"padding" : "0px" , "height" : "280px", "border" : "1px solid #DADADA"});
-                                        $(".dropdown_data_type").val(type);
-                                    } 
-                                });
-
-
-                            }
-                            else{
-                                $(".dropdown_data_window").html("");
-                                $(".dropdown_data_window").css({"padding" : "0px" , "height" : "0px" , "border" : "none"});
-                            }
-
-                        }
-
-                        // Function for infinite scrolling on message notification bar    
-                        var userLoggedIn = '<?php echo $userLoggedIn; ?>';
-
-                        $(document).ready(function() {
-
-                            $('.dropdown_data_window').scroll(function(){
-                                var inner_height= $('.dropdown_data_window').innerHeight();
-                                var scroll_top = $('.dropdown_data_window').scrollTop();
-                                var page = $('.dropdown_data_window').find('.nextPageDropDownData').val();
-                                var noMoreData = $('.dropdown_data_window').find('.noMoreDropDownData').val();
-
-                                if((scroll_top + inner_height >= $('.dropdown_data_window')[0].scrollHeight) && noMoreData == 'false') {
-
-
-                                    var pageName;  // Holds name of page to send ajax request to
-                                    var type = $('#dropdown_data_type').val();
-
-                                    if (type == 'notification')
-                                        pageName = "ajax_load_notifications.php";
-                                    else if(type == 'message')
-                                        pageName = "ajax_load_messages.php";
-
-
-
-                                    var ajaxReq = $.ajax({
-                                        url:"handlers/" + pageName,
-                                        type:"POST",
-                                        data:"page=" + page + "&userLoggedIn=" + userLoggedIn,
-                                        cache:false,
-
-                                        success:function(response){
-                                            $('.dropdown_data_window').find('.nextPageDropDownData').remove(); // Removes current .nextpage
-                                            $('.dropdown_data_window').find('.noMoreDropDownData').remove();
-                                            $('.dropdown_data_window').append(response);
-                                        }
-                                    });
-                                }
-                            }); 
-                        });
-                    </script>
-
                 </div>
-
+            </div>
+        </div>   
                 <nav>
                     <?php 
                         //Unread messages 
@@ -196,8 +108,93 @@
                     <input type="hidden" id="dropdown_data_type" value="" name="">
                 </div>
 
-            </div>
-        </div>
+        <script src="js/search.js"></script>
+        <script type="text/javascript">
+            function ready(){
+                var div = document.getElementById("scroll_messages");
+                div.scrollTop = div.scrollHeight;
+            }
+
+            function getLiveSearchUsers(value, user){
+                $.post("ajax_search.php", {query:value, userLoggedIn:user}, function (data){
+                    $(".search_results").html(data);
+                });
+            }
+
+            function getDropdownData(user, type){ 
+                if($(".dropdown_data_window").css("height") == "0px"){
+                    var pageName;
+
+                    if(type == 'notification'){
+
+                    }
+                    else if(type == 'message'){
+                        pageName = "ajax_load_messages.php";
+                        $("span").remove("#unread_message");
+                    }
+
+                    var ajaxreq = $.ajax({
+                        url: "handlers/" +pageName,
+                        type: "POST",
+                        data: "page=1&userLoggedIn=" + user,
+                        cache:false,
+
+                        success: function(response){
+                            $(".dropdown_data_window").html(response);
+                            $(".dropdown_data_window").css({"padding" : "0px" , "height" : "280px", "border" : "1px solid #DADADA", "z-index" : "10"});
+                            $(".dropdown_data_type").val(type);
+                        } 
+                    });
+
+
+                }
+                else{
+                    $(".dropdown_data_window").html("");
+                    $(".dropdown_data_window").css({"padding" : "0px" , "height" : "0px" , "border" : "none"});
+                }
+
+            }
+
+            // Function for infinite scrolling on message notification bar    
+            var userLoggedIn = '<?php echo $userLoggedIn; ?>';
+
+            $(document).ready(function() {
+
+                $('.dropdown_data_window').scroll(function(){
+                    var inner_height= $('.dropdown_data_window').innerHeight();
+                    var scroll_top = $('.dropdown_data_window').scrollTop();
+                    var page = $('.dropdown_data_window').find('.nextPageDropDownData').val();
+                    var noMoreData = $('.dropdown_data_window').find('.noMoreDropDownData').val();
+
+                    if((scroll_top + inner_height >= $('.dropdown_data_window')[0].scrollHeight) && noMoreData == 'false') {
+
+
+                        var pageName;  // Holds name of page to send ajax request to
+                        var type = $('#dropdown_data_type').val();
+
+                        if (type == 'notification')
+                            pageName = "ajax_load_notifications.php";
+                        else if(type == 'message')
+                            pageName = "ajax_load_messages.php";
+
+
+
+                        var ajaxReq = $.ajax({
+                            url:"handlers/" + pageName,
+                            type:"POST",
+                            data:"page=" + page + "&userLoggedIn=" + userLoggedIn,
+                            cache:false,
+
+                            success:function(response){
+                                $('.dropdown_data_window').find('.nextPageDropDownData').remove(); // Removes current .nextpage
+                                $('.dropdown_data_window').find('.noMoreDropDownData').remove();
+                                $('.dropdown_data_window').append(response);
+                            }
+                        });
+                    }
+                }); 
+            });
+        </script>
         <!-- jQuery -->
         <script src="vendor/jquery/jquery.min.js"></script>
 

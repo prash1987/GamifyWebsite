@@ -8,7 +8,7 @@ $(document).ready(function() {
  
               $('#image_button').on('click', function() {
                            //document.search_form1.submit();
-                           alert("button is clicked");
+                           //alert("button is clicked");
               });
  
 });

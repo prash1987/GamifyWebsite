@@ -5,6 +5,7 @@ include("../classes/UserClass.php");
 
 $query = $_POST['query'];
 $userLoggedIn = $_POST['userLoggedIn'];
+$return_string = "";
 
 $time = time();
 $status_query = mysqli_query($con, "UPDATE user SET status_timestamp = '$time' WHERE User_id = '$userLoggedIn'");
@@ -49,7 +50,7 @@ $user_logged_obj = new UserClass($con, $userLoggedIn);
 			else
 				$status = "<img src='images/icons/offline.png' style='float:right; height:16px;' title='".$user_found_obj->getFirstAndLastName()." is offline'>";
 
-			echo "<div class='resultsDisplay'>
+			$return_string .= "<div class='resultsDisplay'>
 		 					<a href = profile.php?profile_username=" . $user_found_obj->getUserName() ." style='color:#000'>
 
 		 					<div class='liveSearchProfilePic'>
@@ -62,6 +63,8 @@ $user_logged_obj = new UserClass($con, $userLoggedIn);
 		 				</a>
 		 			</div>";
 		}
+
+        echo $return_string;
 
 		// Code Commented by Sagar on 11/29/2017 to test the object oriented method to fetch the data-----------------------------------------------------
 		// while ($row = mysqli_fetch_array($usersReturned)){
