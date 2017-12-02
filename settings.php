@@ -1,8 +1,5 @@
 	<?php  
-	require 'config.php';
 	include("header.php");
-	include("classes/UserClass.php");
-	include("classes/PostClass.php");
 
 	if(isset($_SESSION['login_user'])) {
 		$userLoggedIn = $_SESSION['login_user'];
@@ -93,37 +90,55 @@
 			<div class="form-group">
 			    <label  class="col-sm-2 control-label">First Name</label>
 			    <div class="col-sm-10">
-			      	<input type="text" class="form-control" name="firstName" placeholder="First Name" value="<?php echo $user_obj->getFirstName(); ?>" required>
+			    	<div class="input-group">
+      					<span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>	
+						<input type="text" class="form-control" name="firstName" placeholder="First Name" value="<?php echo $user_obj->getFirstName(); ?>" required autofocus>
+					</div>
 			    </div>
 			</div>
             <div class="form-group">
 			    <label  class="col-sm-2 control-label">Last Name</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="lastName" placeholder="Last Name" value="<?php echo $user_obj->getLastName(); ?>" required>
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>	
+			      		<input type="text" class="form-control" name="lastName" style="height:35px;" placeholder="Last Name" value="<?php echo $user_obj->getLastName(); ?>" required>
+					</div>					
 				</div>
 			</div>
 			<div class="form-group">
 			    <label  class="col-sm-2 control-label">Email/User Name</label>
-			    <div class="col-sm-10">
-			      	<input type="email" class="form-control" name="userEmail" placeholder="Email address" value="<?php echo $user_obj->getUserName(); ?>" readonly>
+			    <div class="col-sm-10">			      	
+			      	<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+			      		<input type="email" class="form-control" name="userEmail" placeholder="Email address" value="<?php echo $user_obj->getUserName(); ?>" readonly>
+					</div>
 				</div>
 			</div>
             <div class="form-group">
 			    <label  class="col-sm-2 control-label">Location</label>
 			    <div class="col-sm-10">
-			      	<input type="text" class="form-control" id = "userAddress" name="userAddress" value="<?php echo $user_obj->getUserLocation(); ?>" readonly>
+			      	<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-globe" aria-hidden="true"></i></span>
+			      		<input type="text" class="form-control" id = "userAddress" style="height:36px;" name="userAddress" value="<?php echo $user_obj->getUserLocation(); ?>" placeholder="Address" required>
+					</div>
 				</div>
 			 </div>
             <div class="form-group">
 			    <label  class="col-sm-2 control-label">Phone Number</label>
 			    <div class="col-sm-10">
-				    <input type="text" pattern="\d*" maxlength="10" class="form-control" name="userContact" title='Invalid phone number' value="<?php echo $user_obj->getUserContact(); ?>" placeholder="Phone Number" required>
+			    	<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+			      		<input type="text" pattern="\d*" maxlength="10" class="form-control" name="userContact" title='Invalid phone number' value="<?php echo $user_obj->getUserContact(); ?>" placeholder="Phone Number" required>
+					</div>
 				</div>
 			</div>
             <div class="form-group">
 			    <label  class="col-sm-2 control-label">Date of Birth</label>
 			    <div class="col-sm-10">
-			      	<input type="date" class="form-control" id = "userDOB" name="userDOB" value="<?php echo $user_obj->getDOB(); ?>" placeholder="Date of Birth" required>
+			      	<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+			      		<input type="date" class="form-control" id = "userDOB" name="userDOB" placeholder="Date of Birth" value="<?php echo $user_obj->getDOB(); ?>" required>
+					</div>
 				</div>
 			</div>
 		  	<div class="form-group">

@@ -384,7 +384,7 @@
 							    <div class="col-sm-10">
 									<div class="input-group">
       									<span class="input-group-addon"><i class="fa fa-globe" aria-hidden="true"></i></span>						
-								      	<input type="text" class="form-control" id = "userAddress" style="height:36px;" name="userAddress" value="<?php echo @$city_name;?>"placeholder="Address" required>
+								      	<input type="text" class="form-control" id = "userAddress" style="height:36px;" name="userAddress" value="<?php echo @$city_name;?>" splaceholder="Address" required>
 								    </div>
 								</div>
 							</div>

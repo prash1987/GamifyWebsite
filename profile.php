@@ -34,10 +34,12 @@
 		$user_obj3 = new UserClass($con, $userLoggedIn);
 		$user_obj3->Block($username);
 		header("Location: block.php");
-
 	}
 
 
+	if(isset($_POST['update_profile'])) {		
+		header("Location: settings.php");
+	}
 
 	if(isset($_POST['post_message'])) {
 		if(isset($_POST['message_body'])) {
@@ -104,7 +106,7 @@
 
 		if($userLoggedIn == $username)
 					{
-						echo "<button name='update_profile' class='btn btn-primary btn-sm'>Update Profile</button>";
+						echo "<input type='submit' id= 'update_profile' name='update_profile' class='btn btn-primary btn-sm' value='Update Profile'>";
 					}
 					else if($user_obj1->isFriend1($username)) 
 					{

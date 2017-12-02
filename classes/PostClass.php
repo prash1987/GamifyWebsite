@@ -90,7 +90,7 @@ class PostClass {
 				/*This is the delete button logic*/
 				if($userLoggedIn == $added_by){
 					$delete_id = "post_".$id;
-					$delete_button = "<i style='margin-right:50px; margin-top: 20px;' class='delete_button fa fa-minus-square' id='$delete_id' onClick='delete_function(\"$delete_id\");'></i>";
+					$delete_button = "<i style='margin-right:50px; margin-top: 20px;' class='delete_button glyphicon glyphicon-trash' id='$delete_id' onClick='delete_function(\"$delete_id\");'></i>";
 				}
 				else {
 					$delete_button = "";
@@ -331,7 +331,7 @@ class PostClass {
 				/*This is the delete button logic*/
 				if($userLoggedIn == $added_by){
 					$delete_id = "post_".$id;
-					$delete_button = "<i class='delete_button glyphicon glyphicon-trash' id='$delete_id' onClick='delete_function(\"$delete_id\");'></i>";
+					$delete_button = "<i style='margin-right:50px; margin-top: 20px;' class='delete_button glyphicon glyphicon-trash' id='$delete_id' onClick='delete_function(\"$delete_id\");'></i>";
 				}
 				else {
 					$delete_button = "";
@@ -467,7 +467,7 @@ class PostClass {
 											Event of <u>$game</u> will be held in $location at <br> $play_time and $gender								
 										</div>
 										<br>
-										<img src='$image_path' height='400px' width='500px'style='border:2px solid #021a40; max-width:500px; max-height:400px;'></img>
+										<img src='$image_path' height='30%' width='500px'style='border:1px solid #021a40; max-width:500px; max-height:30%;'></img>
 										<div class='newsfeedPostOptions'>	
 											<button id='comment_anchor' class='btn btn-primary btn-xs' style='margin-bottom:15px;' onClick='javascript:toggle$id();'>Comments($comments_check_num)</button>&nbsp;&nbsp;&nbsp;	
 											<span style='margin-top:10px;'><iframe allowtransparency='true' src='like.php?post_id=$id' style='height: 47px; width: 130px;' frameBorder='0'  scrolling='no'></iframe>
