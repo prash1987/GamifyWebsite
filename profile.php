@@ -80,7 +80,7 @@
 			getMessagesForLiveChat();
 
 			var myVar = setInterval(getMessagesForLiveChat, 1000);
-   		</script>>
+   		</script>
    	</head>
 
 	<br><br><br><br>

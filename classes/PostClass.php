@@ -70,13 +70,13 @@ class PostClass {
 				$game = $row['game'];
 				$gender = $row['gender'];
 				if ($gender == 'A'){
-					$gender = "This event is open for <b>All</b>";
+					$gender = "is open for <b>All</b>";
 				}
 				elseif ($gender == 'M') {
-					$gender = "This event is open to <b>Males</b> only";
+					$gender = "is open to <b>Males</b> only";
 				}
 				elseif ($gender == 'F') {
-					$gender = "This event is open to <b>Females</b> only";
+					$gender = "is open to <b>Females</b> only";
 				}
 
 				if(isset($_SESSION['login_user'])) {
@@ -90,7 +90,7 @@ class PostClass {
 				/*This is the delete button logic*/
 				if($userLoggedIn == $added_by){
 					$delete_id = "post_".$id;
-					$delete_button = "<i class='delete_button fa fa-minus-square' id='$delete_id' onClick='delete_function(\"$delete_id\");'></i>";
+					$delete_button = "<i style='margin-right:50px; margin-top: 20px;' class='delete_button fa fa-minus-square' id='$delete_id' onClick='delete_function(\"$delete_id\");'></i>";
 				}
 				else {
 					$delete_button = "";
@@ -199,44 +199,49 @@ class PostClass {
 				}
 
 				$str .= "<div class='status_post'>
+							<div class='row'>
+								<div class='posted_by' style='color:#ACACAC;'>
+									
+									<div class='col-xs-3 col-sm-2'>
+										<a href='profile.php?profile_username=$added_by'><img src=$profile_pic class='img-circle' height='90' width='90' alt=$first_name $last_name style='margin-left: 5px;'></a>
+									</div>
 
-							<div class='posted_by' style='color:#ACACAC;'>
-								<img src=$profile_pic class='img-circle' height='50' width='50' alt=$first_name $last_name style='margin-left: 5px; vertical-align: middle;'></a>
-								<a href='profile.php?profile_username=$added_by'>
-								<b style='margin-left: 15px;'> $first_name $last_name </b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								$time_message
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								$delete_button
-
-							</div>
-							<div style='margin-left: 75px;'>
-								<div id='post_body'>
-									$body
-									<br>
-								</div>
-								<div id='post_loc_and_play_time'>
-									Game: $game
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									$location
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									$play_time
-									<br>								
-									<span> $gender </span>								
-								</div>
-								<br>
-								<img src='$image_path' height='40%' width='40%'></img>
-								<div class='newsfeedPostOptions'>	
-									<button id='comment_anchor' class='btn btn-primary btn-xs' onClick='javascript:toggle$id();'>Comments($comments_check_num)</button>&nbsp;&nbsp;&nbsp;	
-									<span style='margin-top:10px;'><iframe allowtransparency='true' src='like.php?post_id=$id' style='height: 47px; width: 130px;' frameBorder='0'  scrolling='no'></iframe>
-									</span>
+									<div class='col-xs-9 col-sm-10'>
+										<a href='profile.php?profile_username=$added_by'><b> $first_name $last_name </b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										$delete_button
+										<br>
+										<i>$time_message</i>
+									</div>
 								</div>
 							</div>
-						</div>
+							<div class='row'>
+								<div class='col-sm-10 col-sm-offset-0_5'>
+									<div style='margin-left: 75px;'>
+										<div id='post_body'>
+											$body
+											<br>
+											<br>
+										</div>
+										<div id='post_loc_and_play_time'>
+											<b>Note:</b>
+											Event of <u>$game</u> will be held in $location at <br> $play_time and $gender								
+										</div>
+										<br>
+										<img src='$image_path' style='border:2px solid #021a40; width:100%; height:auto;'></img>
+										<div class='newsfeedPostOptions'>	
+											<button id='comment_anchor' class='btn btn-primary btn-xs' style='margin-bottom:15px;' onClick='javascript:toggle$id();'>Comments($comments_check_num)</button>&nbsp;&nbsp;&nbsp;	
+											<span style='margin-top:10px;'><iframe allowtransparency='true' src='like.php?post_id=$id' style='height: 47px; width: 130px;' frameBorder='0'  scrolling='no'></iframe>
+											</span>
+										</div>
+									</div>
 
-							<div class='post_comment' id='toggleComment$id' style='display:none; margin-left: 75px;'>
-							<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
+
+									<div class='post_comment' id='toggleComment$id' style='display:none; margin-left: 75px;'>
+										<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
+									</div>
+								</div>
+							</div>
 						</div>
 						
 						<hr>";
@@ -306,13 +311,13 @@ class PostClass {
 				$game = $row['game'];
 				$gender = $row['gender'];
 				if ($gender == 'A'){
-					$gender = "This event is open for <b>All</b>";
+					$gender = "is open for <b>All</b>";
 				}
 				elseif ($gender == 'M') {
-					$gender = "This event is open to <b>Males</b> only";
+					$gender = "is open to <b>Males</b> only";
 				}
 				elseif ($gender == 'F') {
-					$gender = "This event is open to <b>Females</b> only";
+					$gender = "is open to <b>Females</b> only";
 				}
 
 				if(isset($_SESSION['login_user'])) {
@@ -433,43 +438,49 @@ class PostClass {
 				}
 
 				$str .= "<div class='status_post'>
+							<div class='row'>
+								<div class='posted_by' style='color:#ACACAC;'>
+									
+									<div class='col-xs-3 col-sm-2'>
+										<a href='profile.php?profile_username=$added_by'><img src=$profile_pic class='img-circle' height='90' width='90' alt=$first_name $last_name style='margin-left: 5px;'></a>
+									</div>
 
-							<div class='posted_by' style='color:#ACACAC;'>
-								<a href='profile.php?profile_username=$added_by'>
-								<img src=$profile_pic class='img-circle' height='50' width='50' alt=$first_name $last_name style='margin-left: 5px; vertical-align: middle;'></a>
-								<a href='profile.php?profile_username=$added_by'>
-								<b style='margin-left: 15px;'> $first_name $last_name </b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$time_message
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$delete_button
-
+									<div class='col-xs-9 col-sm-10'>
+										<a href='profile.php?profile_username=$added_by'><b> $first_name $last_name </b></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										$delete_button
+										<br>
+										<i>$time_message</i>
+									</div>
+								</div>
 							</div>
-							<div style='margin-left: 75px;'>
-								<div id='post_body'>
-									$body
-									<br>
-								</div>							
-								<div id='post_loc_and_play_time'>
-									Game: $game
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									$location
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									$play_time
-									<br>								
-									<span> $gender </span>								
-								</div>
-								<br>
-								<img src='$image_path' height='40%' width='40%'></img>
-								<div class='newsfeedPostOptions'>	
-									<button id='comment_anchor' class='btn btn-primary btn-xs' onClick='javascript:toggle$id();'>Comments($comments_check_num)</button>&nbsp;&nbsp;&nbsp;	
-									<span style='margin-top:10px;'><iframe allowtransparency='true' src='like.php?post_id=$id' style='height: 47px; width: 130px;' frameBorder='0'  scrolling='no'></iframe>
-									</span>
-								</div>
-							</div>		
-						</div>
+							<div class='row'>
+								<div class='col-sm-10 col-sm-offset-0_5'>
+									<div style='margin-left: 75px;'>
+										<div id='post_body'>
+											$body
+											<br>
+											<br>
+										</div>
+										<div id='post_loc_and_play_time'>
+											<b>Note:</b>
+											Event of <u>$game</u> will be held in $location at <br> $play_time and $gender								
+										</div>
+										<br>
+										<img src='$image_path' height='400px' width='500px'style='border:2px solid #021a40; max-width:500px; max-height:400px;'></img>
+										<div class='newsfeedPostOptions'>	
+											<button id='comment_anchor' class='btn btn-primary btn-xs' style='margin-bottom:15px;' onClick='javascript:toggle$id();'>Comments($comments_check_num)</button>&nbsp;&nbsp;&nbsp;	
+											<span style='margin-top:10px;'><iframe allowtransparency='true' src='like.php?post_id=$id' style='height: 47px; width: 130px;' frameBorder='0'  scrolling='no'></iframe>
+											</span>
+										</div>
+									</div>
 
-							<div class='post_comment' id='toggleComment$id' style='display:none;margin-left:75px;'>
-							<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
+
+									<div class='post_comment' id='toggleComment$id' style='display:none; margin-left: 75px;'>
+										<iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
+									</div>
+								</div>
+							</div>
 						</div>
 						
 						<hr>";

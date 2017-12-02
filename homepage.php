@@ -77,6 +77,10 @@
 				display:none;
 				z-index: -1;
 			}
+
+			input[type="file"] {
+				display: inline-block !important; 
+			}
 		</style>
 	</head>
 
@@ -164,7 +168,7 @@
 			<textarea name="post_text" id="post_text" placeholder="Post here" required></textarea>
 			<input type="submit" name="post" id="post_button" value="Post" class="btn btn-primary btn-lg" ><br><br>
 			
-			<label for="post_game">Game</label>
+			<label for="post_game">Game:  </label>
 			    <select id="post_game" name="post_game">
 			      <option value="Cricket">Cricket</option>
 			      <option value="Badminton">Badminton</option>
@@ -179,7 +183,7 @@
 				  <option value="MartialArts">Martial Arts</option>
 			    </select>
 		  	
-			<label for="post_gender">Gender</label>
+			<label for="post_gender" style="margin-left: 3px;">Gender:  </label>
 			
 			<label class="form-check-label">
 			    <input class="form-check-input" type="radio" name="post_gender" id="inlineRadio1" value="A" checked="checked"> All
@@ -195,11 +199,11 @@
 
 			&nbsp;&nbsp;&nbsp;&nbsp;
 
-			<input type="text" name="post_location" id = "post_location" placeholder="Location" width="20px" required>
-			<input type="datetime-local" name="post_time" id = "post_time" placeholder="Date and Time" required>
-
+			<input type="text" name="post_location" id = "post_location" placeholder="Enter Location of event" width="10px" required> 
 			<br>
-		    <label for="post_image">Upload Image</label> <input type="file" name="post_image" id="post_image"> <br>		  	
+			<label for="post_time">Event Date and Time:  </label> <input type="datetime-local" name="post_time" id = "post_time" placeholder="Date and Time" required>
+		    <label for="post_image" style="margin-left: 3px;"> Upload Image:  </label>&nbsp;&nbsp;<input type="file" name="post_image" id="post_image">
+		    <br>		  	
 			
 			<hr>
 		</form>

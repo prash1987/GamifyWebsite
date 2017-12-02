@@ -41,7 +41,16 @@
         <link href="sn_styles.css" rel="stylesheet" type="text/css">
         <link href="fa-css/css/font-awesome.min.css" rel="stylesheet">
         
-        
+        <style type="text/css">
+            a:hover,
+            a:focus{
+                color:#428bca;
+            }
+
+            .col-sm-offset-0_5{
+                margin-left: 6%;
+            }
+        </style>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -210,5 +219,3 @@
 
         <!-- Theme JavaScript -->
         <script src="js/freelancer.min.js"></script>
-    </body>
-</html>
