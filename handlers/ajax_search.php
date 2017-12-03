@@ -64,6 +64,11 @@ $user_logged_obj = new UserClass($con, $userLoggedIn);
 		 			</div>";
 		}
 
+        $return_string .= "<form action ='search.php' method ='post'>
+        						<input type='hidden' name='query' value='".$query."'>
+        						<input type = 'submit' class='btn btn-primary btn-block signup'  value ='See All Results'/>
+        					</form>";
+
         echo $return_string;
 
 		// Code Commented by Sagar on 11/29/2017 to test the object oriented method to fetch the data-----------------------------------------------------
