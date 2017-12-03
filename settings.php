@@ -13,6 +13,8 @@
 	    $firstname=$_POST["firstName"];
 	    $lastname=$_POST["lastName"];    
 	    $contact=$_POST["userContact"];
+	    $location=$_POST["userAddress"];
+
 	    $date = $_POST["userDOB"];
     
 	    if(isset($_FILES['userPic'])){
@@ -46,8 +48,7 @@
 
 	    $user_id = $user_obj->getUserName();
 
-	    $sql = "UPDATE user set first_name='$firstname', last_name='$lastname', contact='$contact', dob='$date', propic='$new_file_name' 
-				WHERE user_id='$user_id';";
+	    $sql = "UPDATE user set first_name='$firstname', last_name='$lastname', address='$location', dob='$date', contact='$contact', propic='$new_file_name' WHERE user_id='$user_id';";
 
 		if ($con->query($sql) === TRUE) {
 			header('Location: homepage.php');			 
@@ -152,11 +153,13 @@
             </form>
             <hr>
 
-            <form action="chg_pswrd.php" method="post" class="form-horizontal">            	
-            	<div class="action">
+            <form action="chg_pswrd.php" method="post">
             		<input type='hidden' name ='email_id' value ="<?php echo $user_obj->getUserName(); ?>" readonly>
-                	<input type="submit" class="btn btn-primary signup" value="Change Password">
-            	</div>
+                	<input type="submit" class="btn btn-primary" value="Change Password">
+            </form><br>
+
+            <form action="block.php" method="post">
+                	<input type="submit" class="btn btn-primary" value="Unblock Users">
             </form>
 	</div>
 
