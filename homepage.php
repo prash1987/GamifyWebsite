@@ -21,15 +21,18 @@
 		$post = new PostClass($con, $userLoggedIn);
 		$post->submitPost($_POST['post_text'], $_POST['post_location'], $_POST['post_time'], $_POST['post_game'], $_POST['post_gender'], $upload_image);
 	}
+
+    $details = json_decode(file_get_contents("http://ipinfo.io/"));
+    $city_name= $details->city;
 ?>
 	<head>
 		<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
          rel = "stylesheet">        
 		<link href="css/styles.css" rel="stylesheet">
+		<script src = "js/search.js"></script>
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
    		<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
    		<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-   		<script src = "js/search.js"></script>
-   		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
    		<script>
 
@@ -324,15 +327,8 @@
 
 		function showPosition(position) {
 		    var defaultUserLocation = "<?php echo($user_obj->getUserLocation()); ?>";
-		    var latlon = position.coords.latitude + "," + position.coords.longitude;
-		    var locDetails = "http://maps.googleapis.com/maps/api/geocode/json?latlng="+latlon+"&sensor=true";
-		    
-		    $.get({
-		        url: locDetails,
-		        success: function(data){
-		            console.log(data);
-		            var update_location;
-		         	var current_location = data.results[5].address_components[0].long_name.split(" ",1);
+		    var current_location = "<?php echo @$city_name; ?>";
+		    console.log(current_location);
 		         	
 		            if (current_location!=defaultUserLocation) {
 
@@ -340,7 +336,7 @@
 		  				buttons: ["No, Use default", "Yes"],
 						})
 						.then((Yes) => {
-		  					if (Yes) {
+		  					if (Yes) {		  						
 								var ajax_location = current_location;
 								$.post("handlers/ajax_update_location.php", {location:ajax_location});
 		    					swal("Your location changed to "+current_location);
@@ -350,8 +346,6 @@
 		    			 		swal("You'll only be able to see posts in "+defaultUserLocation);
 						});
 		            }
-		        } 
-			});
 		}
 
 		function showError(error) {

@@ -68,7 +68,7 @@
                    
                       <!-- Logo -->
                     <div class="logo">
-                        <h1><a href="index.php">GAMIFY</a></h1>
+                        <h1><a href="index.php"><img src="images/icons/logo_new.png" style="margin-top: -50px; margin-left: -50px; float: left;" width="18%"></a></h1>
                     </div>
 
                     <div class="search">

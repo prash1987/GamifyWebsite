@@ -14,7 +14,6 @@
 
 	if(isset($_POST['location']))
 	$location = $_POST['location'];
-	$location = implode(" ",$location);
 
 	$query = mysqli_query($con,"UPDATE user SET address= '". $location ."' WHERE user_id= '". $myusername. "'");
 ?>

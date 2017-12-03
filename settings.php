@@ -148,7 +148,15 @@
 	        <br>
 	        <div class="action">
                 <input type="submit" class="btn btn-primary signup"  value="Update"/><br/>
-            </div> 
+            </div>             
+            </form>
+            <hr>
+
+            <form action="chg_pswrd.php" method="post" class="form-horizontal">            	
+            	<div class="action">
+            		<input type='hidden' name ='email_id' value ="<?php echo $user_obj->getUserName(); ?>" readonly>
+                	<input type="submit" class="btn btn-primary signup" value="Change Password">
+            	</div>
             </form>
 	</div>
 

@@ -224,8 +224,8 @@ class PostClass {
 											<br>
 										</div>
 										<div id='post_loc_and_play_time'>
-											<b>Note:</b>
-											Event of <u>$game</u> will be held in $location at <br> $play_time and $gender								
+											
+											Event of <b>$game</b> will be held in <b>$location</b> at <br> <b>$play_time</b> and $gender								
 										</div>
 										<br>
 										<img src='$image_path' style='border:2px solid #021a40; width:100%; height:auto;'></img>
@@ -463,8 +463,8 @@ class PostClass {
 											<br>
 										</div>
 										<div id='post_loc_and_play_time'>
-											<b>Note:</b>
-											Event of <u>$game</u> will be held in $location at <br> $play_time and $gender								
+											
+											Event of <b>$game</b> will be held in <b>$location</b> at <br> <b>$play_time</b> and $gender								
 										</div>
 										<br>
 										<img src='$image_path' height='30%' width='500px'style='border:1px solid #021a40; max-width:500px; max-height:30%;'></img>
