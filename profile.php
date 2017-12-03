@@ -22,6 +22,11 @@
 		header("Location: login.php");
 	}
 
+	if(isset($_POST['unblock_friend'])) {
+		$user_obj2 = new UserClass($con, $userLoggedIn);
+		$user_obj2->unBlock($username);
+		header("Location: homepage.php");
+	}
 
 	if(isset($_GET['block_status']) and $_GET['block_status'] == "unblock") {
 		$user_obj2 = new UserClass($con, $userLoggedIn);
@@ -106,15 +111,15 @@
 
 		if($userLoggedIn == $username)
 					{
-						echo "<input type='submit' id= 'update_profile' name='update_profile' class='btn btn-primary btn-sm' value='Update Profile'>";
+						echo "<input type='submit' id= 'update_profile' name='update_profile' class='btn btn-primary btn-block signup' value='Update Profile'>";
 					}
 					else if($user_obj1->isFriend1($username)) 
 					{
-						echo '<input type="submit" id= "blockBtn" name="unblock_friend" class="btn btn-primary btn-block signup" value="UnBlock"><br>';
+						echo '<input type="submit" id= "blockBtn" name="unblock_friend" class="btn btn-primary btn-block signup" value="UnBlock">';
 					}
 					else
 					{
-						echo '<input type="submit" id= "blockBtn" name="block_friend" class="btn btn-primary btn-block signup" value="Block"><br>';
+						echo '<input type="submit" id= "blockBtn" name="block_friend" class="btn btn-primary btn-block signup" value="Block">';
 
 					}
 

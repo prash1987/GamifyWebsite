@@ -90,7 +90,7 @@ class PostClass {
 				/*This is the delete button logic*/
 				if($userLoggedIn == $added_by){
 					$delete_id = "post_".$id;
-					$delete_button = "<i style='margin-right:50px; margin-top: 20px;' class='delete_button glyphicon glyphicon-trash' id='$delete_id' onClick='delete_function(\"$delete_id\");'></i>";
+					$delete_button = "<i style='margin-right:50px; margin-top: 20px;' title='Delete Post' class='delete_button glyphicon glyphicon-trash' id='$delete_id' onClick='delete_function(\"$delete_id\");'></i>";
 				}
 				else {
 					$delete_button = "";
@@ -331,7 +331,7 @@ class PostClass {
 				/*This is the delete button logic*/
 				if($userLoggedIn == $added_by){
 					$delete_id = "post_".$id;
-					$delete_button = "<i style='margin-right:50px; margin-top: 20px;' class='delete_button glyphicon glyphicon-trash' id='$delete_id' onClick='delete_function(\"$delete_id\");'></i>";
+					$delete_button = "<i style='margin-right:50px; margin-top: 20px;' title='Delete Post' class='delete_button glyphicon glyphicon-trash' id='$delete_id' onClick='delete_function(\"$delete_id\");'></i>";
 				}
 				else {
 					$delete_button = "";
