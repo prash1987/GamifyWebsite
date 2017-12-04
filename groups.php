@@ -11,8 +11,11 @@
 		$sqlAdmin = mysqli_query($con, "SELECT group_id, group_name FROM groups WHERE admin = '$userLoggedIn';");
 
 		while($row_admin = mysqli_fetch_array($sqlAdmin)) {
-			$admin_group_name = $row_admin['group_name'];			
-			$div_admin = "<div>" . $admin_group_name . "</div>";
+			
+			$div_admin = "<div class='posted_by' style='color:#ACACAC;'><b>" . $row_admin['group_name'] . "</b>	
+					<a href='manage_groups.php?group_id=" . $row_admin['group_id'] . "'>
+					<input type='button' id= 'MngBtn' name='MngBtn' class='btn btn-primary signup' value='Manage'/></a></div><br>";
+
 			$data_admin = $data_admin . $div_admin . "<br>";
 		}
 
@@ -52,6 +55,7 @@
 		<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
          rel = "stylesheet">
 		<link href="css/styles.css" rel="stylesheet">
+		<link href="sn_styles.css" rel="stylesheet">
 		
    		<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
    		<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>

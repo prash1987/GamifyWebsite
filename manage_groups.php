@@ -3,47 +3,70 @@
 	include("header.php");
 
 	if(isset($_SESSION['login_user'])) {
-		$userLoggedIn = $_SESSION['login_user'];
-		$user_obj = new UserClass($con, $userLoggedIn);
-		$data_admin = "";
-		$data_member = "";
+			if(isset($_GET["group_id"])){
+				$userLoggedIn = $_SESSION['login_user'];
+				$user_obj = new UserClass($con, $userLoggedIn);
+				$group_id=$_GET["group_id"];
+				
+				$sqlAdmin = mysqli_query($con, "SELECT * FROM groups WHERE group_id = '$group_id';");
 
-		$sqlAdmin = mysqli_query($con, "SELECT group_id, group_name FROM groups WHERE admin = '$userLoggedIn';");
+				while($row_admin = mysqli_fetch_array($sqlAdmin)) {
+					$group_admin = $row_admin['admin'];
+					$group_name = $row_admin['group_name'];			
+					$group_members = $row_admin['members'];
+					$new_members = $group_members . ",";
+				}
 
-		while($row_admin = mysqli_fetch_array($sqlAdmin)) {
-			$admin_group_name = $row_admin['group_name'];			
-			$div_admin = "<div>" . $admin_group_name . "</div>";
-			$data_admin = $data_admin . $div_admin . "<br>";
-		}
-
-		$sqlMember = mysqli_query($con, "SELECT group_id, group_name FROM groups WHERE members like '%" . $userLoggedIn . "%';");
-		
-		while($row_member = mysqli_fetch_array($sqlMember)) {
-			$member_group_name = $row_member['group_name'];			
-			$div_member = "<div>" . $member_group_name . "</div>";
-			$data_member = $data_member . $div_member . "<br>";
-		}
-		
+				if($group_admin !== $userLoggedIn)
+				{
+					header("Location: invalid_request.html");
+				}
+			}
+			else{
+				header("Location: groups.php");
+			}
 	}
 	else
 	{
 		header("Location: login.php");
 	}
 
-	if($_SERVER["REQUEST_METHOD"] == "POST" and (isset($_POST['groupName']))){
-	    $groupname= $_POST["groupName"];
-	    $members= $_POST["members"];
-	    $members= $members . $userLoggedIn;
-	    $user_id = $userLoggedIn;
+	if($_SERVER["REQUEST_METHOD"] == "POST"){
+	    
+	    $user_id = $userLoggedIn;	    
+	    $member_to_delete = '';
 
-	    $sql = "INSERT INTO groups(group_name, admin, members) values('$groupname','$user_id','$members');";
+		foreach($_POST['current_members'] as $vals) {
+			if($vals!==$user_id){
+		    	$member_to_delete = $vals . ',';
+		    	$new_members = str_replace($member_to_delete, "", $new_members);
+		    }
+		}
+
+		if(substr($new_members, -1) === "," ){
+			$new_members = substr($new_members, 0, strlen($new_members)-1);
+		}
+
+	 	$sql = "UPDATE groups SET members='$new_members' WHERE group_id='$group_id';";
 
 		if ($con->query($sql) === TRUE) {
-			header('Location: groups.php');			 
-			//echo "<b><p>Profile updated successfully</p></b>"; 
+		 	header('Location: groups.php');
 		}
 		else {
-			echo "Something went wrong. Error: " . $sql . "<br>" . $con->error;
+		 	echo "Something went wrong. Error: " . $sql . "<br>" . $con->error;
+		}
+
+		///Below is the code that should be executed if the user is trying to add more members
+		if(isset($_POST['members'])){
+			$members= $_POST["members"];
+			$sql = "UPDATE groups SET members= CONCAT(members,',','" . '$members' . "') WHERE group_id='$group_id';";
+
+			if ($con->query($sql) === TRUE) {
+				header('Location: groups.php'); 
+			}
+			else {
+				echo "Something went wrong. Error: " . $sql . "<br>" . $con->error;
+			}
 		}
 	}
 	?>
@@ -91,87 +114,53 @@
 	</div>
 
 	<div class="col-md-6 column col-md-offset-0-5">
-		<h3>Manage Group - </h3><hr>
+		<h3>Manage Group - <?php echo $group_name; ?> </h3><hr>
 
-		<form action="" method="post" class="form-horizontal">
+		<form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
 			<div class="form-group">
-			    <label  class="col-sm-2 control-label">First Name</label>
+				<label  class="col-sm-2 control-label">Current Members:</label>
+				<div class="col-sm-10">
+				    <select multiple class="form-control" id="current_members" name="current_members[]">
+			    	<?php				    		
+			    		$members_arr = explode(",", $group_members);
+			    		for ($i = 0; $i < count($members_arr); $i++) {
+			    			echo "<option value='" . $members_arr[$i] . "'>" . $members_arr[$i] . "</option>";
+			    		}
+			    	?>
+				    </select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label  class="col-sm-2 control-label">Select the member and click Remove</label>
+				<div class="col-sm-10">
+                	<input type="submit" class="btn btn-primary signup" value="Remove"/><br/>
+                </div>
+            </div>
+
+            <hr>
+
+			<div class="form-group">
+			    <label  class="col-sm-2 control-label">Members to be added</label>
 			    <div class="col-sm-10">
-			      	<input type="text" class="form-control" name="firstName" placeholder="First Name" value="<?php echo $user_obj->getFirstName(); ?>" required>
+			      	<input type="text" class="form-control" name="members" id="members" required readonly>
 			    </div>
 			</div>
-            <div class="form-group">
-			    <label  class="col-sm-2 control-label">Last Name</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" name="lastName" placeholder="Last Name" value="<?php echo $user_obj->getLastName(); ?>" required>
-				</div>
-			</div>
-			<div class="form-group">
-			    <label  class="col-sm-2 control-label">Email/User Name</label>
-			    <div class="col-sm-10">
-			      	<input type="email" class="form-control" name="userEmail" placeholder="Email address" value="<?php echo $user_obj->getUserName(); ?>" readonly>
-				</div>
-			</div>
-            <div class="form-group">
-			    <label  class="col-sm-2 control-label">Location</label>
-			    <div class="col-sm-10">
-			      	<input type="text" class="form-control" id = "userAddress" name="userAddress" value="<?php echo $user_obj->getUserLocation(); ?>" readonly>
-				</div>
-			 </div>
-            <div class="form-group">
-			    <label  class="col-sm-2 control-label">Phone Number</label>
-			    <div class="col-sm-10">
-				    <input type="text" pattern="\d*" maxlength="10" class="form-control" name="userContact" title='Invalid phone number' value="<?php echo $user_obj->getUserContact(); ?>" placeholder="Phone Number" required>
-				</div>
-			</div>
-            <div class="form-group">
-			    <label  class="col-sm-2 control-label">Date of Birth</label>
-			    <div class="col-sm-10">
-			      	<input type="date" class="form-control" id = "userDOB" name="userDOB" value="<?php echo $user_obj->getDOB(); ?>" placeholder="Date of Birth" required>
-				</div>
-			</div>
-		  	<div class="form-group">
-			  	<label class="col-sm-2 control-label">Profile Picture</label>
-			  	<div class="col-sm-10"><input type="file" name="userPic" id="userPic"></div>
-			</div>
 	        <br>
+	        
+	        Select the friend you would like to add to your group<br>
+			<input type="search" onkeyup='getUsers(this.value, "<?php echo $userLoggedIn; ?>")' name='q' placeholder='Name' autocomplete='off' id='search_text_input' onsearch="getUsers('','')">
+			<div class='results' id='results'></div>			
+			<br>
+			<div class="col-sm-10">
 	        <div class="action">
-                <input type="submit" class="btn btn-primary signup"  value="Update"/><br/>
-            </div> 
+                <input type="submit" class="btn btn-primary signup" value="Update"/><br/>
+            </div></div>
         </form>
 	</div>
 
 	<div class="col-md-3 column col-md-offset-0-5">
-		<h3>Create Group</h3><hr>
-		<form action="" method="post" class="form-horizontal">
-			<div class="form-group">
-			    <label  class="col-sm-2 control-label">Group Name</label>
-			    <div class="col-sm-10">
-			      	<input type="text" class="form-control" name="groupName" placeholder="Group Name" required>
-			    </div>
-			</div>
-            <div class="form-group">
-			    <label  class="col-sm-2 control-label">Members</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" name="members" id="members" placeholder="Members" readonly required>
-				</div>
-			</div>
-			<br>
-
-			<?php			
-				{
-					echo "Select the friend you would like to add to your group<br>";
-					?>
-					<input type="search" onkeyup='getUsers(this.value, "<?php echo $userLoggedIn; ?>")' name='q' placeholder='Name' autocomplete='off' id='search_text_input' onsearch="getUsers('','')">
-					<?php
-						echo "<div class='results' id='results'></div>";
-				}
-			?>
-			<br>
-	        <div class="action">
-                <input type="submit" class="btn btn-primary signup" value="Create"/><br/>
-            </div> 
-        </form>
+		Ads
 	</div>
 
 </body>
