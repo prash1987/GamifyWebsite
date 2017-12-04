@@ -101,7 +101,7 @@
 
 	<!-- <div class="col-md-3 column col-md-offset-0-5">
 	</div> -->
-	<div class="col-md-3" style="margin-left: 13px; margin-top: 10px;">
+	<div class="col-md-3 ads">
 		<div style="max-width: 500px;">	
 	  
 	  		<a target="_blank" href="https://www.ebay.com/b/Mens-Fitness-Running-Shoes/158952/bn_1965202">

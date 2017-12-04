@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <?php
-   include("config.php");
-   include('swift/lib/swift_required.php');
+	
+	include("initial-header.php");
+   	include("config.php");
+   	include('swift/lib/swift_required.php');
 
-   $error = ".";
+   $error = "";
 
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       // username and password sent from form 
-      $error = ".";
 
       $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
        
@@ -30,18 +31,9 @@
         //If the password is correct
         if($password_hash == $myhash){
 			$_SESSION['login_user'] = $myusername;
-			//$_SESSION['loggedin'] = true;
-
-			//Send OTP to '$myusername' and also store it in the login table
 			$random =  rand(100000,999999);
 			$sql2 = "UPDATE login SET otp=". $random ." WHERE User_id='". $myusername. "'";
 			$querry = mysqli_query($db,$sql2);
-
-			/*$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl") //smtp for mailing
-			->setUsername('gamify101@gmail.com')  //username for account to mail
-			->setPassword('gamify123456789'); //password for the account to mail
-
-			$mailer = Swift_Mailer::newInstance($transport);  //mailer to mail to admin*/
 			
 			$to = $myusername;
 			$subject = 'Dual Authentication for Gamify';
@@ -49,18 +41,7 @@
 			$headers = 'From: Gamify <gamify101@gmail.com>' . "\r\n" .
 				'Reply-To: Gamify <gamify101@gmail.com>' . "\r\n" .
 				'X-Mailer: PHP/' . phpversion();
-				
-			
-			//$myemail= "gamify101@gmail.com"; //initializing the FROM mail id
-			//$toemail= $myusername;
 
-			/*$message = Swift_Message::newInstance('Query')  //heading of the mail
-			->setFrom(array($myemail=>'Gamify'))  //FROM field in the mail 
-			->setTo(array($toemail))  //TO Field in the mail
-			->setSubject('Dual Authentication for Gamify')  //SUBJECT of the mail
-			->setBody($body); //Actual body of the mail*/
-
-			//$result = $mailer->send($message);  //to check mail sent successfully
 			$result = mail($to, $subject, $body, $headers);
 			
 			header('Location: duo_auth.php'); 
@@ -72,40 +53,9 @@
          $error = "Your Login Name or Password is invalid";
       }
    }
+
+   
 ?>
-
-
-<html>
-  <head>
-    <title>GAMIFY</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- styles -->
-    <link href="css/styles.css" rel="stylesheet">
-    <link href="fa-css/css/font-awesome.min.css" rel="stylesheet">
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body class="login-bg">
-  	<div class="header">
-	     <div class="container">
-	        <div class="row">
-	           <div class="col-md-12">
-	              <!-- Logo -->
-	              <div class="logo">
-	                 <h1><a href="index.php">GAMIFY</a></h1>
-	              </div>
-	           </div>
-	        </div>
-	     </div>
-	</div>
 
 	<div class="page-content container">
 		<div class="row">
@@ -142,6 +92,7 @@
 			        </div>
 			    </div>
 			</div>
+			<?php include('initial-footer.php'); ?>		
 		</div>
 	</div>
 

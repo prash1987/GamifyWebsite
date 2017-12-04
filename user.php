@@ -80,7 +80,7 @@
 
 
 			if ($conn->query($sql) === TRUE && $conn->query($sql2) === TRUE) {
-				header('Location: registration_successful.html');    
+				header('Location: registration_successful.php');    
 			} else {
 				//echo " --Something went wrong Error: " . $sql . "<br>" . $conn->error;
 				echo "User ID already exists";
@@ -291,13 +291,13 @@
 
   </head>
    <body class="login-bg" onload = 'set_max_date_attribute()'>
-	  	<div class="header">
+	  	<div class="header navbar-fixed-top">
 	     <div class="container">
 	        <div class="row">
 	           <div class="col-md-5">
 	              <!-- Logo -->
 	              <div class="logo">
-	                 <h1><a href="login.php">GAMIFY</a></h1>
+	                 <h1><a href="index.php"><b class="ttf">Gamify</b></a></h1>
 	              </div>
 	           </div>
 	           <div class="col-md-5">
@@ -321,7 +321,7 @@
 		  </div>
        		<div class="row">
            	<div class="col-md-8">
-               <div class="content-box-large">
+               <div class="content-box-large" style="background-color: rgba(4, 11, 29, .5);color:#fff;font-size: 14px; margin-bottom: 50px;">
                 	<div class="panel-heading">
 						<div class="panel-title">
 							<h3>Registration Form</h3>
@@ -334,7 +334,7 @@
 								<div class="col-sm-10">
                             		<div class="input-group">
       									<span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>	
-								      	<input type="text" class="form-control" name="firstName" placeholder="First Name" required autofocus>
+								      	<input type="text" class="form-control" name="firstName" style="height:35px;" placeholder="First Name" required autofocus>
 								    </div>
 								</div>
 							</div>
@@ -343,7 +343,7 @@
 								<div class="col-sm-10">
 									<div class="input-group">
       									<span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>	
-								      	<input type="text" class="form-control" name="lastName" style="height:35px;" placeholder="Last Name" required>
+								      	<input type="text" class="form-control" name="lastName" style="height:37px;" placeholder="Last Name" required>
 								    </div>
 								</div>
 							</div>
@@ -362,7 +362,7 @@
 								<div class="col-sm-10">
 									<div class="input-group">
       									<span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
-										<input type="password" class="form-control" name="confirm_password" style="height:35px;" id="confirm_password" onblur='return matchPasswords();' placeholder="Confirm Password" required>
+										<input type="password" class="form-control" name="confirm_password" style="height:36px;" id="confirm_password" onblur='return matchPasswords();' placeholder="Confirm Password" required>
 									</div>
 									<p id="cpass_error" style="color:red; font-size:small;"></p>
 								</div>
@@ -402,7 +402,7 @@
 								<div class="col-sm-10">
 									<div class="input-group">
       									<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>						
-								      	<input type="date" class="form-control" id = "userDOB" name="userDOB" placeholder="Date of Birth" required>
+								      	<input type="date" class="form-control" id = "userDOB" style="height:35px;" name="userDOB" placeholder="Date of Birth" required>
 								    </div>
 								</div>
 							</div>
@@ -423,6 +423,7 @@
 										<option value="MartialArts">Martial Arts</option>
 								    </select>
 								</div>
+								<p style="color:red; font-size:small; margin-left: 17%;">&nbsp;&nbsp;&nbsp;&nbsp;*Its a combo box. Hence, you can select multiple games of your interests.</p>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Other Games (if any)</label>
@@ -432,7 +433,7 @@
 							  			<input type="text" class="form-control" name="userBIO" id="userBIO" placeholder="Other Games">
 							  		</div>
 							  	</div>
-							  	<p style="color:red; font-size:small;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Separate game names with commas. Do not enter any spaces after or before commas.</p>
+							  	<p style="color:red; font-size:small;">&nbsp;&nbsp;&nbsp;&nbsp;*Separate game names with commas. Do not enter any spaces after or before commas.</p>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Profile Picture</label>
@@ -482,7 +483,7 @@
                     			<div class="col-sm-10">
                     				<div class="input-group">
       									<span class="input-group-addon"><i class="fa fa-question-circle" aria-hidden="true"></i></span>
-                    					<select class="form-control" id ="SecQues2" name="secQ2" onblur="return securityQuestionCheck();">
+                    					<select class="form-control" id ="SecQues2" name="secQ2" style="height:35px;" onblur="return securityQuestionCheck();">
                             				<option value="default">Select one from below</option>
                             				<option value="father">In what year was your father born?</option>
                             				<option value="pet">What is your pet’s name?</option>
@@ -506,7 +507,7 @@
                     			<div class="col-sm-10">
                     				<div class="input-group">
       									<span class="input-group-addon"><i class="fa fa-clipboard" aria-hidden="true"></i></span>
-                    					<input type="text" class="form-control" id = "secAns2" placeholder="Your Answer" name="secAns2" required>
+                    					<input type="text" class="form-control" id = "secAns2" style="height:36px;" placeholder="Your Answer" name="secAns2" required>
                     				</div>
                 				</div>
                   			</div>                 
@@ -517,8 +518,12 @@
                         </form>
                    	</div> 
                </div>
+               <div class='mastfoot' style="margin-left:4%;">
+  					<div class='inner'>
+      					<p>Gamify website developed by <a href='#'>@SE_GROUP 1</a></p>
+  					</div>
+				</div>
            </div>
-           
        </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
    <!-- <script src="https://code.jquery.com/jquery.js"></script>-->

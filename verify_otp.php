@@ -1,24 +1,9 @@
 <!DOCTYPE html>
-<head>
-    <title>GAMIFY</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- styles -->
-    <link href="css/styles.css" rel="stylesheet">
-    <link href="fa-css/css/font-awesome.min.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-	
 
 <?php
+	include("initial-header.php");
 	include("config.php");
-	
+
 	$db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 		
 	$error = "";
@@ -36,7 +21,6 @@
 		if ( $ret_val  == FALSE ) 
 		{
 			$error .= "Email ID does not exist.<a href='login.php'> Please try again</a> ";
-			//echo mysql_error();
  		}
  		else 
  		{
@@ -46,36 +30,7 @@
 		}
 		
 		$success_str = "";
-	        $success_str .="<html>
-					  <head>
-					    <title>GAMIFY</title>
-					    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-					    <!-- Bootstrap -->
-					    <link href='bootstrap/css/bootstrap.min.css' rel='stylesheet'>
-					    <!-- styles -->
-					    <link href='css/styles.css' rel='stylesheet'>
-
-					    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-					    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-					    <!--[if lt IE 9]>
-					      <script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script>
-					      <script src='https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js'></script>
-					    <![endif]-->
-					  </head>
-					  <body class='login-bg'>
-					  	<div class='header'>
-						     <div class='container'>
-						        <div class='row'>
-						           <div class='col-md-12'>
-						              <!-- Logo -->
-						              <div class='logo'>
-						                 <h1><a href='index.php'>GAMIFY</a></h1>
-						              </div>
-						           </div>
-						        </div>
-						     </div>
-						</div>
-
+	        $success_str .="
 						<div class='page-content container'>
 							<div class='row'>
 								<div class='col-md-4 col-md-offset-4'>
@@ -116,10 +71,13 @@
 								        </div>
 								    </div>
 								</div>
+								<div class='mastfoot'>
+  									<div class='inner'>
+      									<p>Gamify website developed by <a href='#'>@SE_GROUP 1</a></p>
+  									</div>
+								</div> 
 							</div>
 						</div>
-
-
 
 					    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 					    <script src='https://code.jquery.com/jquery.js'></script>
@@ -130,35 +88,7 @@
 					</html>"; 
 			
 			$failure_str = "";
-			$failure_str = "<html>
-					<head>
-					<title>GAMIFY</title>
-					<meta name='viewport' content='width=device-width, initial-scale=1.0'>
-					<!-- Bootstrap -->
-					<link href='bootstrap/css/bootstrap.min.css' rel='stylesheet'>
-					<!-- styles -->
-					<link href='css/styles.css' rel='stylesheet'>
-
-					<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-					<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-					<!--[if lt IE 9]>
-					  <script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script>
-					  <script src='https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js'></script>
-					<![endif]-->
-				 </head>
-				<body class='login-bg'>
-					<div class='header'>
-						 <div class='container'>
-							<div class='row'>
-							   <div class='col-md-12'>
-								  <!-- Logo -->
-								  <div class='logo'>
-									 <h1><a href='index.php'>GAMIFY</a></h1>
-								  </div>
-							   </div>
-							</div>
-						 </div>
-					</div>
+			$failure_str = "
 
 					<div class='page-content container'>
 						<div class='row'>
@@ -171,10 +101,13 @@
 									</div>
 								</div>
 							</div>
+							<div class='mastfoot'>
+  								<div class='inner'>
+      								<p>Gamify website developed by <a href='#'>@SE_GROUP 1</a></p>
+  								</div>
+							</div>
 						</div>
 					</div>
-
-
 
 					<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 					<script src='https://code.jquery.com/jquery.js'></script>
@@ -186,22 +119,10 @@
 
 		if($u_otp == $got_otp)
 		{
-			//require_once("re_enter_password.php");
-			//echo "Redirect to enter new password page";
-			//header('Location: re_enter_password.php');
-
-			//echo"<form action = 're_enter_password.php' method = 'post'>";
-			//echo "<input class='form-control' type='text' name = 'email_id' value=$u_name readonly>";
-			//echo "<input class='form-control' type='password' name = 'new_password' placeholder='New Password'>";
-			//echo "<input class='form-control' type='password' name = 'confirm_password' placeholder='Confirm Password'>";
-			//echo "<div class='action'>";
-			//echo "<input type = 'submit' class='btn btn-primary signup'  value = 'Change Password' /><br/>";
-			//echo "</div></form>";
 			echo $success_str;
 		}
 		else
 		{
-			//echo "OTP entered does not match. Please try again from the beginning";
 			echo $failure_str;
 		}
 ?>

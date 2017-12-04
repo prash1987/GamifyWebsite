@@ -40,7 +40,12 @@
         <link href="css/styles.css" rel="stylesheet">
         <link href="sn_styles.css" rel="stylesheet" type="text/css">
         <link href="fa-css/css/font-awesome.min.css" rel="stylesheet">
-        
+
+        <!-- Begin emoji-picker Stylesheets -->
+        <link href="emoji_lib/css/nanoscroller.css" rel="stylesheet">
+        <link href="emoji_lib/css/emoji.css" rel="stylesheet">
+        <!-- End emoji-picker Stylesheets -->
+
         <style type="text/css">
             a:hover,
             a:focus{
@@ -54,14 +59,14 @@
 
     </head>
 
-    <body id="page-top" class="index">
-        <div class="header">
+    <body id="page-top" class="index" style="background-image: none !important;">
+        <div class="header navbar-fixed-top">
              <div class="container">
                 <div class="row">
                    
                       <!-- Logo -->
                     <div class="logo">
-                        <h1><a href="index.php"><img src="images/icons/logo_new.png" style="margin-top: -50px; margin-left: -50px; float: left;" width="18%"></a></h1>
+                        <h1><a href="index.php"><b class="ttf">Gamify</b></a></h1>
                     </div>
 
                     <div class="search">
@@ -75,33 +80,36 @@
                         
                         <div class="search_results">
                         </div>
+
+                    </div>
+                    <div class="sagar">
+                        <nav>
+                            <?php 
+                                //Unread messages 
+                                $message_obj = new MessageClass($con, $userLoggedIn);
+                                $num_messages = $message_obj->getUnreadNumber();
+                            ?>
+                            <a href="<?php echo 'profile.php?profile_username=' .$userLoggedIn;?>" title="Profile"><?php echo $user['first_name']; ?>
+                            </a>&nbsp;&nbsp;
+
+                            <a href="homepage.php"><i class="fa fa-home fa-lg" title="Homepage"></i></a>&nbsp;&nbsp;
+
+                            <a href="javascript:void(0);" onclick="getDropdownData('<?php echo  $userLoggedIn; ?>','message')" title="Chat">
+                                <i class="fa fa-comments fa-lg" title="Chat"></i><?php 
+                                if($num_messages > 0)
+                                    echo "<span class='notification_badge' id='unread_message'>". $num_messages ."</span>";
+                                ?></a>&nbsp;&nbsp;
+
+                            <a href="message.php"><i class="fa fa-envelope fa-lg" title="Messages"></i></a>&nbsp;&nbsp;
+                            <a href="groups.php"><i class="fa fa-users fa-lg" title="Groups"></i></a>&nbsp;&nbsp;
+
+                            <a href="logout.php"><i class="fa fa-sign-out fa-lg" title="Sign out"></i></a>
+                        </nav>
                     </div>
                 </div>
             </div>
-        </div>   
-                <nav>
-                    <?php 
-                        //Unread messages 
-                        $message_obj = new MessageClass($con, $userLoggedIn);
-                        $num_messages = $message_obj->getUnreadNumber();
-                    ?>
-                    <a href="<?php echo 'profile.php?profile_username=' .$userLoggedIn;?>" title="Profile">
-                        <?php echo $user['first_name']; ?>
-                    </a>&nbsp;&nbsp;
-
-                    <a href="homepage.php"><i class="fa fa-home fa-lg" title="Homepage"></i></a>&nbsp;&nbsp;
-
-                    <a href="javascript:void(0);" onclick="getDropdownData('<?php echo  $userLoggedIn; ?>','message')" title="Chat">
-                        <i class="fa fa-comments fa-lg" title="Chat"></i><?php 
-                        if($num_messages > 0)
-                            echo "<span class='notification_badge' id='unread_message'>". $num_messages ."</span>";
-                        ?></a>&nbsp;&nbsp;
-
-                    <a href="message.php"><i class="fa fa-envelope fa-lg" title="Messages"></i></a>&nbsp;&nbsp;
-                    <a href="groups.php"><i class="fa fa-users fa-lg" title="Groups"></i></a>&nbsp;&nbsp;
-
-                    <a href="logout.php"><i class="fa fa-sign-out fa-lg" title="Sign out"></i></a>
-                </nav>
+        </div>
+        
 
                 <div class="dropdown_data_window" style='height:0px; border:none;'>
                     <input type="hidden" id="dropdown_data_type" value="" name="">
@@ -140,7 +148,7 @@
 
                         success: function(response){
                             $(".dropdown_data_window").html(response);
-                            $(".dropdown_data_window").css({"padding" : "0px" , "height" : "280px", "border" : "1px solid #DADADA", "z-index" : "10"});
+                            $(".dropdown_data_window").css({"padding" : "0px" , "height" : "280px", "border" : "1px solid #DADADA", "z-index" : "1031"});
                             $(".dropdown_data_type").val(type);
                         } 
                     });
@@ -209,3 +217,12 @@
 
         <!-- Theme JavaScript -->
         <script src="js/freelancer.min.js"></script>
+
+        <!-- Begin emoji-picker JavaScript -->
+        <script src="emoji_lib/js/nanoscroller.min.js"></script>
+        <script src="emoji_lib/js/tether.min.js"></script>
+        <script src="emoji_lib/js/config.js"></script>
+        <script src="emoji_lib/js/util.js"></script>
+        <script src="emoji_lib/js/jquery.emojiarea.js"></script>
+        <script src="emoji_lib/js/emoji-picker.js"></script>
+        <!-- End emoji-picker JavaScript -->
