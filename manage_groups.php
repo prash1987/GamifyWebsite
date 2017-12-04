@@ -131,8 +131,8 @@
 			    		$members_arr = explode(",", $group_members);
 			    		for ($i = 0; $i < count($members_arr); $i++) {
 			    			$member_obj = new UserClass($con, $members_arr[$i]);
-		    				$name = $member_obj->getFirstAndLastName();
-		    				echo "<option value='" . $members_arr[$i] . "'>" . $name . "</option>";
+		    				$member_name = $member_obj->getFirstAndLastName();
+		    				echo "<option value='" . $members_arr[$i] . "'>" . $member_name . "</option>";
 			    		}
 			    	?>
 				    </select>

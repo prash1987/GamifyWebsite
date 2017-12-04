@@ -8,7 +8,7 @@ class PostClass {
 		$this->user_obj = new UserClass($con, $user);
 	}
 
-	public function submitPost($body, $location, $play_time, $game, $gender, $image_name) {
+	public function submitPost($body, $location, $play_time, $game, $gender, $image_name, $group_id) {
 		$body = strip_tags($body); 
 		$body = mysqli_real_escape_string($this->con, $body);
 		$play_time = strip_tags($play_time); 
@@ -26,9 +26,10 @@ class PostClass {
 		
 		$time_stamp = date("Y-m-d H:i:s");
 		$posted_by = $this->user_obj->getUsername();
+		$group_id = (int)$group_id;
 
 		//$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-		$insert_stmnt = "INSERT INTO posts(body, posted_by, time_stamp, location, play_time, image_path, likes,game,gender,deleted) VALUES('$body','$posted_by','$time_stamp', '$location', '$play_time', '$image_name',0,'$game', '$gender', 0)";
+		$insert_stmnt = "INSERT INTO posts(body, posted_by, time_stamp, location, play_time, image_path, likes,game,gender,deleted,group_id) VALUES('$body','$posted_by','$time_stamp', '$location', '$play_time', '$image_name',0,'$game', '$gender', 0, $group_id)";
 		$query = mysqli_query($this->con, $insert_stmnt);
 		$returned_id = mysqli_insert_id($this->con);
 	}

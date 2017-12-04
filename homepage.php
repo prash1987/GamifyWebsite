@@ -19,11 +19,26 @@
 		}
 
 		$post = new PostClass($con, $userLoggedIn);
-		$post->submitPost($_POST['post_text'], $_POST['post_location'], $_POST['post_time'], $_POST['post_game'], $_POST['post_gender'], $upload_image);
+		$post->submitPost($_POST['post_text'], $_POST['post_location'], $_POST['post_time'], $_POST['post_game'], $_POST['post_gender'], $upload_image,
+		$_POST['post_type']);
 	}
 
     $details = json_decode(file_get_contents("http://ipinfo.io/"));
     $city_name= $details->city;
+
+	$data_member= "";
+	$options = "";
+	$options .= "<option value='0' selected>Public</option>";
+	$sqlMember = mysqli_query($con, "SELECT group_id, group_name FROM groups WHERE members like '%" . $userLoggedIn . "%';");
+	while($row_member = mysqli_fetch_array($sqlMember)) {
+		$member_group_name = $row_member['group_name'];
+		$member_group_id = $row_member['group_id'];		
+		// To display group names in 3rd column	
+		$div_member = "<div style='font-size:14px;'><a href='group_posts.php?group_id=" . $member_group_id . "'>" . $member_group_name . "</a></div>";
+		$data_member .= $div_member . "<br>";
+		$value =  "<option value='" . $member_group_id . "'>" . $member_group_name . "</option>";
+		$options .= $value; 
+	}
 ?>
 	<head>
 		<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
@@ -195,7 +210,7 @@
 				  <option value="MartialArts">Martial Arts</option>
 			    </select>
 		  	
-			<label for="post_gender" style="margin-left: 3px;">Gender:  </label>
+			<label for="post_gender" style="margin-left: 3px;">Gender Selection:  </label>
 			
 			<label class="form-check-label">
 			    <input class="form-check-input" type="radio" name="post_gender" id="inlineRadio1" value="A" checked="checked"> All
@@ -215,7 +230,14 @@
 			<br>
 			<label for="post_time">Event Date and Time:  </label> <input type="datetime-local" name="post_time" id = "post_time" placeholder="Date and Time" required>
 		    <label for="post_image" style="margin-left: 3px;"> Upload Image:  </label>&nbsp;&nbsp;<input type="file" name="post_image" id="post_image">
-		    <br>		  	
+		    <br>
+
+		    <label for="post_type">Post Type:  </label>
+			    <select id="post_type" name="post_type">
+			      <?php	
+						echo $options;
+			      ?>
+			    </select>		  	
 			
 			<hr>
 		</form>
@@ -279,15 +301,8 @@
 	</div>
 
 	<div class="col-md-3 column col-md-offset-0-5">
-		<?php
-			$data_member= "";
-			$sqlMember = mysqli_query($con, "SELECT group_id, group_name FROM groups WHERE members like '%" . $userLoggedIn . "%';");
-		
-			while($row_member = mysqli_fetch_array($sqlMember)) {
-				$member_group_name = $row_member['group_name'];			
-				$div_member = "<div><a href='group_posts.php?group_id=" . $row_member['group_id'] . "'>" . $member_group_name . "</a></div>";				
-				$data_member = $data_member . $div_member . "<br>";
-			}
+		<h4>Groups You own/are member of</h4><br>
+		<?php	
 			echo $data_member;	
 		?>
 	</div>
