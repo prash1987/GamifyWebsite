@@ -32,40 +32,46 @@
 	}
 
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
-	    
-	    $user_id = $userLoggedIn;	    
-	    $member_to_delete = '';
+		if (isset($_POST['btnRemove'])){	    
+		    $user_id = $userLoggedIn;	    
+		    $member_to_delete = '';
 
-		foreach($_POST['current_members'] as $vals) {
-			if($vals!==$user_id){
-		    	$member_to_delete = $vals . ',';
-		    	$new_members = str_replace($member_to_delete, "", $new_members);
-		    }
-		}
+			foreach($_POST['current_members'] as $vals) {
+				if($vals!==$user_id){
+			    	$member_to_delete = $vals . ',';
+			    	$new_members = str_replace($member_to_delete, "", $new_members);
+			    }
+			}
 
-		if(substr($new_members, -1) === "," ){
-			$new_members = substr($new_members, 0, strlen($new_members)-1);
-		}
+			if(substr($new_members, -1) === "," ){
+				$new_members = substr($new_members, 0, strlen($new_members)-1);
+			}
 
-	 	$sql = "UPDATE groups SET members='$new_members' WHERE group_id='$group_id';";
-
-		if ($con->query($sql) === TRUE) {
-		 	header('Location: groups.php');
-		}
-		else {
-		 	echo "Something went wrong. Error: " . $sql . "<br>" . $con->error;
-		}
-
-		///Below is the code that should be executed if the user is trying to add more members
-		if(isset($_POST['members'])){
-			$members= $_POST["members"];
-			$sql = "UPDATE groups SET members= CONCAT(members,',','" . '$members' . "') WHERE group_id='$group_id';";
+		 	$sql = "UPDATE groups SET members='$new_members' WHERE group_id='$group_id';";
 
 			if ($con->query($sql) === TRUE) {
-				header('Location: groups.php'); 
+			 	header('Location: groups.php');
 			}
 			else {
-				echo "Something went wrong. Error: " . $sql . "<br>" . $con->error;
+			 	echo "Something went wrong. Error: " . $sql . "<br>" . $con->error;
+			}
+		}
+
+		///Below is the code that will be executed if the user is trying to add more members
+		if (isset($_POST['btnUpdate'])){
+			if(isset($_POST['members'])){
+				$members= $_POST["members"];
+				$sql = "UPDATE groups SET members= CONCAT(members,',','" . '$members' . "') WHERE group_id='$group_id';";
+
+				if ($con->query($sql) === TRUE) {
+					header('Location: groups.php'); 
+				}
+				else {
+					echo "Something went wrong. Error: " . $sql . "<br>" . $con->error;
+				}
+			}
+			else{
+				echo "No members to add.";
 			}
 		}
 	}
@@ -136,7 +142,7 @@
 			<div class="form-group">
 				<label  class="col-sm-2 control-label">Select the members and click Remove</label>
 				<div class="col-sm-10">
-                	<input type="submit" class="btn btn-primary signup" value="Remove"/><br/>
+                	<input type="submit" name="btnRemove" class="btn btn-primary signup" value="Remove"/><br/>
                 </div>
             </div>
 
@@ -156,7 +162,7 @@
 			<br>
 			<div class="col-sm-10">
 	        <div class="action">
-                <input type="submit" class="btn btn-primary signup" value="Update"/><br/>
+                <input type="submit" name="btnUpdate" class="btn btn-primary signup" value="Update"/><br/>
             </div></div>
         </form>
 	</div>

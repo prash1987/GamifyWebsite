@@ -278,9 +278,18 @@
 
 	</div>
 
-	<!--@Author- Harsha: Ads-->
 	<div class="col-md-3 column col-md-offset-0-5">
-		<a href="message.php">Testing</a>
+		<?php
+			$data_member= "";
+			$sqlMember = mysqli_query($con, "SELECT group_id, group_name FROM groups WHERE members like '%" . $userLoggedIn . "%';");
+		
+			while($row_member = mysqli_fetch_array($sqlMember)) {
+				$member_group_name = $row_member['group_name'];			
+				$div_member = "<div><a href='group_posts.php?group_id=" . $row_member['group_id'] . "'>" . $member_group_name . "</a></div>";				
+				$data_member = $data_member . $div_member . "<br>";
+			}
+			echo $data_member;	
+		?>
 	</div>
 	<div class="col-md-3 ads">
 		<div style="max-width: 500px;">	
