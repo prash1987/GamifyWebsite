@@ -47,12 +47,11 @@
 
 	<div class="col-md-6 column col-md-offset-0-5">
 		<?php
-			echo "<h3>People Blocked By You ";
+			echo "<h3>Users Blocked By You ";
 			//echo $user_obj->getFirstAndLastName();
 			echo "</h3><hr>";
 			$post = new PostClass($con, $userLoggedIn);
 			$post->display_blocked($userLoggedIn);
-			
 		?>
 	</div>
 

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <?php
 	
-	include("header.php");
+	include("initial-header.php");
+?>
 		<div class='page-content container'>
 			<div class='row'>
 				<div class='col-md-4 col-md-offset-4'>
@@ -10,7 +11,7 @@
 							<div class='content-wrap'>
 								<h6>Nice try! But you are not the admin of this group!</h6>
 								<div class='social'>
-									<p>You will be redirected to Homepage in <span id='counter'>5</span> second(s).</p>
+									<p>You will be redirected to Homepage in <span id='counter'>3</span> second(s).</p>
 								</div>
 							</div>
 						</div>
@@ -27,14 +28,15 @@
 		<script src='js/custom.js'></script>
 		<script type="text/javascript">
 			window.onload = function WindowLoad(event) {
-				setInterval(function(){ countdown(); },1000);
+				var timerId = setInterval(function(){ countdown(); },1000);
 			}
 			function countdown() {
 				var i = document.getElementById('counter');
-				if (parseInt(i.innerHTML)<2) {
-					location.href = 'homepage.php';
-				}
 				i.innerHTML = parseInt(i.innerHTML)-1;
+				if (parseInt(i.innerHTML)<2) {
+					location.href = 'login.php';
+					clearInterval(timerId);
+				}
 			}
 		</script>
 	</body>

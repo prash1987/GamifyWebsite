@@ -19,7 +19,7 @@
 
 				if($group_admin !== $userLoggedIn)
 				{
-					header("Location: invalid_request.html");
+					header("Location: homepage.php");
 				}
 			}
 			else{
