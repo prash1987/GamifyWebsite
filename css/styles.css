@@ -7,7 +7,7 @@ body {
   position: relative;
   margin: 0px;
   font-size: 12px;
-  padding: 0px;
+  padding-top: 30px;
   color:#333;
 }
 
@@ -233,10 +233,10 @@ footer .copy{
    background:#fff;
    border-radius:10px;
    padding:10px;
-   border-left:1px solid #eee;
+   /*border-left:1px solid #eee;
    border-top:1px solid #eee;
    border-right:2px solid #eee;
-   border-bottom:2px solid #eee; 
+   border-bottom:2px solid #eee; */
 }
 
 .content-box-large {
@@ -381,19 +381,30 @@ footer .copy{
 }
 
 .login-bg {
-  background: rgba(255, 255, 255, 0);
+  /*background: rgba(255, 255, 255, 0);
   background: -webkit-linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
   background: -moz-linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
   background: -ms-linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
   background: -o-linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
   background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
-  background-image:url(../images/bg-images/bg-cp-img.jpg);
+  background-image:url(../images/bg-images/bg-cp-img.jpg);*/
   background-repeat: no-repeat;
   height: 100%;
 }
 
 body {
-  background-color: #eff0f3;
+  background-color: #333;
+  background-image:url(../images/bg.png);
+  background-attachment: fixed;
+  
+  background-size: cover;
+  background-position: top center;
+  width: 100%;
+  height: 100%;
+  margin:auto; 
+  margin-top: 64px;
+
+
 }
 
 /** Login & Signup **/
@@ -403,6 +414,10 @@ body {
   left: 0;
   right: 0;
   text-align: center;
+  top:50px;
+  background-color: rgba(4, 11, 29, .5);
+  padding: 15px;
+  border-radius: 4px;
 }
 
 
@@ -415,7 +430,7 @@ body {
   -ms-box-shadow: rgba(0, 0, 0, 0.4) 0 1px 3px, rgba(0, 0, 0, 0.35) 0 0 1px;
   -o-box-shadow: rgba(0, 0, 0, 0.4) 0 1px 3px, rgba(0, 0, 0, 0.35) 0 0 1px;
   box-shadow: rgba(0, 0, 0, 0.4) 0 1px 3px, rgba(0, 0, 0, 0.35) 0 0 1px;
-  background: #fff;
+  /*background: #fff;*/
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   -ms-border-radius: 6px;
@@ -425,13 +440,16 @@ body {
 .login-wrapper .box .content-wrap {
   width: 82%;
   margin: 0 auto;
+  color:#fff;
 }
+
 .login-wrapper .box h6 {
   text-transform: uppercase;
   margin-bottom: 35px;
   font-size: 18px;
   font-weight: 600;
 }
+
 .login-wrapper .box input[type="text"],
 .login-wrapper .box input[type="password"] {
   font-size: 15px;
@@ -687,7 +705,7 @@ body {
   width:300px;
   position: absolute;
   right:10px;
-  top:40px;
+  top:-26px;
   overflow: scroll;
 }
 
@@ -780,6 +798,18 @@ fieldset .pref_label{
   margin-top: -40px;
 }
 
+.sagar {
+  margin: 2px 0 0 70%;  
+  position: relative;
+  margin-top: 70px;
+  font-size: 16px;
+}
+
+.sagar a{
+  color:#fff !important;
+}
+
+
 .search #search_text_input {
   border: thin solid #E5E5E5;
     float: left;
@@ -807,4 +837,53 @@ fieldset .pref_label{
 .button_holder img {
   margin-top: 1px;
     width: 20px;
+}
+
+.ads{
+  margin-left: 15px; 
+  margin-top: 10px;
+}
+
+.mastfoot {
+  color: #999; /* IE8 proofing */
+  color: rgba(255,255,255,.5);
+  margin-left:15%;
+}
+
+@media (min-width: 768px) {
+  .mastfoot {
+    position: fixed;
+    bottom: 0;
+    width: 100%; /* Must be percentage or pixels for horizontal alignment */
+  }
+}
+
+@media (min-width: 992px) {
+  .mastfoot  {
+    width: 700px;
+  }
+}
+
+.inner {
+  padding: 5px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.inner a{
+  color:#fff;
+  text-decoration: none;
+}
+
+.inner, .logo a:hover{
+  text-decoration: none;
+}
+
+@font-face{
+  src: url('../fonts/Reality Hyper Regular.ttf');
+  font-family: 'Reality Hyper Regular'; 
+}
+
+.ttf{
+  font-family: 'Reality Hyper Regular';  
 }

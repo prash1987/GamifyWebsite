@@ -87,7 +87,34 @@ if(isset($_POST['post_message'])) {
 				var func = "sendMessages";
 				$.post("handlers/ajax_live_chat.php", {user_to:user_to, date:date, body:body, func:func});
 			}*/
+
+			// When the user scrolls down 20px from the top of the document, show the button
+			// Implemented by Sagar
+			window.onscroll = function() {scrollFunction()};
+
+			function scrollFunction() {
+			    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+			        document.getElementById("myBtn").style.display = "block";
+			    } else {
+			        document.getElementById("myBtn").style.display = "none";
+			    }
+			}
+
+			// When the user clicks on the button, scroll to the top of the document
+			function topFunction() {
+			    document.body.scrollTop = 0;
+			    document.documentElement.scrollTop = 0;
+			}
    		</script>
+   		<style>
+			#myBtn {
+			  display: none;
+			  position: fixed;
+			  bottom: 20px;
+			  right: 30px;
+			  z-index: 99;
+			}
+		</style>
 
    	</head>
    	
@@ -173,7 +200,7 @@ if(isset($_POST['post_message'])) {
 	<div class="col-md-3 column col-md-offset-0-5">
 		<a href="message.php">Testing</a>
 	</div>
-	<div class="col-md-3" style="margin-left: 13px; margin-top: 10px;">
+	<div class="col-md-3 ads">
 		<div style="max-width: 500px;">	
 	  
 	  		<a target="_blank" href="https://www.ebay.com/b/Mens-Fitness-Running-Shoes/158952/bn_1965202">
@@ -194,6 +221,7 @@ if(isset($_POST['post_message'])) {
 	  		<a target="_blank" href="https://www.amazon.com/Best-Sellers-Health-Personal-Care-Sports-Nutrition-Protein/zgbs/hpc/6973704011/ref=zg_bs_unv_hpc_3_6973717011_2">
 	  		<img class="mySlides" src="images/ads/ad_protein.jpg" style="width:100%"></a>
 		</div>
+		<button onclick="topFunction()" id="myBtn" class="btn btn-primary btn-lg" title="Go to top"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
 	</div>
 		
 	<script>
