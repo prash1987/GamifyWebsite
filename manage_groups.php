@@ -124,7 +124,9 @@
 			    	<?php				    		
 			    		$members_arr = explode(",", $group_members);
 			    		for ($i = 0; $i < count($members_arr); $i++) {
-			    			echo "<option value='" . $members_arr[$i] . "'>" . $members_arr[$i] . "</option>";
+			    			$member_obj = new UserClass($con, $members_arr[$i]);
+		    				$name = $member_obj->getFirstAndLastName();
+		    				echo "<option value='" . $members_arr[$i] . "'>" . $name . "</option>";
 			    		}
 			    	?>
 				    </select>
@@ -132,7 +134,7 @@
 			</div>
 
 			<div class="form-group">
-				<label  class="col-sm-2 control-label">Select the member and click Remove</label>
+				<label  class="col-sm-2 control-label">Select the members and click Remove</label>
 				<div class="col-sm-10">
                 	<input type="submit" class="btn btn-primary signup" value="Remove"/><br/>
                 </div>
@@ -159,9 +161,45 @@
         </form>
 	</div>
 
-	<div class="col-md-3 column col-md-offset-0-5">
-		Ads
-	</div>
+	<div class="col-md-3 ads">
+			<div style="max-width: 500px;">	
+		  
+		  		<a target="_blank" href="https://www.ebay.com/b/Mens-Fitness-Running-Shoes/158952/bn_1965202">
+		  		<img class="mySlides" src="images/ads/ad_ebay.jpg" style="width:100%"></a>
+		  
+		  		<a target="_blank" href="http://www.indianavolleyballcamps.com/index.html">
+		  		<img class="mySlides" src="images/ads/ad_volleyball.jpg" style="width:100%"></a>
+
+		  		<a target="_blank" href="http://northamericasports.blogspot.ca/2012/09/new-nike-epl-match-ball-maxim-for.html">
+		  		<img class="mySlides" src="images/ads/ad_nike.jpg" style="width:100%"></a>
+		  
+		  		<a target="_blank" href="https://www.anytimefitness.com/gyms/2822/bloomington-in-47401/">
+		  		<img class="mySlides" src="images/ads/ad_gym.jpg" style="width:100%"></a>
+
+		  		<a target="_blank" href="https://www.pinterest.com/pin/316659417526781056/">
+		  		<img class="mySlides" src="images/ads/ad_adidas.jpg" style="width:100%"></a>
+
+		  		<a target="_blank" href="https://www.amazon.com/Best-Sellers-Health-Personal-Care-Sports-Nutrition-Protein/zgbs/hpc/6973704011/ref=zg_bs_unv_hpc_3_6973717011_2">
+		  		<img class="mySlides" src="images/ads/ad_protein.jpg" style="width:100%"></a>
+			</div>
+		</div>
+			
+		<script>
+			var myIndex = 0;
+			carousel();
+
+			function carousel() {
+		    	var i;
+		    	var x = document.getElementsByClassName("mySlides");
+		    	for (i = 0; i < x.length; i++) {
+		       		x[i].style.display = "none";  
+		    	}
+		    	myIndex++;
+		    	if (myIndex > x.length) {myIndex = 1}    
+		    	x[myIndex-1].style.display = "block";  
+		    	setTimeout(carousel, 3000); // Change image every 3 seconds
+			}
+		</script>
 
 </body>
 </html>
