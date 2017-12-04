@@ -197,9 +197,6 @@ if(isset($_POST['post_message'])) {
 	</div>
 
 		<!--@Author- Harsha: Ads-->
-	<div class="col-md-3 column col-md-offset-0-5">
-		<a href="message.php">Testing</a>
-	</div>
 	<div class="col-md-3 ads">
 		<div style="max-width: 500px;">	
 	  

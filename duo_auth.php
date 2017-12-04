@@ -31,7 +31,7 @@
 
         header('Location: homepage.php');   
       }else {
-         $msg = "Authentication failed";
+         $msg = "Authentication failed. Please re-enter correct OTP.";
       }
    }
 ?>

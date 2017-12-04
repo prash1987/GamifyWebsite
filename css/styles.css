@@ -492,7 +492,7 @@ body {
 }
 .login-wrapper .already p {
   display: inline-block;
-  color: #222;
+  color: red;
 }
 .login-wrapper .already a {
   color: #222;
