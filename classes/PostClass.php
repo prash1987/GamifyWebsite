@@ -47,7 +47,7 @@ class PostClass {
 			header("Location: login.php");
 		}
 
-		$query = "SELECT * FROM posts WHERE posted_by='$username' AND deleted = 0 ORDER BY time_stamp DESC";
+		$query = "SELECT * FROM posts WHERE posted_by='$username' AND deleted = 0 AND group_id = 0 ORDER BY time_stamp DESC";
 		$str = ""; //String to return 
 		//$con = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 		$data_query = mysqli_query($this->con, $query);  
@@ -280,8 +280,7 @@ class PostClass {
 			$sql[] = "game IN ($userbio)";
 		}
 
-		$query = "SELECT * FROM posts WHERE location='$userLocation' AND deleted = 0";
-
+		$query = "SELECT * FROM posts WHERE location='$userLocation' AND deleted = 0 AND group_id = 0";
 
 		if (!empty($sql)) {
     		$query .= ' and ' . implode(' and ', $sql);

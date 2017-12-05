@@ -12,9 +12,10 @@
 
 		while($row_admin = mysqli_fetch_array($sqlAdmin)) {
 			
-			$div_admin = "<div class='posted_by'><span style='font-size:15px;'><b>" . $row_admin['group_name'] . "</b></span>
-					<a href='manage_groups.php?group_id=" . $row_admin['group_id'] . "'>
-					<input type='button' id= 'MngBtn' name='MngBtn' class='btn btn-primary btn-sm signup' style='margin-left:70%;'value='Manage'/></a></div><br>";
+			$div_admin = "<span style='font-size:15px;'>
+			<a href='group_posts.php?group_id=" . $row_admin['group_id'] . "'><b>" . $row_admin['group_name'] . "</b></a></span>
+			<a href='manage_groups.php?group_id=" . $row_admin['group_id'] . "'>
+			<input type='button' id= 'MngBtn' name='MngBtn' class='btn btn-primary btn-sm signup' style='margin-left:70%;'value='Manage'/></a><br>";
 
 			$data_admin = $data_admin . $div_admin . "<br>";
 		}
@@ -23,7 +24,7 @@
 		
 		while($row_member = mysqli_fetch_array($sqlMember)) {
 			$member_group_name = $row_member['group_name'];			
-			$div_member = "<div>" . $member_group_name . "</div>";
+			$div_member = "<div><span style='font-size:15px;'><a href='group_posts.php?group_id=" . $row_member['group_id'] . "'><b>" . $member_group_name . "</b></a></span></div>";
 			$data_member = $data_member . $div_member . "<br>";
 		}
 		

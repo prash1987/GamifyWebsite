@@ -112,7 +112,7 @@
 	</head>
 
 
-	<body onload="getLocation()">  
+	<body onload="showPosition(1)">  
 	<br><br><br>
 	<div class="col-md-2 column col-md-offset-0-5">
 	<!--<div class="user_details column">-->
