@@ -5,12 +5,10 @@
     include("initial-header.php");
     include("config.php");
   
-   $msg = ".";
+   $msg = "";
 
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       
-      $msg = ".";
-
       //$db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
        
       $email_id = mysqli_real_escape_string($con,$_POST['email_id']);
