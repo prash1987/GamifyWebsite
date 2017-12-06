@@ -5,7 +5,7 @@
 	include("initial-header.php");
    	include("config.php");
 
-   $msg = ".";
+   $msg = "";
    $my_sec_q1 = "";
    $sec_ans1 = "";
    $my_sec_q2 = "";

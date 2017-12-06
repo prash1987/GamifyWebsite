@@ -5,12 +5,11 @@
     include("config.php");
     include('swift/lib/swift_required.php');
 
-   $msg = ".";
+    $msg = "";
     $email_valid_flag = False;
 
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       // email ID sent from form
-      $msg = ".";
 
       $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
        
