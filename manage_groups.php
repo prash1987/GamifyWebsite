@@ -50,7 +50,7 @@
 		 	$sql = "UPDATE groups SET members='$new_members' WHERE group_id='$group_id';";
 
 			if ($con->query($sql) === TRUE) {
-			 	header('Location: groups.php');
+			 	header('Location: manage_groups.php');
 			}
 			else {
 			 	echo "Something went wrong. Error: " . $sql . "<br>" . $con->error;
@@ -61,10 +61,12 @@
 		if (isset($_POST['btnUpdate'])){
 			if(isset($_POST['members'])){
 				$members= $_POST["members"];
-				$sql = "UPDATE groups SET members= CONCAT(members,',','" . '$members' . "') WHERE group_id='$group_id';";
+				$members = substr($members, 0, strlen($members)-1);
+
+				$sql = "UPDATE groups SET members= CONCAT('" . $group_members . "', " . "','"  . " '" . $members . "') WHERE group_id='$group_id';";
 
 				if ($con->query($sql) === TRUE) {
-					header('Location: groups.php'); 
+					header('Location: manage_groups.php'); 
 				}
 				else {
 					echo "Something went wrong. Error: " . $sql . "<br>" . $con->error;
