@@ -12,10 +12,10 @@
 
 		while($row_admin = mysqli_fetch_array($sqlAdmin)) {
 			
-			$div_admin = "<span style='font-size:15px;'>
+			$div_admin = "<div style='margin-bottom:2px;'><span style='font-size:15px;'>
 			<a href='group_posts.php?group_id=" . $row_admin['group_id'] . "'><b>" . $row_admin['group_name'] . "</b></a></span>
 			<a href='manage_groups.php?group_id=" . $row_admin['group_id'] . "'>
-			<input type='button' id= 'MngBtn' name='MngBtn' class='btn btn-primary btn-sm signup' style='margin-left:70%;'value='Manage'/></a><br>";
+			<input type='button' id='MngBtn' name='MngBtn' class='btn btn-primary btn-sm signup' style='float:right; margin-right:3%;' value='Manage'/></a></div><br>";
 
 			$data_admin = $data_admin . $div_admin . "<br>";
 		}
