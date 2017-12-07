@@ -386,7 +386,7 @@
 		         	
 		            if (current_location!=defaultUserLocation) {
 
-		            	swal("Your default location is "+defaultUserLocation+". Change it to "+current_location+"?", {
+		            	swal("Your current location is "+defaultUserLocation+". Do you want to change it to "+current_location+"?", {
 		  				buttons: ["No, Use default", "Yes"],
 						})
 						.then((Yes) => {
